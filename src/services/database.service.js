@@ -1,4 +1,4 @@
-import { ref, get, set, update, remove, query, orderByChild, equalTo, onValue, off } from 'firebase/database'
+import { ref, get, set, update, remove, query, orderByChild, equalTo, onValue, off, push } from 'firebase/database'
 import { rtdb } from './firebase'
 
 const snap2list = (snapshot) => {
@@ -141,6 +141,33 @@ export const deleteUserData = async (uid, username) => {
   ])
   await remove(ref(rtdb, `uids/${uid}`))
 }
+
+// --- Public profile ---
+
+export const getPublicMissing = async (username) => {
+  const map = await getMissingIds(username)
+  return getSurprisesByIds(Object.keys(map))
+}
+
+export const getPublicDoubles = async (username) => {
+  const map = await getDoublesIds(username)
+  return getSurprisesByIds(Object.keys(map))
+}
+
+// --- Feedback ---
+
+export const addFeedback = (targetUsername, fromUsername, rating, comment) =>
+  push(ref(rtdb, `feedback/${targetUsername}`), {
+    from: fromUsername, rating, comment: comment || '', createdAt: new Date().toISOString()
+  })
+
+export const updateFeedback = (targetUsername, reviewId, rating, comment) =>
+  update(ref(rtdb, `feedback/${targetUsername}/${reviewId}`), {
+    rating, comment: comment || '', updatedAt: new Date().toISOString()
+  })
+
+export const getFeedbackFor = (username) =>
+  get(ref(rtdb, `feedback/${username}`)).then(snap2list)
 
 // --- Search ---
 

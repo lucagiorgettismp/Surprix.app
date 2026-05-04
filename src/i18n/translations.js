@@ -72,6 +72,7 @@ const translations = {
       otherTitle: (name) => `Altre per te da ${name}`,
       noOther: 'Questo utente non ha altri pezzi che ti mancano.',
       contact: (name) => `Contatta ${name}`,
+      viewProfile: 'Vedi profilo',
       emailSubject: (myUsername) => `Surprix - ${myUsername}`,
       emailBody: (ownerUsername, myUsername, items) =>
         `Ciao ${ownerUsername},\n\nSono ${myUsername} su Surprix. Ho visto che hai disponibili i seguenti pezzi:\n\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nSarei interessato a uno scambio!\n\n${myUsername}`,
@@ -100,12 +101,24 @@ const translations = {
       contactUs: 'Contattaci',
       contactUsSummary: 'Contattaci per suggerirci miglioramenti o chiederci di inserire una serie. Scrivici anche se vuoi collaborare alla crescita di Surprix.',
     },
+    feedback: {
+      title: 'Lascia una recensione',
+      editTitle: 'Modifica recensione',
+      edited: 'modificata',
+      comment: 'Commento (opzionale)',
+      alreadyLeft: 'Hai già lasciato una recensione per questo utente.',
+      submit: 'Invia',
+      noFeedback: 'Nessuna recensione ancora.',
+      viewAll: 'Vedi tutte le recensioni',
+    },
     common: {
       notFound: 'Sorpresa non trovata.',
       confirm: 'Conferma',
       cancel: 'Annulla',
       undo: 'Annulla',
       tagline: 'Tieni in ordine le tue collezioni',
+      linkCopied: 'Link copiato!',
+      shareList: 'Condividi lista',
     },
     undo: {
       addedToMissing: 'Aggiunto ai mancanti',
@@ -163,6 +176,13 @@ const translations = {
       mustConfirmAge: 'Devi dichiarare di avere almeno 16 anni per continuare.',
       wrongAccount: 'Account sbagliato?',
       signOut: 'Esci',
+    },
+    public: {
+      emptyList: 'Nessun elemento.',
+      loginWall: (n) => `Accedi per vedere altri ${n} elementi`,
+      signIn: 'Accedi',
+      createAccount: 'Crea account',
+      joinCta: 'Gestisci la tua collezione su Surprix — è gratis!',
     },
     rarity: {
       auto: 'Rarità secondo',
@@ -253,6 +273,7 @@ const translations = {
       otherTitle: (name) => `Other surprises from ${name}`,
       noOther: 'This user has no other pieces you need.',
       contact: (name) => `Contact ${name}`,
+      viewProfile: 'View profile',
       emailSubject: (myUsername) => `Surprix - ${myUsername}`,
       emailBody: (ownerUsername, myUsername, items) =>
         `Hi ${ownerUsername},\n\nI'm ${myUsername} on Surprix. I saw you have the following pieces available:\n\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nI'd be interested in a trade!\n\n${myUsername}`,
@@ -281,12 +302,24 @@ const translations = {
       contactUs: 'Contact us',
       contactUsSummary: 'Contact us to suggest improvements or ask for a particular set to be added. Write to us also if you would like to collaborate to Surprix growth.',
     },
+    feedback: {
+      title: 'Leave a review',
+      editTitle: 'Edit review',
+      edited: 'edited',
+      comment: 'Comment (optional)',
+      alreadyLeft: 'You have already left a review for this user.',
+      submit: 'Submit',
+      noFeedback: 'No reviews yet.',
+      viewAll: 'View all reviews',
+    },
     common: {
       notFound: 'Surprise not found.',
       confirm: 'Confirm',
       cancel: 'Cancel',
       undo: 'Undo',
       tagline: 'Keep your collections in order',
+      linkCopied: 'Link copied!',
+      shareList: 'Share list',
     },
     undo: {
       addedToMissing: 'Added to missing',
@@ -344,6 +377,13 @@ const translations = {
       mustConfirmAge: 'You must confirm you are at least 16 years old to continue.',
       wrongAccount: 'Wrong account?',
       signOut: 'Sign out',
+    },
+    public: {
+      emptyList: 'No items.',
+      loginWall: (n) => `Sign in to see ${n} more items`,
+      signIn: 'Sign in',
+      createAccount: 'Create account',
+      joinCta: 'Manage your collection on Surprix — it\'s free!',
     },
     rarity: {
       auto: 'Rarity by',

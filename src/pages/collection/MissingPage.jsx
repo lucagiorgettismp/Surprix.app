@@ -7,6 +7,7 @@ import CollectionFilterPopover from '../../components/lists/CollectionFilterPopo
 import CollectionHero from '../../components/collection/CollectionHero'
 import EmptyState from '../../components/common/EmptyState'
 import { useCollectionFilter } from '../../hooks/useCollectionFilter'
+import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
 import { getCategoryLabel } from '../../utils/locale'
@@ -28,7 +29,7 @@ const CollectionSkeleton = () => (
 )
 
 const MissingPage = () => {
-  const { missing, itemsLoading, toggleMissing, producerColors } = useCollection()
+  const { missing, itemsLoading, toggleMissing, producerColors, refresh } = useCollection()
   const navigate = useNavigate()
   const t = useT()
   const { lang } = useLanguage()
@@ -67,7 +68,7 @@ const MissingPage = () => {
   ]
 
   return (
-    <>
+    <PullToRefresh onRefresh={refresh}>
       <CollectionHero
         title={t.missing.title}
         count={missing.length}
@@ -117,7 +118,7 @@ const MissingPage = () => {
         onClear={clearFilters}
         activeCount={activeCount}
       />
-    </>
+    </PullToRefresh>
   )
 }
 

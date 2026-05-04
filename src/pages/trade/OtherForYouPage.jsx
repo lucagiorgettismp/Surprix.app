@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { Box, List, CircularProgress, Button, Divider } from '@mui/material'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'
 import { getOtherSurprisesForYou } from '../../services/database.service'
 import { useT } from '../../store/LanguageContext'
 import { trackTradeEmail } from '../../services/analytics.service'
@@ -14,6 +15,7 @@ import PageHeader from '../../components/catalog/PageHeader'
 const OtherForYouPage = () => {
   const { ownerUsername } = useParams()
   const { state } = useLocation()
+  const navigate = useNavigate()
   const missingIds = state?.missingIds || []
   const surpriseLabel = state?.surpriseLabel
   const ownerEmail = state?.ownerEmail
@@ -56,7 +58,7 @@ const OtherForYouPage = () => {
 
       <Divider sx={{ my: 2 }} />
 
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
         <Button
           variant="outlined"
           startIcon={<EmailOutlinedIcon />}
@@ -68,6 +70,14 @@ const OtherForYouPage = () => {
           sx={{ px: 4, borderRadius: 5 }}
         >
           {t.trade.contact(ownerUsername)}
+        </Button>
+        <Button
+          variant="text"
+          startIcon={<PersonOutlinedIcon />}
+          onClick={() => navigate(`/u/${ownerUsername}`)}
+          sx={{ borderRadius: 5 }}
+        >
+          {t.trade.viewProfile}
         </Button>
       </Box>
     </>

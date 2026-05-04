@@ -22,12 +22,13 @@ export const SnackbarProvider = ({ children }) => {
 
   const showUndo = useCallback((msg, undoFn) => show(msg, undoFn, null), [])
   const showWarning = useCallback((msg) => show(msg, null, 'warning'), [])
+  const showSnackbar = useCallback((msg) => show(msg, null, null), [])
 
   const handleUndo = () => { trackUndo(); undoRef.current?.(); setOpen(false) }
   const handleClose = (_, reason) => { if (reason === 'clickaway') return; setOpen(false) }
 
   return (
-    <SnackbarContext.Provider value={{ showUndo, showWarning }}>
+    <SnackbarContext.Provider value={{ showUndo, showWarning, showSnackbar }}>
       {children}
       <Snackbar
         open={open}

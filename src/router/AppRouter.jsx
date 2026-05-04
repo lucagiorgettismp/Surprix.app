@@ -16,10 +16,12 @@ const SurprisesPage     = lazy(() => import('../pages/catalog/SurprisesPage'))
 const MissingPage       = lazy(() => import('../pages/collection/MissingPage'))
 const DoublesPage       = lazy(() => import('../pages/collection/DoublesPage'))
 const ProfilePage       = lazy(() => import('../pages/profile/ProfilePage'))
-const MissingOwnersPage = lazy(() => import('../pages/trade/MissingOwnersPage'))
-const OtherForYouPage   = lazy(() => import('../pages/trade/OtherForYouPage'))
-const SearchPage        = lazy(() => import('../pages/search/SearchPage'))
-const NotFoundPage      = lazy(() => import('../pages/NotFoundPage'))
+const MissingOwnersPage  = lazy(() => import('../pages/trade/MissingOwnersPage'))
+const OtherForYouPage    = lazy(() => import('../pages/trade/OtherForYouPage'))
+const SearchPage         = lazy(() => import('../pages/search/SearchPage'))
+const NotFoundPage       = lazy(() => import('../pages/NotFoundPage'))
+const PublicProfilePage  = lazy(() => import('../pages/public/PublicProfilePage'))
+const AllReviewsPage     = lazy(() => import('../pages/public/AllReviewsPage'))
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth()
@@ -41,6 +43,8 @@ const AppRouter = () => (
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/u/:username" element={<PublicProfilePage />} />
+        <Route path="/u/:username/reviews" element={<AllReviewsPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route
           path="/"

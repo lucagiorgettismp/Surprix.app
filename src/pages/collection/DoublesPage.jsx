@@ -7,6 +7,7 @@ import CollectionFilterPopover from '../../components/lists/CollectionFilterPopo
 import CollectionHero from '../../components/collection/CollectionHero'
 import EmptyState from '../../components/common/EmptyState'
 import { useCollectionFilter } from '../../hooks/useCollectionFilter'
+import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
 import { getCategoryLabel } from '../../utils/locale'
@@ -28,7 +29,7 @@ const CollectionSkeleton = () => (
 )
 
 const DoublesPage = () => {
-  const { doubles, itemsLoading, toggleDoubles, producerColors } = useCollection()
+  const { doubles, itemsLoading, toggleDoubles, producerColors, refresh } = useCollection()
   const navigate = useNavigate()
   const t = useT()
   const { lang } = useLanguage()
@@ -66,7 +67,7 @@ const categoryCounters = useMemo(() => {
   ]
 
   return (
-    <>
+    <PullToRefresh onRefresh={refresh}>
       <CollectionHero
         title={t.doubles.title}
         count={doubles.length}
@@ -106,7 +107,7 @@ const categoryCounters = useMemo(() => {
         onClear={clearFilters}
         activeCount={activeCount}
       />
-    </>
+    </PullToRefresh>
   )
 }
 
