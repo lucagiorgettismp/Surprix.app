@@ -1,0 +1,30 @@
+{
+  "name": "Surprix",
+  "short_name": "Surprix",
+  "description": "Tieni in ordine le tue collezioni",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#00838f",
+  "theme_color": "#00838f",
+  "icons": [
+    {
+      "src": "/icon-any.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-monochrome.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "monochrome"
+    }
+  ]
+}

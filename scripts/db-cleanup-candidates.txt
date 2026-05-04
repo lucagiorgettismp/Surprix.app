@@ -1,0 +1,80 @@
+NODI E SUBNODI POTENZIALMENTE RIMOVIBILI DAL DATABASE
+======================================================
+Generato analizzando database.service.js, firestore.service.js e AppRouter.jsx
+Data analisi: 2026-04-29
+
+========================================
+1. FIRESTORE — INTERA STRUTTURA INUTILIZZATA
+========================================
+Il file firestore.service.js esiste ma nessuna delle sue funzioni viene importata
+o utilizzata dall'app corrente. I componenti che le usavano (ManufacturersPage,
+ProductsPage, SeriesListPage, SeriesDetailPage, YearPage) non sono registrati
+in AppRouter.jsx.
+
+Collezioni Firestore candidati alla rimozione:
+  - manufacturers/
+      └─ products/
+           └─ years/
+                └─ series/
+  - users/{uid}/missing
+  - users/{uid}/doubles
+
+NOTA: prima di rimuovere, verificare che nessun utente abbia ancora dati
+      in users/{uid}/missing o users/{uid}/doubles (vecchia struttura).
+
+========================================
+2. RTDB — NODI NON REFERENZIATI DALL'APP
+========================================
+
+  2a. "collection"
+      Presente nelle security rules ma non usato in database.service.js.
+      Probabilmente legacy di una versione precedente dell'app.
+
+  2b. "sponsors"
+      Presente nelle security rules ma non usato in database.service.js
+      né in nessun componente React.
+
+========================================
+3. RTDB — SUBNODI INUTILIZZATI DENTRO NODI ATTIVI
+========================================
+
+  3a. sets/{setId}/surprises
+      Ogni documento nel nodo "sets" ha un campo "surprises" con la lista
+      degli ID delle sorpresine. Questo indice NON viene letto dall'app:
+      getSurprises() usa invece orderByChild('set_id') sul nodo "surprises".
+      È mantenuto manualmente (con i problemi di spazi trailing visti),
+      ma non porta benefici. Candidato alla rimozione.
+
+========================================
+4. RTDB — CAMPI RIDONDANTI DENTRO NODI ATTIVI
+========================================
+
+  4a. surprises/{id}/id
+      Ogni sorpresina ha un campo "id" uguale alla chiave Firebase.
+      È ridondante perché snap2list() aggiunge già { id: child.key } a ogni
+      record al momento della lettura. Risparmio di spazio per ogni record.
+
+  4b. Campi denormalizzati in "surprises" (set_name, set_producer_name, ecc.)
+      Ogni sorpresina replica i dati del set (set_name, set_year_name,
+      set_year_year, set_producer_name, set_producer_id, set_producer_color,
+      set_category, set_nation, set_effective_code, set_year_id).
+      Questi campi sono necessari per le query dell'app (lista mancanti/doppi,
+      ricerca) — NON rimuovere senza riprogettare le query.
+      Segnalati solo come nota architetturale.
+
+========================================
+5. RTDB — NODI NELLE RULES MA NON NEI DATI (da verificare)
+========================================
+
+  Dalla lettura delle rules esistono riferimenti a strutture che potrebbero
+  non avere più dati reali:
+  - uids/{uid}/admin — campo usato nelle rules per controllo admin,
+    verificare se esistono utenti con questo campo impostato.
+
+========================================
+PRIORITÀ SUGGERITA
+========================================
+Alta   → 2a (collection), 2b (sponsors): nodi orfani, zero rischio
+Media  → 3a (sets/{id}/surprises): elimina manutenzione, zero impatto app
+Bassa  → 4a (surprises/{id}/id): piccolo risparmio, richiede migration
+N/A    → 1 (Firestore): verificare dati utenti prima di procedere

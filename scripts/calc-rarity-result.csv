@@ -1,0 +1,498 @@
+id,codice,descrizione,serie,annata,produttore,categoria,mancanti,doppi,ratio,rarità_script,rarità_manuale,diff,recente
+Kinder_2024_001_VQ332,"VQ332","Tiana","Disney Princesses: I Love","2024/2025",KS,Hand_painted,10,7,0.59,1,1,,false
+Kinder_2024_001_VQ333,"VQ333","Rapunzel","Disney Princesses: I Love","2024/2025",KS,Hand_painted,8,9,0.47,1,1,,false
+Kinder_2024_001_VQ335,"VQ335","Raya","Disney Princesses: I Love","2024/2025",KS,Hand_painted,10,4,0.71,1,2,DIFF,false
+Kinder_2024_001_VQ336,"VQ336","Jasmine","Disney Princesses: I Love","2024/2025",KS,Hand_painted,9,7,0.56,1,1,,false
+Kinder_2024_001_VQ337,"VQ337","Belle","Disney Princesses: I Love","2024/2025",KS,Hand_painted,10,5,0.67,1,1,,false
+Kinder_2024_001_VQ338,"VQ338","Merida","Disney Princesses: I Love","2024/2025",KS,Hand_painted,12,7,0.63,1,1,,false
+Kinder_2024_001_VQ339,"VQ339","Vaiana","Disney Princesses: I Love","2024/2025",KS,Hand_painted,10,4,0.71,1,2,DIFF,false
+Kinder_2024_001_VQ340,"VQ340","Cenerentola","Disney Princesses: I Love","2024/2025",KS,Hand_painted,11,5,0.69,1,1,,false
+Kinder_2024_002_VQ117,"VQ117","Cucciolo di struzzo","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,11,8,0.58,1,1,,false
+Kinder_2024_002_VQ118,"VQ118","Cucciolo di puzzola","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,10,9,0.53,1,1,,false
+Kinder_2024_002_VQ119,"VQ119","Cucciolo di lepre","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,7,9,0.44,1,1,,false
+Kinder_2024_002_VQ120,"VQ120","Cucciolo di leone","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,11,11,0.50,1,1,,false
+Kinder_2024_002_VQ121,"VQ121","Cucciolo di pinguino","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,10,8,0.56,1,1,,false
+Kinder_2024_002_VQ123,"VQ123","Cucciolo di coccodrillo","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,8,13,0.38,1,1,,false
+Kinder_2024_002_VQ124,"VQ124","Cucciolo di tartaruga marina","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,11,4,0.73,1,1,,false
+Kinder_2024_002_VQ125,"VQ125","Cucciolo di cervo","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,10,6,0.63,1,1,,false
+Kinder_2024_002_VQ127,"VQ127","Cucciolo di suricato","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,12,8,0.60,1,1,,false
+Kinder_2024_002_VQ128,"VQ128","Cucciolo di cigno","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,11,9,0.55,1,1,,false
+Kinder_2024_002_VQ129,"VQ129","Cucciolo di scoiattolo","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,10,9,0.53,1,1,,false
+Kinder_2024_002_VQ130,"VQ130","Cucciolo di tapiro","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,12,6,0.67,1,1,,false
+Kinder_2024_002_VQ131,"VQ131","Cucciolo di orso polare","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,10,7,0.59,1,1,,false
+Kinder_2024_002_VQ172,"VQ172","Cucciolo di elefante","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,7,10,0.41,1,1,,false
+Kinder_2024_002_VQ174,"VQ174","Cucciolo di ippopotamo","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,8,7,0.53,1,1,,false
+Kinder_2024_002_VQ175,"VQ175","Cucciolo di koala","Natoons Cubs 24/25","2024/2025",KS,Hand_painted,12,9,0.57,1,1,,false
+Kinder_2024_003_VD348,"VD348","Rocky","Paw Patrol 2024","2024/2025",KS,Hand_painted,12,7,0.63,1,1,,false
+Kinder_2024_003_VD349,"VD349","Rubble","Paw Patrol 2024","2024/2025",KS,Hand_painted,15,10,0.60,1,1,,false
+Kinder_2024_003_VD354,"VD354","Skye","Paw Patrol 2024","2024/2025",KS,Hand_painted,12,8,0.60,1,2,DIFF,false
+Kinder_2024_003_VD355,"VD355","Zuma","Paw Patrol 2024","2024/2025",KS,Hand_painted,11,6,0.65,1,1,,false
+Kinder_2024_003_VD358,"VD358","Everest","Paw Patrol 2024","2024/2025",KS,Hand_painted,12,7,0.63,1,1,,false
+Kinder_2024_003_VD361,"VD361","Chase","Paw Patrol 2024","2024/2025",KS,Hand_painted,9,6,0.60,1,1,,false
+Kinder_2024_003_VD362,"VD362","Marshall","Paw Patrol 2024","2024/2025",KS,Hand_painted,13,4,0.76,1,1,,false
+Kinder_2024_003_VQ331,"VQ331","Liberty","Paw Patrol 2024","2024/2025",KS,Hand_painted,11,7,0.61,1,1,,false
+Kinder_2024_004_VQ425,"VQ425","Pesce blu","Sea Action Game","2024/2025",KS,Compo,11,1,0.92,2,1,DIFF,false
+Kinder_2024_004_VQ425A,"VQ425A","Pesce arancione","Sea Action Game","2024/2025",KS,Compo,10,2,0.83,2,1,DIFF,false
+Kinder_2024_005_VT080,"VT080","Ippopotamo","Feeding Friends","2024/2025",KS,Compo,11,0,1.00,2,1,DIFF,false
+Kinder_2024_005_VT081,"VT081","Tartaruga","Feeding Friends","2024/2025",KS,Compo,8,5,0.62,1,1,,false
+Kinder_2024_006_VU050D,"VU050D","Trottola gialla","Crown Spinner - riedizione","2024/2025",KS,Compo,10,1,0.91,2,2,,false
+Kinder_2024_006_VU050E,"VU050E","Trottola azzurra","Crown Spinner - riedizione","2024/2025",KS,Compo,11,1,0.92,2,2,,false
+Kinder_2024_007_VQ343,"VQ343","Hatto","Stretchy","2024/2025",KS,Compo,7,3,0.70,1,1,,false
+Kinder_2024_007_VQ343A,"VQ343A","Hollo","Stretchy","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_008_VQ180,"VQ180","Trottola delfini","Trottole animali","2024/2025",KS,Compo,4,6,0.40,1,1,,false
+Kinder_2024_008_VQ181,"VQ181","Trottola fenicotteri","Trottole animali","2024/2025",KS,Compo,5,7,0.42,1,1,,false
+Kinder_2024_009_VQ051,"VQ051","Drill","Breaker","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_009_VQ052,"VQ052","Wrecking Ball","Breaker","2024/2025",KS,Compo,4,3,0.57,1,1,,false
+Kinder_2024_010_VQ082,"VQ082","Orso polare","Feeding Friends","2024/2025",KS,Compo,6,1,0.86,1,1,,false
+Kinder_2024_010_VQ083,"VQ083","Tartaruga","Feeding Friends","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_011_VQ079,"VQ079","Rinoceronte","Feeding Friends","2024/2025",KS,Compo,7,1,0.88,1,1,,false
+Kinder_2024_011_VQ081,"VQ081","Zebra","Feeding Friends","2024/2025",KS,Compo,8,2,0.80,1,1,,false
+Kinder_2024_012_VQ035,"VQ035","Stampino orso","Animali stampini","2024/2025",KS,Compo,11,2,0.85,2,3,DIFF,false
+Kinder_2024_012_VQ036,"VQ036","Stampino gorilla","Animali stampini","2024/2025",KS,Compo,13,0,1.00,2,3,DIFF,false
+Kinder_2024_013_VQ294,"VQ294","Dragon sticker rosso","Dragon stickers","2024/2025",KS,Compo,10,2,0.83,2,1,DIFF,false
+Kinder_2024_013_VQ295,"VQ295","Dragon sticker oro","Dragon stickers","2024/2025",KS,Compo,8,2,0.80,1,1,,false
+Kinder_2024_014_VQ069,"VQ069","Moto giallo-rossa","Wheelie Moto","2024/2025",KS,Compo,7,1,0.88,1,1,,false
+Kinder_2024_014_VQ070,"VQ070","Moto rosso-blu","Wheelie Moto","2024/2025",KS,Compo,7,3,0.70,1,1,,false
+Kinder_2024_015_VQ103,"VQ103","Van verde acqua","Caravans","2024/2025",KS,Compo,6,0,1.00,1,1,,false
+Kinder_2024_015_VQ103A,"VQ103A","Van rosa","Caravans","2024/2025",KS,Compo,5,4,0.56,1,1,,false
+Kinder_2024_016_VQ182,"VQ182","Scimmia","Magic Animal Trick","2024/2025",KS,Compo,5,5,0.50,1,1,,false
+Kinder_2024_016_VQ183,"VQ183","Coniglio","Magic Animal Trick","2024/2025",KS,Compo,5,9,0.36,1,1,,false
+Kinder_2024_017_VQ189,"VQ189","Pinguino","Sick pets","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_017_VQ190,"VQ190","Elefante","Sick pets","2024/2025",KS,Compo,7,3,0.70,1,1,,false
+Kinder_2024_018_VT021,"VT021","Polipo","Water revealing animals","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_018_VT022,"VT022","Lumaca","Water revealing animals","2024/2025",KS,Compo,10,1,0.91,2,1,DIFF,false
+Kinder_2024_019_VQ084 ,"VQ084 ","Coniglio","Feeding Friends","2024/2025",KS,Compo,6,8,0.43,1,,,false
+Kinder_2024_019_VQ085 ,"VQ085 ","Gatto","Feeding Friends","2024/2025",KS,Compo,6,2,0.75,1,,,false
+Kinder_2024_020_VQ059,"VQ059","Carrello giallo","Carrelli elevatori","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_020_VQ059A,"VQ059A","Carrello verde","Carrelli elevatori","2024/2025",KS,Compo,8,0,1.00,1,1,,false
+Kinder_2024_021_VQ005,"VQ005","Rana","Animali saltatori","2024/2025",KS,Compo,4,5,0.44,1,1,,false
+Kinder_2024_021_VQ006,"VQ006","Lepre","Animali saltatori","2024/2025",KS,Compo,7,4,0.64,1,1,,false
+Kinder_2024_022_VT114C,"VT114C","Moto Boat verde","Shooting Boat - riedizione","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_022_VT114D,"VT114D","Moto Boat rossa","Shooting Boat - riedizione","2024/2025",KS,Compo,10,1,0.91,2,1,DIFF,false
+Kinder_2024_023_VT048B,"VT048B","Casa tetto blu","Fairy houses","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_023_VT048C,"VT048C","Casa tetto rosa","Fairy houses","2024/2025",KS,Compo,6,1,0.86,1,1,,false
+Kinder_2024_024_VD057B,"VD057B","Green camera","Reveal camera - riedizione","2024/2025",KS,Compo,8,1,0.89,1,1,,false
+Kinder_2024_024_VD058B,"VD058B","White camera","Reveal camera - riedizione","2024/2025",KS,Compo,5,2,0.71,1,1,,false
+Kinder_2024_025_VD203,"VD203","Robot rosso","Walking robots","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_025_VD203A,"VD203A","Robot giallo","Walking robots","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_026_VQ266,"VQ266","Coccinella rossa","Coccinelle","2024/2025",KS,Compo,3,7,0.30,1,1,,false
+Kinder_2024_026_VQ266A,"VQ266A","Coccinella gialla","Coccinelle","2024/2025",KS,Compo,6,1,0.86,1,1,,false
+Kinder_2024_027_VQ055,"VQ055","Auto gialla","Auto con elastico","2024/2025",KS,Compo,5,2,0.71,1,1,,false
+Kinder_2024_027_VQ056,"VQ056","Auto blu","Auto con elastico","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_028_VQ007,"VQ007","Koala","Animali dal veterinario","2024/2025",KS,Compo,5,4,0.56,1,1,,false
+Kinder_2024_028_VQ008,"VQ008","Scimmia","Animali dal veterinario","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_029_VQ113,"VQ113","Orso","Eating Time Animals","2024/2025",KS,Compo,7,3,0.70,1,1,,false
+Kinder_2024_029_VQ114,"VQ114","Pinguino","Eating Time Animals","2024/2025",KS,Compo,7,4,0.64,1,1,,false
+Kinder_2024_030_VQ094,"VQ094","Drago ali rosse","Finger Dragons","2024/2025",KS,Compo,9,1,0.90,1,1,,false
+Kinder_2024_030_VQ095,"VQ095","Drago ali oro","Finger Dragons","2024/2025",KS,Compo,10,1,0.91,2,1,DIFF,false
+Kinder_2024_031_VQ020,"VQ020","Infermiera con koala","Vet Check","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_031_VQ021,"VQ021","Infermiera con pinguino","Vet Check","2024/2025",KS,Compo,4,3,0.57,1,1,,false
+Kinder_2024_032_VQ076,"VQ076","Fire Dragon","Dragons in crystal","2024/2025",KS,Compo,8,3,0.73,1,1,,false
+Kinder_2024_032_VQ076A,"VQ076A","Red Dragon","Dragons in crystal","2024/2025",KS,Compo,8,3,0.73,1,1,,false
+Kinder_2024_033_VQ090,"VQ090","Drago rosso","Shooting Dragons","2024/2025",KS,Compo,5,2,0.71,1,1,,false
+Kinder_2024_033_VQ091,"VQ091","Drago oro","Shooting Dragons","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_034_VQ088,"VQ088","Mini Enrico","Minidragon","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_034_VQ089,"VQ089","Mini Giordano","Minidragon","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_035_VQ353,"VQ353","Gilly","Throwing Monkeys","2024/2025",KS,Compo,7,0,1.00,1,1,,false
+Kinder_2024_035_VQ353A,"VQ353A","Godric","Throwing Monkeys","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_036_VQ092,"VQ092","Kitty Bracelet","Bracelets","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_036_VQ093,"VQ093","Paw bracelet","Bracelets","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_037_VQ043,"VQ043","Lumaca","Animali pastello","2024/2025",KS,Compo,8,2,0.80,1,1,,false
+Kinder_2024_037_VQ044,"VQ044","Pinguino","Animali pastello","2024/2025",KS,Compo,8,1,0.89,1,1,,false
+Kinder_2024_038_VQ251,"VQ251","Bracciale gatto","Bracciali di stoffa","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_038_VQ251B,"VQ251B","Bracciale panda","Bracciali di stoffa","2024/2025",KS,Compo,8,2,0.80,1,1,,false
+Kinder_2024_039_VQ099,"VQ099","Drago rosso","Magic Dragons","2024/2025",KS,Compo,7,1,0.88,1,1,,false
+Kinder_2024_039_VQ100,"VQ100","Drago oro","Magic Dragons","2024/2025",KS,Compo,7,1,0.88,1,1,,false
+Kinder_2024_040_VQ041,"VQ041","Tom Frog","School Friends","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_040_VQ042,"VQ042","Sam Chamaleon","School Friends","2024/2025",KS,Compo,5,4,0.56,1,1,,false
+Kinder_2024_041_VQ209,"VQ209","Kimi","Road Chaser Formula","2024/2025",KS,Compo,4,4,0.50,1,1,,false
+Kinder_2024_041_VQ210,"VQ210","Mick","Road Chaser Formula","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_042_VQ024 ,"VQ024 ","Feeding Cygnets","Feeding Time Animals","2024/2025",KS,Compo,5,5,0.50,1,,,false
+Kinder_2024_042_VQ025 ,"VQ025 ","Feeding Turtles","Feeding Time Animals","2024/2025",KS,Compo,6,4,0.60,1,,,false
+Kinder_2024_043_VQ049,"VQ049","Gorilla","Silly Brushes","2024/2025",KS,Compo,8,2,0.80,1,1,,false
+Kinder_2024_043_VQ050,"VQ050","Pappagallo","Silly Brushes","2024/2025",KS,Compo,8,1,0.89,1,1,,false
+Kinder_2024_044_VQ108,"VQ108","Star Fish","Vet Secret Message","2024/2025",KS,Compo,4,2,0.67,1,1,,false
+Kinder_2024_044_VQ108A,"VQ108A","Marine","Vet Secret Message","2024/2025",KS,Compo,5,2,0.71,1,1,,false
+Kinder_2024_045_VQ178,"VQ178","Balena affamata","Abitanti degli oceani","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_045_VQ179,"VQ179","Squalo affamato","Abitanti degli oceani","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_046_VQ013,"VQ013","Fire Dragon","Dragons Fire and Ice","2024/2025",KS,Compo,4,0,1.00,1,1,,false
+Kinder_2024_046_VQ014,"VQ014","Ice Dragon","Dragons Fire and Ice","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_047_VT040A,"VT040A","Anello fiore","Anelli scrigno","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_047_VT041A,"VT041A","Anello farfalla","Anelli scrigno","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_048_VQ115,"VQ115","Anello gatti","Twins rings","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_048_VQ116,"VQ116","Anello conigli","Twins rings","2024/2025",KS,Compo,7,2,0.78,1,1,,false
+Kinder_2024_049_VQ187,"VQ187","Iacopo","Holding Dragons","2024/2025",KS,Compo,5,1,0.83,1,1,,false
+Kinder_2024_049_VQ188,"VQ188","Mark","Holding Dragons","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_050_VQ063,"VQ063","Truck giallo-rosso","Monster truck","2024/2025",KS,Compo,6,1,0.86,1,1,,false
+Kinder_2024_050_VQ064,"VQ064","Truck grigio-viola","Monster truck","2024/2025",KS,Compo,7,5,0.58,1,1,,false
+Kinder_2024_051_VQ018,"VQ018","Infermiera con pantera","Nurses with Pets","2024/2025",KS,Compo,6,1,0.86,1,1,,false
+Kinder_2024_051_VQ019,"VQ019","Infermiera con tartaruga","Nurses with Pets","2024/2025",KS,Compo,5,4,0.56,1,1,,false
+Kinder_2024_052_VT151B,"VT151B","Action figure bionda","Dragon Wings Action Figure","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_052_VT151C,"VT151C","Action figure mora","Dragon Wings Action Figure","2024/2025",KS,Compo,10,2,0.83,2,2,,false
+Kinder_2024_053_VQ022,"VQ022","Nurse Klara","Amiche degli animali","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_053_VQ023,"VQ023","Nurse Sara","Amiche degli animali","2024/2025",KS,Compo,7,4,0.64,1,1,,false
+Kinder_2024_054_VQ078,"VQ078","Orecchini arancioni","Orecchini","2024/2025",KS,Compo,9,3,0.75,1,1,,false
+Kinder_2024_054_VQ078B,"VQ078B","Orecchini viola","Orecchini","2024/2025",KS,Compo,7,4,0.64,1,1,,false
+Kinder_2024_055_VQ009,"VQ009","Scoiattolo con trasportino","Trasportini","2024/2025",KS,Compo,5,2,0.71,1,1,,false
+Kinder_2024_055_VQ010,"VQ010","Coniglio con trasportino","Trasportini","2024/2025",KS,Compo,5,3,0.63,1,1,,false
+Kinder_2024_056_VQ057,"VQ057","Auto viola","Engine cars","2024/2025",KS,Compo,5,3,0.63,1,1,,false
+Kinder_2024_056_VQ058,"VQ058","Auto verde","Engine cars","2024/2025",KS,Compo,4,8,0.33,1,1,,false
+Kinder_2024_057_VQ111,"VQ111","Drago oro","Chinese Moving Dragons","2024/2025",KS,Compo,13,0,1.00,2,2,,false
+Kinder_2024_057_VQ111B,"VQ111B","Drago rosso","Chinese Moving Dragons","2024/2025",KS,Compo,11,2,0.85,2,2,,false
+Kinder_2024_058_VQ252,"VQ252","Gingerbread","Christmas 2024","2024/2025",KS,Compo,6,4,0.60,1,1,,false
+Kinder_2024_058_VQ253,"VQ253","Renna","Christmas 2024","2024/2025",KS,Compo,5,7,0.42,1,1,,false
+Kinder_2024_058_VQ254,"VQ254","Babbo Natale slitta","Christmas 2024","2024/2025",KS,Compo,6,7,0.46,1,1,,false
+Kinder_2024_058_VQ255,"VQ255","Civetta","Christmas 2024","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_058_VQ256,"VQ256","Elfo verde","Christmas 2024","2024/2025",KS,Compo,6,2,0.75,1,2,DIFF,false
+Kinder_2024_058_VQ257,"VQ257","Elfo rosso","Christmas 2024","2024/2025",KS,Compo,5,3,0.63,1,1,,false
+Kinder_2024_058_VQ258,"VQ258","Pupazzo di neve","Christmas 2024","2024/2025",KS,Compo,5,4,0.56,1,1,,false
+Kinder_2024_058_VQ259,"VQ259","Orso","Christmas 2024","2024/2025",KS,Compo,5,8,0.38,1,1,,false
+Kinder_2024_058_VQ260,"VQ260","Renna sci","Christmas 2024","2024/2025",KS,Compo,6,6,0.50,1,1,,false
+Kinder_2024_058_VQ261,"VQ261","Babbo Natale snowboard","Christmas 2024","2024/2025",KS,Compo,4,8,0.33,1,1,,false
+Kinder_2024_058_VQ262,"VQ262","Pinguino slittino","Christmas 2024","2024/2025",KS,Compo,6,5,0.55,1,1,,false
+Kinder_2024_058_VQ263,"VQ263","Scoiattolo slittino","Christmas 2024","2024/2025",KS,Compo,8,6,0.57,1,1,,false
+Kinder_2024_061_VQ278,"VQ278","Coniglio picnic","Pasqua 2025","2024/2025",KS,Hand_painted,8,4,0.67,1,1,,false
+Kinder_2024_061_VQ279,"VQ279","Pecora picnic","Pasqua 2025","2024/2025",KS,Hand_painted,8,5,0.62,1,1,,false
+Kinder_2024_061_VQ281,"VQ281","Gufo picnic","Pasqua 2025","2024/2025",KS,Hand_painted,7,5,0.58,1,1,,false
+Kinder_2024_061_VQ282,"VQ282","Volpe picnic","Pasqua 2025","2024/2025",KS,Hand_painted,6,5,0.55,1,1,,false
+Kinder_2024_061_VQ283,"VQ283","Trottola farfalla","Pasqua 2025","2024/2025",KS,Hand_painted,18,1,0.95,3,3,,false
+Kinder_2024_061_VQ297,"VQ297","Coccinella sparadischi","Pasqua 2025","2024/2025",KS,Hand_painted,5,8,0.38,1,1,,false
+Kinder_2024_061_VQ298,"VQ298","Coniglio sparadischi","Pasqua 2025","2024/2025",KS,Hand_painted,6,7,0.46,1,1,,false
+Kinder_2024_061_VQ299,"VQ299","Riccio sparadischi","Pasqua 2025","2024/2025",KS,Hand_painted,5,7,0.42,1,1,,false
+Kinder_2024_061_VQ300,"VQ300","Trottola uccello verde","Pasqua 2025","2024/2025",KS,Hand_painted,5,9,0.36,1,1,,false
+Kinder_2024_061_VQ301,"VQ301","Trottola uccello rosso","Pasqua 2025","2024/2025",KS,Hand_painted,7,5,0.58,1,1,,false
+Kinder_2024_061_VT342,"VT342","Trottola rana","Pasqua 2025","2024/2025",KS,Hand_painted,7,3,0.70,1,1,,false
+Kinder_2024_061_VT347,"VT347","Gallo sparadischi","Pasqua 2025","2024/2025",KS,Hand_painted,5,7,0.42,1,1,,false
+Kinder_2024_062_VQ053,"VQ053","Auto spia 1","Auto spia","2024/2025",KS,Compo,6,4,0.60,1,1,,false
+Kinder_2024_062_VQ054,"VQ054","Auto spia 2","Auto spia","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_063_VQ106,"VQ106","Drago ali rosse","Moving Dragons","2024/2025",KS,Compo,7,1,0.88,1,1,,false
+Kinder_2024_063_VQ107,"VQ107","Drago ali oro","Moving Dragons","2024/2025",KS,Compo,6,3,0.67,1,1,,false
+Kinder_2024_064_VQ012,"VQ012","Soldier","Car to Plane","2024/2025",KS,Compo,6,6,0.50,1,1,,false
+Kinder_2024_064_VQ012A,"VQ012A","Fire wings","Car to Plane","2024/2025",KS,Compo,6,2,0.75,1,1,,false
+Kinder_2024_065_VQ356,"VQ356","Iron Man","Marvel","2024/2025",KS,Hand_painted,14,6,0.70,1,1,,false
+Kinder_2024_065_VQ357,"VQ357","Capitan America (Sam)","Marvel","2024/2025",KS,Hand_painted,15,5,0.75,1,1,,false
+Kinder_2024_065_VQ363,"VQ363","Spiderman","Marvel","2024/2025",KS,Hand_painted,14,4,0.78,1,1,,false
+Kinder_2024_065_VQ364,"VQ364","Antman","Marvel","2024/2025",KS,Hand_painted,17,1,0.94,3,1,DIFF,false
+Kinder_2024_065_VQ365,"VQ365","Black Panther","Marvel","2024/2025",KS,Hand_painted,11,4,0.73,1,1,,false
+Kinder_2024_065_VQ366,"VQ366","Doctor Strange","Marvel","2024/2025",KS,Hand_painted,12,5,0.71,1,1,,false
+Kinder_2024_065_VQ368,"VQ368","Hulk","Marvel","2024/2025",KS,Hand_painted,14,8,0.64,1,1,,false
+Kinder_2024_065_VQ379,"VQ379","Spider-woman (Spider Ghost)","Marvel","2024/2025",KS,Hand_painted,15,3,0.83,2,1,DIFF,false
+Kinder_2024_066_EN399B,"EN399B","Barbie regista","Barbie","2024/2025",KS,Hand_painted,7,2,0.78,1,1,,false
+Kinder_2024_066_VD401,"VD401","Barbie veterinaria","Barbie","2024/2025",KS,Hand_painted,5,2,0.71,1,1,,false
+Kinder_2024_066_VD402,"VD402","Barbie ballerina","Barbie","2024/2025",KS,Hand_painted,6,2,0.75,1,1,,false
+Kinder_2024_066_VD403,"VD403","Barbie scienziata","Barbie","2024/2025",KS,Hand_painted,5,2,0.71,1,1,,false
+Kinder_2024_066_VD404,"VD404","Barbie pilota","Barbie","2024/2025",KS,Hand_painted,5,2,0.71,1,1,,false
+Kinder_2024_066_VD405,"VD405","Barbie operaia","Barbie","2024/2025",KS,Hand_painted,8,1,0.89,2,2,,false
+Kinder_2024_066_VD406,"VD406","Barbie pompiere","Barbie","2024/2025",KS,Hand_painted,8,2,0.80,2,1,DIFF,false
+Kinder_2024_066_VD415,"VD415","Barbie astronauta","Barbie","2024/2025",KS,Hand_painted,5,1,0.83,1,1,,false
+Kinder_2025_002_VC097,"VC097","Stegosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,7,12,0.37,1,1,,true
+Kinder_2025_002_VC098,"VC098","Synocerotops","Jurassic Natoons","2025/2026",KS,Hand_painted,9,5,0.64,1,1,,true
+Kinder_2025_002_VC099,"VC099","Triceratops","Jurassic Natoons","2025/2026",KS,Hand_painted,7,3,0.70,1,1,,true
+Kinder_2025_002_VC100,"VC100","Ankylosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,13,4,0.76,1,2,DIFF,true
+Kinder_2025_002_VC101,"VC101","Pteranodon","Jurassic Natoons","2025/2026",KS,Hand_painted,11,8,0.58,1,1,,true
+Kinder_2025_002_VC102,"VC102","Spinosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,9,7,0.56,1,1,,true
+Kinder_2025_002_VC103,"VC103","Parasaurolophus","Jurassic Natoons","2025/2026",KS,Hand_painted,6,7,0.46,1,1,,true
+Kinder_2025_002_VC108,"VC108","Diplodocus","Jurassic Natoons","2025/2026",KS,Hand_painted,6,4,0.60,1,2,DIFF,true
+Kinder_2025_002_VC109,"VC109","Velociraptor","Jurassic Natoons","2025/2026",KS,Hand_painted,10,5,0.67,1,1,,true
+Kinder_2025_002_VC110,"VC110","Brachiosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,13,3,0.81,2,1,DIFF,true
+Kinder_2025_002_VC111,"VC111","Dilophosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,11,5,0.69,1,1,,true
+Kinder_2025_002_VC112,"VC112","Gigonerosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,11,2,0.85,2,1,DIFF,true
+Kinder_2025_002_VC113,"VC113","Lambeosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,13,6,0.68,1,1,,true
+Kinder_2025_002_VC114,"VC114","Pachiccephalosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,10,4,0.71,1,1,,true
+Kinder_2025_002_VC122,"VC122","Tyrannosaurus Rex","Jurassic Natoons","2025/2026",KS,Hand_painted,5,7,0.42,1,1,,true
+Kinder_2025_002_VC123,"VC123","Plesiosaurus","Jurassic Natoons","2025/2026",KS,Hand_painted,14,6,0.70,1,1,,true
+Kinder_2025_003_VC005,"VC005","Magnolia","Unicorns","2025/2026",KS,Hand_painted,8,1,0.89,2,1,DIFF,true
+Kinder_2025_003_VC005A,"VC005A","Petunia","Unicorns","2025/2026",KS,Hand_painted,5,1,0.83,1,2,DIFF,true
+Kinder_2025_003_VC005B,"VC005B","Vanilla","Unicorns","2025/2026",KS,Hand_painted,6,2,0.75,1,2,DIFF,true
+Kinder_2025_003_VC005C,"VC005C","Clementine","Unicorns","2025/2026",KS,Hand_painted,5,3,0.63,1,2,DIFF,true
+Kinder_2025_003_VC080,"VC080","Earring Sleepy","Unicorns","2025/2026",KS,Hand_painted,9,3,0.75,1,1,,true
+Kinder_2025_003_VC080B,"VC080B","Earring Dream","Unicorns","2025/2026",KS,Hand_painted,6,3,0.67,1,1,,true
+Kinder_2025_003_VC082,"VC082","Ring pink","Unicorns","2025/2026",KS,Hand_painted,5,6,0.45,1,1,,true
+Kinder_2025_003_VC104,"VC104","Bracelet zephyr red","Unicorns","2025/2026",KS,Hand_painted,6,2,0.75,1,1,,true
+Kinder_2025_003_VC104A,"VC104A","Bracelet zephyr blue","Unicorns","2025/2026",KS,Hand_painted,5,4,0.56,1,1,,true
+Kinder_2025_003_VC106,"VC106","Silvia","Unicorns","2025/2026",KS,Hand_painted,7,3,0.70,1,1,,true
+Kinder_2025_003_VC118,"VC118","Maya","Unicorns","2025/2026",KS,Hand_painted,5,6,0.45,1,1,,true
+Kinder_2025_003_VC119,"VC119","Bracialet/pin sparkle","Unicorns","2025/2026",KS,Hand_painted,5,5,0.50,1,1,,true
+Kinder_2025_003_VC119A,"VC119A","Bracialet/pin cloud","Unicorns","2025/2026",KS,Hand_painted,4,3,0.57,1,1,,true
+Kinder_2025_003_VC124,"VC124","Ring purple","Unicorns","2025/2026",KS,Hand_painted,4,3,0.57,1,1,,true
+Kinder_2025_003_VC125,"VC125","Justine","Unicorns","2025/2026",KS,Hand_painted,12,2,0.86,2,1,DIFF,true
+Kinder_2025_003_VC126,"VC126","Camille","Unicorns","2025/2026",KS,Hand_painted,10,4,0.71,1,1,,true
+Kinder_2025_003_VC137,"VC137","Lana","Unicorns","2025/2026",KS,Hand_painted,6,7,0.46,1,1,,true
+Kinder_2025_003_VC157,"VC157","Unicorn Earring pink","Unicorns","2025/2026",KS,Hand_painted,6,0,1.00,2,1,DIFF,true
+Kinder_2025_003_VC157A,"VC157A","Unicorn Earring purple","Unicorns","2025/2026",KS,Hand_painted,4,3,0.57,1,1,,true
+Kinder_2025_003_VC158,"VC158","Flower-Ring purple","Unicorns","2025/2026",KS,Hand_painted,4,4,0.50,1,1,,true
+Kinder_2025_003_VC159,"VC159","Flower-Ring lightblue","Unicorns","2025/2026",KS,Hand_painted,5,5,0.50,1,1,,true
+Kinder_2025_003_VC164,"VC164","Hair Clip yellow Star","Unicorns","2025/2026",KS,Hand_painted,4,6,0.40,1,1,,true
+Kinder_2025_003_VC165,"VC165","Hair Clip purple Heart","Unicorns","2025/2026",KS,Hand_painted,4,6,0.40,1,1,,true
+Kinder_2025_003_VC193,"VC193","Poppy","Unicorns","2025/2026",KS,Hand_painted,7,4,0.64,1,1,,true
+Kinder_2025_003_VC193A,"VC193A","Bubbles","Unicorns","2025/2026",KS,Hand_painted,10,3,0.77,1,2,DIFF,true
+Kinder_2025_003_VC194,"VC194","Aurelia","Unicorns","2025/2026",KS,Hand_painted,11,1,0.92,2,2,,true
+Kinder_2025_003_VC194A,"VC194A","Estelle","Unicorns","2025/2026",KS,Hand_painted,7,2,0.78,1,2,DIFF,true
+Kinder_2025_003_VC195,"VC195","Mirabelle","Unicorns","2025/2026",KS,Hand_painted,4,4,0.50,1,1,,true
+Kinder_2025_003_VC195A,"VC195A","Ambrosia","Unicorns","2025/2026",KS,Hand_painted,7,4,0.64,1,1,,true
+Kinder_2025_003_VC199,"VC199","Lauren","Unicorns","2025/2026",KS,Hand_painted,5,3,0.63,1,1,,true
+Kinder_2025_003_VC200,"VC200","Lisa","Unicorns","2025/2026",KS,Hand_painted,8,3,0.73,1,1,,true
+Kinder_2025_003_VC201,"VC201","Matilde","Unicorns","2025/2026",KS,Hand_painted,4,2,0.67,1,1,,true
+Kinder_2025_003_VC406,"VC406","Color changing bracialet white to blue","Unicorns","2025/2026",KS,Hand_painted,17,1,0.94,3,3,,true
+Kinder_2025_003_VC406A,"VC406A","Color changing bracialet white to pink","Unicorns","2025/2026",KS,Hand_painted,21,0,1.00,3,3,,true
+Kinder_2025_003_VQ029,"VQ029","Miranda ring","Unicorns","2025/2026",KS,Hand_painted,5,5,0.50,1,1,,true
+Kinder_2025_003_VQ029A,"VQ029A","Simone ring","Unicorns","2025/2026",KS,Hand_painted,10,5,0.67,1,1,,true
+Kinder_2025_004_VC291,"VC291","Superman","DC Playmobil","2025/2026",KS,Hand_painted,7,13,0.35,1,1,,true
+Kinder_2025_004_VC292,"VC292","Supergirl","DC Playmobil","2025/2026",KS,Hand_painted,10,10,0.50,1,1,,true
+Kinder_2025_004_VC293,"VC293","The Flash","DC Playmobil","2025/2026",KS,Hand_painted,10,11,0.48,1,1,,true
+Kinder_2025_004_VC294,"VC294","Green Lantern","DC Playmobil","2025/2026",KS,Hand_painted,10,12,0.45,1,1,,true
+Kinder_2025_004_VC295,"VC295","Aquaman","DC Playmobil","2025/2026",KS,Hand_painted,8,10,0.44,1,1,,true
+Kinder_2025_004_VC296,"VC296","Mera","DC Playmobil","2025/2026",KS,Hand_painted,8,16,0.33,1,1,,true
+Kinder_2025_004_VC297,"VC297","Batgirl","DC Playmobil","2025/2026",KS,Hand_painted,7,13,0.35,1,1,,true
+Kinder_2025_004_VC298,"VC298","Batman","DC Playmobil","2025/2026",KS,Hand_painted,9,14,0.39,1,1,,true
+Kinder_2025_004_VC299,"VC299","Catwoman","DC Playmobil","2025/2026",KS,Hand_painted,11,8,0.58,1,1,,true
+Kinder_2025_004_VC300,"VC300","Cyborg","DC Playmobil","2025/2026",KS,Hand_painted,11,13,0.46,1,1,,true
+Kinder_2025_004_VC301,"VC301","The Riddler","DC Playmobil","2025/2026",KS,Hand_painted,7,16,0.30,1,1,,true
+Kinder_2025_004_VC302,"VC302","Wonder Woman","DC Playmobil","2025/2026",KS,Hand_painted,14,7,0.67,1,2,DIFF,true
+Kinder_2025_004_VC303,"VC303","Harley Quinn","DC Playmobil","2025/2026",KS,Hand_painted,10,9,0.53,1,1,,true
+Kinder_2025_004_VC304,"VC304","Black Adam","DC Playmobil","2025/2026",KS,Hand_painted,9,13,0.41,1,1,,true
+Kinder_2025_004_VC305,"VC305","Robin","DC Playmobil","2025/2026",KS,Hand_painted,9,10,0.47,1,1,,true
+Kinder_2025_004_VC306,"VC306","Joker","DC Playmobil","2025/2026",KS,Hand_painted,8,8,0.50,1,1,,true
+Kinder_2025_005_VC240,"VC240","Elf green with snow scooter","Christmas 2025","2025/2026",KS,Hand_painted,8,1,0.89,2,1,DIFF,true
+Kinder_2025_005_VD259A,"VD259A","Santa with sleigh","Christmas 2025","2025/2026",KS,Hand_painted,7,2,0.78,1,2,DIFF,true
+Kinder_2025_005_VD262A,"VD262A","Reindeer on snowboard","Christmas 2025","2025/2026",KS,Hand_painted,9,1,0.90,2,1,DIFF,true
+Kinder_2025_005_VD266B,"VD266B","Santa with snowmobile","Christmas 2025","2025/2026",KS,Hand_painted,7,2,0.78,1,1,,true
+Kinder_2025_005_VQ252A,"VQ252A","Gingerbread man","Christmas 2025","2025/2026",KS,Hand_painted,14,0,1.00,2,1,DIFF,true
+Kinder_2025_005_VQ254A,"VQ254A","Santa with motor sled","Christmas 2025","2025/2026",KS,Hand_painted,10,3,0.77,1,1,,true
+Kinder_2025_005_VQ255A,"VQ255A","Owl","Christmas 2025","2025/2026",KS,Hand_painted,8,1,0.89,2,1,DIFF,true
+Kinder_2025_005_VQ257A,"VQ257A","Elf red with snowboard","Christmas 2025","2025/2026",KS,Hand_painted,10,1,0.91,2,1,DIFF,true
+Kinder_2025_005_VQ259A,"VQ259A","Polar bear","Christmas 2025","2025/2026",KS,Hand_painted,9,1,0.90,2,1,DIFF,true
+Kinder_2025_005_VQ260A,"VQ260A","Reindeer on skis","Christmas 2025","2025/2026",KS,Hand_painted,10,1,0.91,2,1,DIFF,true
+Kinder_2025_005_VQ263A,"VQ263A","Squirrel","Christmas 2025","2025/2026",KS,Hand_painted,6,1,0.86,2,1,DIFF,true
+Kinder_2025_005_VT240A,"VT240A","Snowman","Christmas 2025","2025/2026",KS,Hand_painted,11,1,0.92,2,1,DIFF,true
+Kinder_2025_006_VC241,"VC241","Red Bird","Easter 2026","2025/2026",KS,Hand_painted,6,1,0.86,2,1,DIFF,true
+Kinder_2025_006_VC244,"VC244","Hedgehog","Easter 2026","2025/2026",KS,Hand_painted,6,2,0.75,1,1,,true
+Kinder_2025_006_VC245,"VC245","Pink Rabbit","Easter 2026","2025/2026",KS,Hand_painted,5,0,1.00,1,1,,true
+Kinder_2025_006_VC246,"VC246","Frog","Easter 2026","2025/2026",KS,Hand_painted,5,1,0.83,1,1,,true
+Kinder_2025_006_VC247,"VC247","Black sheep","Easter 2026","2025/2026",KS,Hand_painted,5,1,0.83,1,1,,true
+Kinder_2025_006_VC250,"VC250","Chick","Easter 2026","2025/2026",KS,Hand_painted,6,2,0.75,1,1,,true
+Kinder_2025_006_VC251,"VC251","Blue Bird","Easter 2026","2025/2026",KS,Hand_painted,6,2,0.75,1,1,,true
+Kinder_2025_006_VC252,"VC252","Fox","Easter 2026","2025/2026",KS,Hand_painted,5,3,0.63,1,1,,true
+Kinder_2025_006_VC253,"VC253","Chicken","Easter 2026","2025/2026",KS,Hand_painted,5,2,0.71,1,1,,true
+Kinder_2025_006_VC254,"VC254","Blue Rabbit","Easter 2026","2025/2026",KS,Hand_painted,7,1,0.88,2,2,,true
+Kinder_2025_006_VC385,"VC385","Rooster","Easter 2026","2025/2026",KS,Hand_painted,9,1,0.90,2,2,,true
+Kinder_2025_007_VC025,"VC025","Crab family","Animal Families - Crab and Monkey","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_007_VC026,"VC026","Monkey family","Animal Families - Crab and Monkey","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_008_VC018,"VC018","Duck family","Animal Families - Duck and Frog","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_008_VC019,"VC019","Frog family","Animal Families - Duck and Frog","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_009_VC033,"VC033","Elefant family","Animal Families - Elephant and Giraffe","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_009_VC034,"VC034","Giraffe family","Animal Families - Elephant and Giraffe","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_010_VC020,"VC020","Hedgehog family","Animal Families - Hedgehog and Squirrel","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_010_VC021,"VC021","Squirrel family","Animal Families - Hedgehog and Squirrel","2025/2026",KS,Compo,8,1,0.89,1,1,,true
+Kinder_2025_011_VC023,"VC023","Moose family","Animal Families - Moose and Sheep","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_011_VC024,"VC024","Sheep family","Animal Families - Moose and Sheep","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_013_VC014,"VC014","Rabbit family","Animal Families - Rabbit and Mouse","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_013_VC015,"VC015","Mouse family","Animal Families - Rabbit and Mouse","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_014_VC258,"VC258","Sea spinner","Animal Spinner","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_015_VQ047,"VQ047","Mouse stamp","Animal Stamps","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_015_VQ048,"VQ048","Parrot stamp","Animal Stamps","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_016_VC069,"VC069","Crocodile","Come closer","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_016_VC070,"VC070","Elephant","Come closer","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_017_VC081,"VC081","Blue alien","Come in my Arms","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_017_VC081A,"VC081A","Red alien","Come in my Arms","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_018_VC088,"VC088","Wrecking ball","Demolition Stars","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_022_VT023A,"VT023A","Fairy Agnes","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,2,DIFF,true
+Kinder_2025_022_VT023B,"VT023B","Fairy Bea","Fairies World","2025/2026",KS,Compo,10,0,1.00,2,2,,true
+Kinder_2025_022_VT024A,"VT024A","Fairy Monika","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,2,DIFF,true
+Kinder_2025_022_VT024B,"VT024B","Fairy Wanda","Fairies World","2025/2026",KS,Compo,8,1,0.89,1,2,DIFF,true
+Kinder_2025_022_VT025A,"VT025A","Flowee Regina","Fairies World","2025/2026",KS,Compo,10,0,1.00,2,2,,true
+Kinder_2025_022_VT025B,"VT025B","Flowee Jasmin","Fairies World","2025/2026",KS,Compo,9,1,0.90,1,2,DIFF,true
+Kinder_2025_022_VT026A,"VT026A","Flowee Stella","Fairies World","2025/2026",KS,Compo,8,0,1.00,1,2,DIFF,true
+Kinder_2025_022_VT026B,"VT026B","Flowee Ruby","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,2,DIFF,true
+Kinder_2025_022_VT035A,"VT035A","Crystal rescal bracialet green","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT035B,"VT035B","Crystal rescal bracialet red","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT036A,"VT036A","Crystal hopper bracialet blue","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT036B,"VT036B","Crystal hopper bracialet pink","Fairies World","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_022_VT038A,"VT038A","Gipsy","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT038B,"VT038B","Rose","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT040B,"VT040B","Flower","Fairies World","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_022_VT041C,"VT041C","Butterfly","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT048D,"VT048D","Monika's House","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT048E,"VT048E","Agnes's House","Fairies World","2025/2026",KS,Compo,9,1,0.90,1,1,,true
+Kinder_2025_022_VT049A,"VT049A","Dangle Dragonfly purple","Fairies World","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_022_VT064A,"VT064A","Butterfly Box","Fairies World","2025/2026",KS,Compo,10,0,1.00,2,1,DIFF,true
+Kinder_2025_022_VT065A,"VT065A","Star Box","Fairies World","2025/2026",KS,Compo,9,1,0.90,1,1,,true
+Kinder_2025_022_VT076B,"VT076B","Mochi","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT076C,"VT076C","Gaia","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT094A,"VT094A","Crown beaver purple","Fairies World","2025/2026",KS,Compo,8,1,0.89,1,1,,true
+Kinder_2025_022_VT094B,"VT094B","Crown beaver orange","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT095A,"VT095A","Crown rabbit green","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT095B,"VT095B","Crown rabbit red","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT096A,"VT096A","Hoggy pink","Fairies World","2025/2026",KS,Compo,8,1,0.89,1,1,,true
+Kinder_2025_022_VT096B,"VT096B","Hoggy purple","Fairies World","2025/2026",KS,Compo,10,0,1.00,2,1,DIFF,true
+Kinder_2025_022_VT097A,"VT097A","Rascal light blue","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_022_VT097B,"VT097B","Rascal pink","Fairies World","2025/2026",KS,Compo,10,0,1.00,2,1,DIFF,true
+Kinder_2025_022_VT209A,"VT209A","Dangle Bird pink","Fairies World","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_023_VC047,"VC047","Koala","Hard Work to painting","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_023_VC049,"VC049","Mouse","Hard Work to painting","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_024_VT102A,"VT102A","Mouse X-ray","Hidden Pictures refresh","2025/2026",KS,Compo,10,0,1.00,2,2,,true
+Kinder_2025_025_VC061,"VC061","Seal","I Like Fish","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_025_VC062,"VC062","Walrus","I Like Fish","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_026_VQ071,"VQ071","Penguin","Ice Games","2025/2026",KS,Compo,6,1,0.86,1,1,,true
+Kinder_2025_026_VQ072,"VQ072","Polar bear","Ice Games","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_027_VC054,"VC054","Frog","Key Guard","2025/2026",KS,Compo,4,2,0.67,1,1,,true
+Kinder_2025_028_VC029A,"VC029A","Purple eyes","Look in my Eyes","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_029_VC094,"VC094","Shovel excavator","On the Constrution site","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_030_VC041,"VC041","Car with gear red","Racers","2025/2026",KS,Compo,6,2,0.75,1,1,,true
+Kinder_2025_030_VC041A,"VC041A","Car with gear blue","Racers","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_030_VC063,"VC063","Quad","Racers","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_030_VC064,"VC064","Cross Car","Racers","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_030_VC066,"VC066","Toy Box blue","Racers","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_030_VC068,"VC068","Toy Box orange","Racers","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_030_VC095,"VC095","Stan the screwmaster","Racers","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_030_VC120,"VC120","Orange Speed","Racers","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_030_VC175,"VC175","Blue Racebike","Racers","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_030_VC176,"VC176","Red Racebike","Racers","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_030_VC178,"VC178","Purple spinning car","Racers","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_030_VC181,"VC181","Hot road red","Racers","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_030_VC182,"VC182","Hot road orange","Racers","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_030_VC196,"VC196","Michael","Racers","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_030_VC248,"VC248","Blue Monster","Racers","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_030_VC249,"VC249","Green Destroyer","Racers","2025/2026",KS,Compo,4,2,0.67,1,1,,true
+Kinder_2025_030_VQ069A,"VQ069A","Green Mileseater","Racers","2025/2026",KS,Compo,9,0,1.00,1,1,,true
+Kinder_2025_030_VQ070A,"VQ070A","Red Roadmaster","Racers","2025/2026",KS,Compo,6,1,0.86,1,1,,true
+Kinder_2025_030_VQ209A,"VQ209A","Le Mans Blue Flash","Racers","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_030_VQ210A,"VQ210A","Le Mans Black Star","Racers","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_031_VC045,"VC045","Octopus","Shake more Hands","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_031_VC046,"VC046","Spider","Shake more Hands","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_032_VC060,"VC060","Parrot","Stamp Animals","2025/2026",KS,Compo,6,0,1.00,1,1,,true
+Kinder_2025_033_VQ203,"VQ203","Octopus green and yellow","Sticky Animals","2025/2026",KS,Compo,8,0,1.00,1,1,,true
+Kinder_2025_033_VQ204,"VQ204","Octopus blue and orange","Sticky Animals","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_034_VC075,"VC075","Frog","Sunlovers","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_035_VC072,"VC072","Blue dragon","Surreal","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_035_VC079,"VC079","Red dragon","Surreal","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_036_VC116,"VC116","Blue Car","Track Vehicle","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_036_VC179,"VC179","Yellow Car","Track Vehicle","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_038_VC224,"VC224","Yellow Flower","Turn me up","2025/2026",KS,Compo,5,1,0.83,1,1,,true
+Kinder_2025_038_VC224A,"VC224A","Blue Flower","Turn me up","2025/2026",KS,Compo,7,0,1.00,1,1,,true
+Kinder_2025_039_VC035,"VC035","Orca","Underwater Games","2025/2026",KS,Compo,5,0,1.00,1,1,,true
+Kinder_2025_040_VC050,"VC050","Crocodile","Zipper Friends","2025/2026",KS,Compo,4,1,0.80,1,1,,true
+Kinder_2025_040_VC051,"VC051","Beaver","Zipper Friends","2025/2026",KS,Compo,4,2,0.67,1,1,,true
+Kinder_2025_041_VC365,"VC365","Obi Wan Kenobi","Star Wars","2025/2026",KS,Hand_painted,9,7,0.56,1,1,,true
+Kinder_2025_041_VC366,"VC366","Luke Skywalker","Star Wars","2025/2026",KS,Hand_painted,2,9,0.18,1,1,,true
+Kinder_2025_041_VC367,"VC367","Chewbacca","Star Wars","2025/2026",KS,Hand_painted,6,9,0.40,1,2,DIFF,true
+Kinder_2025_041_VC368,"VC368","Stormtrooper","Star Wars","2025/2026",KS,Hand_painted,9,7,0.56,1,1,,true
+Kinder_2025_041_VC369,"VC369","Darth Vader","Star Wars","2025/2026",KS,Hand_painted,9,7,0.56,1,1,,true
+Kinder_2025_041_VC370,"VC370","Yoda","Star Wars","2025/2026",KS,Hand_painted,6,6,0.50,1,1,,true
+Kinder_2025_041_VC371,"VC371","Rey","Star Wars","2025/2026",KS,Hand_painted,4,8,0.33,1,1,,true
+Kinder_2025_041_VC372,"VC372","Kylo Ren","Star Wars","2025/2026",KS,Hand_painted,12,6,0.67,1,2,DIFF,true
+Kinder_2025_041_VC373,"VC373","Boba Fett","Star Wars","2025/2026",KS,Hand_painted,5,7,0.42,1,1,,true
+Kinder_2025_041_VC374,"VC374","Leia Organa","Star Wars","2025/2026",KS,Hand_painted,5,5,0.50,1,1,,true
+Kinder_2025_042_VC338,"VC338","Cakey Cat","Gabby's Dollhouse","2025/2026",KS,Hand_painted,5,0,1.00,1,1,,true
+Kinder_2025_042_VC339,"VC339","Gabby","Gabby's Dollhouse","2025/2026",KS,Hand_painted,5,1,0.83,1,1,,true
+Kinder_2025_042_VC340,"VC340","Kitty Fairy","Gabby's Dollhouse","2025/2026",KS,Hand_painted,4,1,0.80,1,1,,true
+Kinder_2025_042_VC341,"VC341","MerCat","Gabby's Dollhouse","2025/2026",KS,Hand_painted,6,1,0.86,2,1,DIFF,true
+Kinder_2025_042_VC342,"VC342","Pandy Paws","Gabby's Dollhouse","2025/2026",KS,Hand_painted,4,1,0.80,1,1,,true
+Kinder_2025_042_VC343,"VC343","Baby Box","Gabby's Dollhouse","2025/2026",KS,Hand_painted,5,0,1.00,1,1,,true
+Kinder_2025_043_VT428,"VT428","Elsa - Frozen 3 edition","Frozen 4","2025/2026",KS,Hand_painted,5,0,1.00,1,1,,true
+Kinder_2025_060_VQ284,"VQ284","Parasaurus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,20,5,0.80,2,2,,false
+Kinder_2025_060_VQ285,"VQ285","Gigantosaurus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,15,14,0.52,1,1,,false
+Kinder_2025_060_VQ286,"VQ286","Triceratops","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,15,4,0.79,1,2,DIFF,false
+Kinder_2025_060_VQ287,"VQ287","Velociraptor","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,13,6,0.68,1,2,DIFF,false
+Kinder_2025_060_VQ288,"VQ288","Pterodactylus (pen deco)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,19,3,0.86,2,2,,false
+Kinder_2025_060_VQ289,"VQ289","Velociraptor (pen deco)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,10,7,0.59,1,1,,false
+Kinder_2025_060_VQ290,"VQ290","Pachycephalosaurus (pen deco)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,8,15,0.35,1,1,,false
+Kinder_2025_060_VQ291,"VQ291","Brachiosaurus (supporto smartphone)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,16,1,0.94,3,3,,false
+Kinder_2025_060_VQ292,"VQ292","Indominus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,13,8,0.62,1,1,,false
+Kinder_2025_060_VQ293,"VQ293","Allosaurus (supporto smartphone)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,11,12,0.48,1,1,,false
+Kinder_2025_060_VQ302,"VQ302","Plateosaurus (supporto smartphone)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,10,11,0.48,1,1,,false
+Kinder_2025_060_VQ314,"VQ314","T-Rex","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,7,15,0.32,1,1,,false
+Kinder_2025_060_VQ315,"VQ315","Mosasaurus (porta cavo)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,20,1,0.95,3,3,,false
+Kinder_2025_060_VQ316,"VQ316","Ankylosaurus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,11,8,0.58,1,2,DIFF,false
+Kinder_2025_060_VQ317,"VQ317","Pterodactylus (cable deco)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,19,1,0.95,3,3,,false
+Kinder_2025_060_VQ318,"VQ318","Pyroraptor (cable deco)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,11,11,0.50,1,2,DIFF,false
+Kinder_2025_060_VQ319,"VQ319","Scorpios Rex (porta cavo)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,8,18,0.31,1,1,,false
+Kinder_2025_060_VQ320,"VQ320","Acrocanthosaurus (porta cavo)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,10,9,0.53,1,1,,false
+Kinder_2025_060_VQ321,"VQ321","Dilophosaurus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,9,16,0.36,1,1,,false
+Kinder_2025_060_VQ322,"VQ322","T-Rex skeleton","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,11,10,0.52,1,2,DIFF,false
+Kinder_2025_060_VQ323,"VQ323","Indoraptor","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,8,17,0.32,1,1,,false
+Kinder_2025_060_VQ324,"VQ324","Stygimoloch","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,12,3,0.80,2,1,DIFF,false
+Kinder_2025_060_VQ325,"VQ325","Stegosaurus","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,20,3,0.87,2,3,DIFF,false
+Kinder_2025_060_VQ326,"VQ326","Chasmosaurus (porta cavo)","Funko Pop - Jurassic World","2024/2025",KM,Hand_painted,8,14,0.36,1,1,,false
+Kinder_2025_067_DV548,"DV548","Mario","Super Mario","2024/2025",KM,Hand_painted,12,12,0.50,1,1,,false
+Kinder_2025_067_DV548A,"DV548A","Fire Mario","Super Mario","2024/2025",KM,Hand_painted,18,11,0.62,1,1,,false
+Kinder_2025_067_DV549,"DV549","Luigi","Super Mario","2024/2025",KM,Hand_painted,13,15,0.46,1,1,,false
+Kinder_2025_067_DV549A,"DV549A","Fire Luigi","Super Mario","2024/2025",KM,Hand_painted,13,11,0.54,1,1,,false
+Kinder_2025_067_DV550,"DV550","Yoshi","Super Mario","2024/2025",KM,Hand_painted,15,12,0.56,1,1,,false
+Kinder_2025_067_DV550A,"DV550A","Yoshi giallo","Super Mario","2024/2025",KM,Hand_painted,10,11,0.48,1,1,,false
+Kinder_2025_067_VQ390,"VQ390","Fungo rosso evidenziatore","Super Mario","2024/2025",KM,Hand_painted,16,3,0.84,2,2,,false
+Kinder_2025_067_VQ390A,"VQ390A","Green Mushroom evidenziatore","Super Mario","2024/2025",KM,Hand_painted,8,14,0.36,1,1,,false
+Kinder_2025_067_VQ392,"VQ392","Mario pen deco","Super Mario","2024/2025",KM,Hand_painted,9,11,0.45,1,1,,false
+Kinder_2025_067_VQ393,"VQ393","Fungo rosso organizer","Super Mario","2024/2025",KM,Hand_painted,12,4,0.75,1,1,,false
+Kinder_2025_067_VQ393A,"VQ393A","Fungo verde organizer","Super Mario","2024/2025",KM,Hand_painted,11,2,0.85,2,2,,false
+Kinder_2025_067_VQ394,"VQ394","Boo clip","Super Mario","2024/2025",KM,Hand_painted,8,8,0.50,1,1,,false
+Kinder_2025_067_VQ397,"VQ397","Goomba","Super Mario","2024/2025",KM,Hand_painted,17,9,0.65,1,2,DIFF,false
+Kinder_2025_067_VQ399,"VQ399","Fire Mario pop-it","Super Mario","2024/2025",KM,Hand_painted,12,3,0.80,2,1,DIFF,false
+Kinder_2025_067_VQ400,"VQ400","Fungo rosso pop-it","Super Mario","2024/2025",KM,Hand_painted,17,3,0.85,2,2,,false
+Kinder_2025_067_VQ401,"VQ401","Superstar","Super Mario","2024/2025",KM,Hand_painted,21,5,0.81,2,2,,false
+Kinder_2025_067_VQ402,"VQ402","CheepCheep rosso","Super Mario","2024/2025",KM,Hand_painted,20,2,0.91,2,2,,false
+Kinder_2025_067_VQ402A,"VQ402A","CheepCheep giallo","Super Mario","2024/2025",KM,Hand_painted,15,16,0.48,1,1,,false
+Kinder_2025_067_VQ405,"VQ405","Browser pop-it","Super Mario","2024/2025",KM,Hand_painted,10,11,0.48,1,1,,false
+Kinder_2025_067_VQ406,"VQ406","Blooper clip","Super Mario","2024/2025",KM,Hand_painted,11,8,0.58,1,1,,false
+Kinder_2025_067_VQ408,"VQ408","Fungo verde pop-it","Super Mario","2024/2025",KM,Hand_painted,14,7,0.67,1,2,DIFF,false
+Kinder_2025_067_VQ412,"VQ412","Spiny clip","Super Mario","2024/2025",KM,Hand_painted,8,10,0.44,1,1,,false
+Kinder_2025_067_VQ413,"VQ413","Piranha paperclip","Super Mario","2024/2025",KM,Hand_painted,14,5,0.74,1,1,,false
+Kinder_2025_067_VQ414,"VQ414","Luigi pen deco","Super Mario","2024/2025",KM,Hand_painted,8,14,0.36,1,1,,false
+Kinder_2025_067_VQ415,"VQ415","Peach pen deco","Super Mario","2024/2025",KM,Hand_painted,9,13,0.41,1,1,,false
+Kinder_2025_067_VQ416,"VQ416","Questionblock tag","Super Mario","2024/2025",KM,Hand_painted,11,8,0.58,1,1,,false
+Kinder_2025_067_VQ417,"VQ417","Toad paperclip","Super Mario","2024/2025",KM,Hand_painted,18,2,0.90,2,2,,false
+Kinder_2025_067_VQ420,"VQ420","Yoshi pen deco","Super Mario","2024/2025",KM,Hand_painted,9,14,0.39,1,1,,false
+Kinder_2025_067_VQ422,"VQ422","Fungo rosso portafoto","Super Mario","2024/2025",KM,Hand_painted,17,4,0.81,2,2,,false
+Kinder_2025_067_VQ422A,"VQ422A","Fungo verde portafoto","Super Mario","2024/2025",KM,Hand_painted,20,2,0.91,2,2,,false
+Kinder_2026_001_VC259,"VC259","Will","Funko Stranger Things","2025/2026",KM,Hand_painted,56,3,0.95,3,3,,true
+Kinder_2026_001_VC260,"VC260","Will Upside Down","Funko Stranger Things","2025/2026",KM,Hand_painted,42,10,0.81,2,2,,true
+Kinder_2026_001_VC261,"VC261","Dustin","Funko Stranger Things","2025/2026",KM,Hand_painted,16,23,0.41,1,1,,true
+Kinder_2026_001_VC262,"VC262","Dustin Upside Down","Funko Stranger Things","2025/2026",KM,Hand_painted,23,20,0.53,1,1,,true
+Kinder_2026_001_VC263,"VC263","Hopper","Funko Stranger Things","2025/2026",KM,Hand_painted,9,23,0.28,1,1,,true
+Kinder_2026_001_VC264,"VC264","Hopper Upside Down","Funko Stranger Things","2025/2026",KM,Hand_painted,15,16,0.48,1,1,,true
+Kinder_2026_001_VC265,"VC265","Max","Funko Stranger Things","2025/2026",KM,Hand_painted,13,25,0.34,1,1,,true
+Kinder_2026_001_VC266,"VC266","Max Upside Down","Funko Stranger Things","2025/2026",KM,Hand_painted,22,19,0.54,1,1,,true
+Kinder_2026_001_VC267,"VC267","Steve","Funko Stranger Things","2025/2026",KM,Hand_painted,10,27,0.27,1,1,,true
+Kinder_2026_001_VC268,"VC268","Steve Upside Down","Funko Stranger Things","2025/2026",KM,Hand_painted,12,26,0.32,1,1,,true
+Kinder_2026_001_VC269,"VC269","Eleven","Funko Stranger Things","2025/2026",KM,Hand_painted,18,18,0.50,1,2,DIFF,true
+Kinder_2026_001_VC271,"VC271","Demo Gorgon","Funko Stranger Things","2025/2026",KM,Hand_painted,11,23,0.32,1,1,,true
+Kinder_2026_001_VC273,"VC273","Lucas","Funko Stranger Things","2025/2026",KM,Hand_painted,13,23,0.36,1,1,,true
+Kinder_2026_001_VC274,"VC274","Mike","Funko Stranger Things","2025/2026",KM,Hand_painted,18,18,0.50,1,2,DIFF,true
+Kinder_2026_001_VC275,"VC275","Demo Gorgon paperclip","Funko Stranger Things","2025/2026",KM,Hand_painted,11,19,0.37,1,1,,true
+Kinder_2026_001_VC276,"VC276","Eleven smartphone holder","Funko Stranger Things","2025/2026",KM,Hand_painted,19,14,0.58,1,2,DIFF,true
+Kinder_2026_001_VC277,"VC277","Vecna smartphone holder","Funko Stranger Things","2025/2026",KM,Hand_painted,10,20,0.33,1,1,,true
+Kinder_2026_001_VC283,"VC283","Nancy cable deco","Funko Stranger Things","2025/2026",KM,Hand_painted,14,19,0.42,1,1,,true
+Kinder_2026_001_VC284,"VC284","Eddie Upside Down cable deco","Funko Stranger Things","2025/2026",KM,Hand_painted,13,20,0.39,1,1,,true
+Kinder_2026_001_VC285,"VC285","Erica cable deco","Funko Stranger Things","2025/2026",KM,Hand_painted,15,18,0.45,1,1,,true
+Kinder_2026_001_VC286,"VC286","Steven e Robin pen deco","Funko Stranger Things","2025/2026",KM,Hand_painted,10,20,0.33,1,1,,true
+Kinder_2026_001_VC287,"VC287","Demo Gorgon pen deco","Funko Stranger Things","2025/2026",KM,Hand_painted,11,18,0.38,1,1,,true
+Kinder_2026_001_VC288,"VC288","Robin Upside Down cable deco","Funko Stranger Things","2025/2026",KM,Hand_painted,13,12,0.52,1,1,,true
+Kinder_2026_001_VC356,"VC356","Eleven paperclip","Funko Stranger Things","2025/2026",KM,Hand_painted,15,21,0.42,1,1,,true
+Kinder_2026_044_VC307,"VC307","Alex","Minecraft","2025/2026",KM,Hand_painted,11,10,0.52,1,1,,true
+Kinder_2026_044_VC308,"VC308","Steve","Minecraft","2025/2026",KM,Hand_painted,16,3,0.84,2,1,DIFF,true
+Kinder_2026_044_VC309,"VC309","Creeper","Minecraft","2025/2026",KM,Hand_painted,24,1,0.96,3,2,DIFF,true
+Kinder_2026_044_VC309A,"VC309A","Charged Creeper","Minecraft","2025/2026",KM,Hand_painted,25,3,0.89,2,2,,true
+Kinder_2026_044_VC310,"VC310","Zombie","Minecraft","2025/2026",KM,Hand_painted,20,2,0.91,2,1,DIFF,true
+Kinder_2026_044_VC311,"VC311","Enderman","Minecraft","2025/2026",KM,Hand_painted,17,2,0.89,2,2,,true
+Kinder_2026_044_VC312,"VC312","Alex in golden armour","Minecraft","2025/2026",KM,Hand_painted,15,3,0.83,2,1,DIFF,true
+Kinder_2026_044_VC314,"VC314","Steve in diamond armour","Minecraft","2025/2026",KM,Hand_painted,20,2,0.91,2,2,,true
+Kinder_2026_044_VC315,"VC315","Netherportal Skeleton smartphone holder","Minecraft","2025/2026",KM,Hand_painted,15,4,0.79,1,1,,true
+Kinder_2026_044_VC317,"VC317","Alex in golden armour paper clip","Minecraft","2025/2026",KM,Hand_painted,15,3,0.83,2,1,DIFF,true
+Kinder_2026_044_VC318,"VC318","Steve in diamond armour paper clip","Minecraft","2025/2026",KM,Hand_painted,18,4,0.82,2,1,DIFF,true
+Kinder_2026_044_VC319,"VC319","Ender Dragon","Minecraft","2025/2026",KM,Hand_painted,15,3,0.83,2,1,DIFF,true
+Kinder_2026_044_VC320,"VC320","Bat clip","Minecraft","2025/2026",KM,Hand_painted,14,3,0.82,2,1,DIFF,true
+Kinder_2026_044_VC321,"VC321","Spider clip","Minecraft","2025/2026",KM,Hand_painted,12,3,0.80,2,1,DIFF,true
+Kinder_2026_044_VC322,"VC322","Ocelet paper clip","Minecraft","2025/2026",KM,Hand_painted,11,4,0.73,1,1,,true
+Kinder_2026_044_VC323,"VC323","Magma pen deco","Minecraft","2025/2026",KM,Hand_painted,19,1,0.95,3,1,DIFF,true
+Kinder_2026_044_VC326,"VC326","Netherportal Wither Skeleton smartphone holder","Minecraft","2025/2026",KM,Hand_painted,22,1,0.96,3,1,DIFF,true
+Kinder_2026_044_VC327,"VC327","Fox paper clip","Minecraft","2025/2026",KM,Hand_painted,14,1,0.93,3,1,DIFF,true
+Kinder_2026_044_VC328,"VC328","Breeze fidget","Minecraft","2025/2026",KM,Hand_painted,15,0,1.00,2,1,DIFF,true
+Kinder_2026_044_VC329,"VC329","Shulker Box fidget","Minecraft","2025/2026",KM,Hand_painted,14,6,0.70,1,1,,true
+Kinder_2026_044_VC334,"VC334","Diamond ore","Minecraft","2025/2026",KM,Hand_painted,19,2,0.90,2,1,DIFF,true
+Kinder_2026_044_VC334A,"VC334A","Redstone ore","Minecraft","2025/2026",KM,Hand_painted,17,2,0.89,2,2,,true
+Kinder_2026_044_VC335,"VC335","Emerald block","Minecraft","2025/2026",KM,Hand_painted,20,3,0.87,2,1,DIFF,true
+Kinder_2026_044_VC335A,"VC335A","Ice block","Minecraft","2025/2026",KM,Hand_painted,19,1,0.95,3,1,DIFF,true
+Kinder_2026_044_VC336,"VC336","Grass block","Minecraft","2025/2026",KM,Hand_painted,20,1,0.95,3,1,DIFF,true
+Kinder_2026_044_VC399,"VC399","Golden block","Minecraft","2025/2026",KM,Hand_painted,15,1,0.94,3,1,DIFF,true
+Kinder_2026_044_VC400,"VC400","Cat paper clip","Minecraft","2025/2026",KM,Hand_painted,12,2,0.86,2,1,DIFF,true
+Kinder_2026_044_VC405,"VC405","Skeleton","Minecraft","2025/2026",KM,Hand_painted,16,4,0.80,2,1,DIFF,true

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /profile
+Disallow: /missing
+Disallow: /doubles
+Disallow: /missing-owners/
+Disallow: /other-for-you/
+Disallow: /onboarding

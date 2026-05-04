@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.lucagiorgetti.surprix",
+    "sha256_cert_fingerprints": [
+      "4A:87:EA:C7:D6:80:E7:06:84:8C:DA:06:E8:24:B0:6D:CC:45:4B:B3:73:44:51:17:F1:72:52:49:E1:DB:96:74"
+    ]
+  }
+}]
