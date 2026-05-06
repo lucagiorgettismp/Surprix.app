@@ -14,7 +14,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     handleRedirectResult()
-      .then((result) => { if (result?.user) navigate('/') })
+      .then((result) => { if (result?.user) navigate('/', { replace: true }) })
       .catch(() => {})
   }, [])
   const [password, setPassword] = useState('')
@@ -69,7 +69,7 @@ const LoginPage = () => {
     setError('')
     try {
       await fn()
-      navigate('/')
+      navigate('/', { replace: true })
     } catch (e) {
       setError(mapError(e))
     } finally {
@@ -152,7 +152,7 @@ const LoginPage = () => {
 
         <Typography variant="body2" sx={{ textAlign: 'center' }} color="text.secondary">
           {t.login.noAccount}{' '}
-          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => navigate('/signup')}>
+          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => navigate('/signup', { replace: true })}>
             {t.login.signUp}
           </Typography>
         </Typography>

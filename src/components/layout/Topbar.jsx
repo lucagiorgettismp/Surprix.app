@@ -24,7 +24,7 @@ const Topbar = () => {
   const handleLogout = async () => {
     handleClose()
     await logout()
-    navigate('/login')
+    navigate('/login', { replace: true })
   }
 
   const theme = useTheme()

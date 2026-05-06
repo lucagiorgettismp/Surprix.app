@@ -37,7 +37,7 @@ const OnboardingPage = () => {
       if (exists) return setError(t.signup.usernameExists)
       await createUserProfile(user.uid, user.email, username, country, provider)
       await refreshProfile()
-      navigate('/')
+      navigate('/', { replace: true })
     } catch (e) {
       setError(e.message)
     } finally {
@@ -86,7 +86,7 @@ const OnboardingPage = () => {
         </Button>
         <Typography variant="body2" sx={{ textAlign: 'center' }} color="text.secondary">
           {t.onboarding.wrongAccount}{' '}
-          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => logout().then(() => navigate('/login'))}>
+          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => logout().then(() => navigate('/login', { replace: true }))}>
             {t.onboarding.signOut}
           </Typography>
         </Typography>

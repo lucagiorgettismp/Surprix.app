@@ -37,7 +37,7 @@ const SignUpPage = () => {
       const { user } = await registerWithEmail(email, password)
       await createUserProfile(user.uid, email, username, country, 'password')
       await refreshProfile()
-      navigate('/')
+      navigate('/', { replace: true })
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') setError(t.signup.emailInUse)
       else if (e.code === 'auth/invalid-email') setError(t.signup.emailFormat)
@@ -91,7 +91,7 @@ const SignUpPage = () => {
 
         <Typography variant="body2" textAlign="center" color="text.secondary">
           {t.login.alreadyAccount}{' '}
-          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => navigate('/login')}>
+          <Typography component="span" variant="body2" color="primary" sx={{ cursor: 'pointer', fontWeight: 600 }} onClick={() => navigate('/login', { replace: true })}>
             {t.login.signIn}
           </Typography>
         </Typography>

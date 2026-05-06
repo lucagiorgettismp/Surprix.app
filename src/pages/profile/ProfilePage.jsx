@@ -99,13 +99,13 @@ const ProfilePage = () => {
 
   const handleLogout = async () => {
     await logout()
-    navigate('/login')
+    navigate('/login', { replace: true })
   }
 
   const performDelete = async () => {
     await deleteUserData(user.uid, username)
     await deleteAccount()
-    navigate('/login')
+    navigate('/login', { replace: true })
   }
 
   const handleDeleteConfirm = async () => {

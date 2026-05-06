@@ -9,7 +9,7 @@ const NotFoundPage = () => {
       <AppLogo size={72} />
       <Typography variant="h5" fontWeight={700}>Pagina non trovata</Typography>
       <Typography variant="body2" color="text.secondary">La pagina che cerchi non esiste o è stata spostata.</Typography>
-      <Button variant="contained" onClick={() => navigate('/')}>Torna alla home</Button>
+      <Button variant="contained" onClick={() => navigate('/', { replace: true })}>Torna alla home</Button>
     </Box>
   )
 }
