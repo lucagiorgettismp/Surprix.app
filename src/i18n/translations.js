@@ -120,6 +120,7 @@ const translations = {
       noFeedback: 'Nessuna recensione ancora.',
       reviewCount: (n) => n === 1 ? '1 recensione' : `${n} recensioni`,
       viewAll: 'Vedi tutte le recensioni',
+      loadMore: 'Carica altre recensioni',
     },
     common: {
       notFound: 'Sorpresa non trovata.',
@@ -346,6 +347,7 @@ const translations = {
       noFeedback: 'No reviews yet.',
       reviewCount: (n) => n === 1 ? '1 review' : `${n} reviews`,
       viewAll: 'View all reviews',
+      loadMore: 'Load more reviews',
     },
     common: {
       notFound: 'Surprise not found.',

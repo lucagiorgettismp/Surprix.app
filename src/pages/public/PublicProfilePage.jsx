@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { Box, Avatar, Typography, CircularProgress, Button, Divider, Paper, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -19,11 +19,13 @@ import EggRating from '../../components/feedback/EggRating'
 import LeaveFeedbackDialog from '../../components/feedback/LeaveFeedbackDialog'
 
 const LOGIN_WALL_AFTER = 10
-const REVIEWS_PREVIEW = 5
+const REVIEWS_PAGE_SIZE = 5
 
 const PublicProfilePage = () => {
   const { username: profileUsername } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const canGoBack = location.key !== 'default'
   const { user } = useAuth()
   const { username: myUsername } = useCollection()
   const t = useT()
@@ -36,6 +38,7 @@ const PublicProfilePage = () => {
   const [missing, setMissing] = useState([])
   const [doubles, setDoubles] = useState([])
   const [feedbacks, setFeedbacks] = useState([])
+  const [visibleReviews, setVisibleReviews] = useState(REVIEWS_PAGE_SIZE)
   const [loading, setLoading] = useState(true)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [editingReview, setEditingReview] = useState(null)
@@ -117,7 +120,7 @@ const PublicProfilePage = () => {
         px: 1,
         zIndex: 10,
       }}>
-        <IconButton onClick={() => navigate(-1)} sx={{ color: 'inherit' }}>
+        <IconButton onClick={() => canGoBack ? navigate(-1) : navigate('/', { replace: true })} sx={{ color: 'inherit' }}>
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" fontWeight={700} noWrap>
@@ -240,16 +243,15 @@ const PublicProfilePage = () => {
       {tab === 2 && (
         <Box>
           <FeedbackList
-            feedbacks={feedbacks}
-            limit={REVIEWS_PREVIEW}
+            feedbacks={feedbacks.slice(0, visibleReviews)}
             myUsername={myUsername}
             onEdit={(fb) => setEditingReview(fb)}
           />
-          {feedbacks.length > REVIEWS_PREVIEW && (
+          {feedbacks.length > visibleReviews && (
             <>
               <Divider sx={{ my: 1 }} />
-              <Button fullWidth onClick={() => navigate(`/u/${profileUsername}/reviews`)}>
-                {t.feedback.viewAll}
+              <Button fullWidth onClick={() => setVisibleReviews((v) => v + REVIEWS_PAGE_SIZE)}>
+                {t.feedback.loadMore}
               </Button>
             </>
           )}
