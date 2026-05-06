@@ -1,4 +1,4 @@
-import { Box, Paper, Portal, Typography } from '@mui/material'
+import { Box, Paper, Portal, Typography, Badge } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useLocation, useNavigate } from 'react-router-dom'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -6,7 +6,10 @@ import StarBorderIcon from '@mui/icons-material/StarBorder'
 import StarIcon from '@mui/icons-material/Star'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import DifferenceIcon from '@mui/icons-material/Difference'
+import ChatBubbleOutlinedIcon from '@mui/icons-material/ChatBubbleOutlined'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import { useT } from '../../store/LanguageContext'
+import { useCollection } from '../../store/CollectionContext'
 
 const NavItem = ({ icon, activeIcon, label, active, onClick }) => {
   const theme = useTheme()
@@ -67,6 +70,9 @@ const BottomNav = () => {
   const { pathname } = useLocation()
   const theme = useTheme()
   const t = useT()
+  const { unreadChats } = useCollection()
+
+  if (/^\/chat\/.+/.test(pathname) || pathname === '/settings') return null
 
   const tabs = [
     {
@@ -85,6 +91,12 @@ const BottomNav = () => {
       label: t.nav.catalog,
       path: '/catalog',
       icon: <MenuBookIcon fontSize="small" />,
+    },
+    {
+      label: t.chat.title,
+      path: '/chat',
+      icon: <Badge badgeContent={unreadChats || null} color="error" sx={{ '& .MuiBadge-badge': { fontSize: '0.6rem', minWidth: 16, height: 16 } }}><ChatBubbleOutlinedIcon fontSize="small" /></Badge>,
+      activeIcon: <Badge badgeContent={unreadChats || null} color="error" sx={{ '& .MuiBadge-badge': { fontSize: '0.6rem', minWidth: 16, height: 16 } }}><ChatBubbleIcon fontSize="small" /></Badge>,
     },
   ]
 
@@ -110,7 +122,7 @@ const BottomNav = () => {
             bgcolor: theme.palette.mode === 'dark' ? '#1e1e1e' : 'background.paper',
           }}
         >
-          <Box sx={{ display: 'flex', height: 60 }}>
+          <Box sx={{ display: 'flex', height: 60, px: 1 }}>
             {tabs.map((tab) => (
               <NavItem
                 key={tab.path}

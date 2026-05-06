@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { Box, List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, CircularProgress, Chip, ListItemButton } from '@mui/material'
-import { getOwnersForSurprise, getUserProfile } from '../../services/database.service'
+import { Box, List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, CircularProgress, ListItemButton } from '@mui/material'
+import { getOwnersForSurprise, getUserProfile, getFeedbackFor } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
 import { getCountryName } from '../../utils/locale'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
 import PageHeader from '../../components/catalog/PageHeader'
+import RatingBadge from '../../components/feedback/RatingBadge'
 
 const MissingOwnersPage = () => {
   const { surpriseId } = useParams()
@@ -16,6 +17,7 @@ const MissingOwnersPage = () => {
   const { username, missing } = useCollection()
 
   const [owners, setOwners] = useState([])
+  const [ratings, setRatings] = useState({})
   const [myProfile, setMyProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -29,7 +31,7 @@ const MissingOwnersPage = () => {
       getOwnersForSurprise(surpriseId),
       username ? getUserProfile(username) : Promise.resolve(null),
     ])
-      .then(([fetchedOwners, profile]) => {
+      .then(async ([fetchedOwners, profile]) => {
         setMyProfile(profile)
         const myCountry = profile?.country
         const sorted = [...fetchedOwners].sort((a, b) => {
@@ -38,6 +40,16 @@ const MissingOwnersPage = () => {
           return 0
         })
         setOwners(sorted)
+        const feedbacks = await Promise.all(sorted.map((o) => getFeedbackFor(o.username)))
+        const map = {}
+        sorted.forEach((o, i) => {
+          const fbs = feedbacks[i]
+          map[o.username] = {
+            count: fbs.length,
+            avg: fbs.length ? fbs.reduce((s, f) => s + f.rating, 0) / fbs.length : 0,
+          }
+        })
+        setRatings(map)
       })
       .catch(setError)
       .finally(() => setLoading(false))
@@ -53,13 +65,12 @@ const MissingOwnersPage = () => {
 
   return (
     <>
-      <PageHeader crumbs={crumbs} title={t.trade.ownersTitle} />
+      <PageHeader crumbs={crumbs} title={t.trade.ownersTitle} backButton />
       {owners.length === 0 ? (
         <EmptyState message={t.trade.noOwners} />
       ) : (
         <List disablePadding>
           {owners.map((owner) => {
-            const sameCountry = owner.country && owner.country === myProfile?.country
             return (
               <ListItem
                 key={owner.username}
@@ -87,8 +98,18 @@ const MissingOwnersPage = () => {
                   <ListItemText
                     primary={owner.username}
                     secondary={getCountryName(owner.country, lang)}
+                    slotProps={{ primary: { sx: { fontWeight: 700 } } }}
                   />
-                  {sameCountry && <Chip label={t.trade.sameCountry} size="small" color="primary" variant="outlined" />}
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.5, flexShrink: 0 }}>
+                    {ratings[owner.username] && (
+                      <>
+                        <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
+                          {t.feedback.eggScore}
+                        </Typography>
+                        <RatingBadge value={ratings[owner.username].avg} count={ratings[owner.username].count} showCount={false} />
+                      </>
+                    )}
+                  </Box>
                 </ListItemButton>
               </ListItem>
             )

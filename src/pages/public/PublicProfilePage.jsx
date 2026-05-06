@@ -1,10 +1,17 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Box, Avatar, Typography, Tab, Tabs, CircularProgress, Button, Divider, Paper } from '@mui/material'
-import { getUserProfile, getPublicMissing, getPublicDoubles, getFeedbackFor } from '../../services/database.service'
+import { Box, Avatar, Typography, CircularProgress, Button, Divider, Paper, IconButton } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import ShareIcon from '@mui/icons-material/Share'
+import Topbar from '../../components/layout/Topbar'
+import PublicFooter from '../../components/layout/PublicFooter'
+import { getUserProfile, getPublicMissing, getPublicDoubles, getFeedbackFor, getChatId } from '../../services/database.service'
 import { useAuth } from '../../store/AuthContext'
 import { useCollection } from '../../store/CollectionContext'
 import { useT, useLanguage } from '../../store/LanguageContext'
+import { useSnackbar } from '../../store/SnackbarContext'
+import { usePageMeta } from '../../hooks/usePageMeta'
 import { getCountryName } from '../../utils/locale'
 import PublicCollectionList from '../../components/public/PublicCollectionList'
 import FeedbackList from '../../components/feedback/FeedbackList'
@@ -21,6 +28,8 @@ const PublicProfilePage = () => {
   const { username: myUsername } = useCollection()
   const t = useT()
   const { lang } = useLanguage()
+  const theme = useTheme()
+  const isDark = theme.palette.mode === 'dark'
 
   const [tab, setTab] = useState(0)
   const [profile, setProfile] = useState(null)
@@ -33,6 +42,17 @@ const PublicProfilePage = () => {
 
   const isLoggedIn = !!user
   const isSelf = myUsername === profileUsername
+  const { showSnackbar } = useSnackbar()
+
+  const handleShare = async () => {
+    const url = `${window.location.origin}/u/${profileUsername}`
+    if (navigator.share) {
+      await navigator.share({ title: `Lista di ${profileUsername} su Surprix`, url })
+    } else {
+      await navigator.clipboard.writeText(url)
+      showSnackbar(t.common.linkCopied)
+    }
+  }
 
   useEffect(() => {
     Promise.allSettled([
@@ -55,14 +75,16 @@ const PublicProfilePage = () => {
     return feedbacks.reduce((sum, fb) => sum + fb.rating, 0) / feedbacks.length
   }, [feedbacks])
 
-  useEffect(() => {
-    if (!profile) return
-    document.title = `${profile.username} — Surprix`
-    const desc = `Lista mancanti e doppi di ${profile.username} su Surprix`
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc)
-    return () => { document.title = 'Surprix' }
-  }, [profile])
+  const metaDesc = profile
+    ? `${profile.username} ha ${missing.length} mancanti e ${doubles.length} doppi su Surprix${avgRating ? `. Punteggio uova: ${avgRating.toFixed(1)}/5` : ''}.`
+    : undefined
+
+  usePageMeta({
+    title: profile ? `${profile.username} — Surprix` : undefined,
+    description: metaDesc,
+    url: profile ? `https://surprix.app/u/${profile.username}` : undefined,
+    type: 'profile',
+  })
 
   if (loading) return (
     <Box sx={{ display: 'flex', justifyContent: 'center', pt: 10 }}>
@@ -77,7 +99,34 @@ const PublicProfilePage = () => {
   )
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', pb: 6 }}>
+    <Box>
+      <Topbar />
+      <Box sx={{ height: { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' } }} />
+
+      {/* Page header */}
+      <Box sx={{
+        position: 'fixed',
+        top: { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' },
+        left: 0, right: 0,
+        height: '56px',
+        bgcolor: isDark ? '#111111' : 'primary.main',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        px: 1,
+        zIndex: 10,
+      }}>
+        <IconButton onClick={() => navigate(-1)} sx={{ color: 'inherit' }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h6" fontWeight={700} noWrap>
+          {profile.username}
+        </Typography>
+      </Box>
+      <Box sx={{ height: '56px' }} />
+
+    <Box sx={{ maxWidth: 600, mx: 'auto', pb: 6, px: 2, mt: 1 }}>
       {/* Header */}
       <Paper elevation={0} sx={{ p: 3, mb: 2, borderRadius: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
@@ -91,32 +140,84 @@ const PublicProfilePage = () => {
                 {getCountryName(profile.country, lang)}
               </Typography>
             )}
-            {feedbacks.length > 0 && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mt: 0.5 }}>
-                <EggRating value={avgRating} readOnly size="small" />
-                <Typography variant="caption" color="text.secondary">
-                  ({feedbacks.length})
-                </Typography>
-              </Box>
-            )}
+          </Box>
+        </Box>
+
+        {/* Rating */}
+        <Box sx={{ textAlign: 'center', py: 1.5, mb: 2, bgcolor: 'background.default', borderRadius: 2 }}>
+          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+            {t.feedback.eggScore}
+          </Typography>
+          <Box sx={{ mt: 0.5 }}>
+            <EggRating value={avgRating} readOnly size="large" />
+          </Box>
+          {feedbacks.length > 0 && (
+            <Typography variant="h5" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
+              {avgRating.toFixed(1)}
+            </Typography>
+          )}
+          <Typography variant="caption" color="text.secondary" display="block">
+            {t.feedback.reviewCount(feedbacks.length)}
+          </Typography>
+        </Box>
+
+        {/* Counters */}
+        <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+          <Box sx={{ flex: 1, textAlign: 'center', py: 1.5, bgcolor: 'background.default', borderRadius: 2 }}>
+            <Typography variant="h4" sx={{ fontWeight: 800 }} color="warning.main">{missing.length}</Typography>
+            <Typography variant="caption" color="text.secondary">{t.missing.title}</Typography>
+          </Box>
+          <Box sx={{ flex: 1, textAlign: 'center', py: 1.5, bgcolor: 'background.default', borderRadius: 2 }}>
+            <Typography variant="h4" sx={{ fontWeight: 800 }} color="info.main">{doubles.length}</Typography>
+            <Typography variant="caption" color="text.secondary">{t.doubles.title}</Typography>
           </Box>
         </Box>
 
         {isLoggedIn && !isSelf && (
           <Box sx={{ display: 'flex', gap: 1 }}>
+            <Button size="small" variant="outlined" onClick={() => navigate(`/chat/${getChatId(myUsername, profileUsername)}`, { state: { with: profileUsername } })}>
+              {t.chat.startChat}
+            </Button>
             <Button size="small" variant="outlined" onClick={() => setFeedbackOpen(true)}>
               {t.feedback.title}
             </Button>
           </Box>
         )}
+        {isSelf && (
+          <Button size="small" variant="outlined" startIcon={<ShareIcon />} onClick={handleShare} fullWidth>
+            {t.common.shareList}
+          </Button>
+        )}
       </Paper>
 
       {/* Tabs */}
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
-        <Tab label={`${t.missing.title} (${missing.length})`} />
-        <Tab label={`${t.doubles.title} (${doubles.length})`} />
-        <Tab label={`${t.feedback.title} (${feedbacks.length})`} />
-      </Tabs>
+      <Paper elevation={0} sx={{ borderRadius: 3, p: 0.5, mb: 2, display: 'flex', gap: 0.5 }}>
+        {[
+          `${t.missing.title} (${missing.length})`,
+          `${t.doubles.title} (${doubles.length})`,
+          `${t.feedback.reviews} (${feedbacks.length})`,
+        ].map((label, i) => (
+          <Box
+            key={i}
+            onClick={() => setTab(i)}
+            sx={{
+              flex: 1,
+              textAlign: 'center',
+              py: 0.75,
+              borderRadius: 2.5,
+              bgcolor: tab === i ? (isDark ? 'primary.dark' : 'primary.main') : 'transparent',
+              color: tab === i ? 'white' : 'text.secondary',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
+              userSelect: 'none',
+            }}
+          >
+            <Typography variant="caption" sx={{ fontWeight: tab === i ? 700 : 400 }}>
+              {label}
+            </Typography>
+          </Box>
+        ))}
+      </Paper>
 
       {tab === 0 && (
         <PublicCollectionList
@@ -167,6 +268,8 @@ const PublicProfilePage = () => {
         </Box>
       )}
 
+      <PublicFooter />
+
       <LeaveFeedbackDialog
         open={feedbackOpen || !!editingReview}
         onClose={() => { setFeedbackOpen(false); setEditingReview(null) }}
@@ -177,6 +280,7 @@ const PublicProfilePage = () => {
         initialRating={editingReview?.rating}
         initialComment={editingReview?.comment}
       />
+    </Box>
     </Box>
   )
 }

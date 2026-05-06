@@ -1,37 +1,22 @@
 import { useState } from 'react'
-import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Button } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate, useLocation } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
-import RefreshIcon from '@mui/icons-material/Refresh'
-import ShareIcon from '@mui/icons-material/Share'
 import { APP_NAME } from '../../constants'
 import { useAuth } from '../../store/AuthContext'
 import { useCollection } from '../../store/CollectionContext'
 import { useT } from '../../store/LanguageContext'
 import { logout } from '../../services/auth.service'
-import { useSnackbar } from '../../store/SnackbarContext'
 
 const Topbar = () => {
   const { user } = useAuth()
-  const { username, refresh, refreshing } = useCollection()
+  const { username } = useCollection()
   const t = useT()
   const navigate = useNavigate()
   const location = useLocation()
   const [anchor, setAnchor] = useState(null)
-  const { showSnackbar } = useSnackbar()
-
-  const isCollectionPage = location.pathname === '/missing' || location.pathname === '/doubles'
-
-  const handleShare = async () => {
-    const url = `https://surprix.app/u/${username}`
-    if (navigator.share) {
-      await navigator.share({ title: `Lista di ${username} su Surprix`, url })
-    } else {
-      await navigator.clipboard.writeText(url)
-      showSnackbar(t.common.linkCopied)
-    }
-  }
+  const isChat = location.pathname.startsWith('/chat')
 
   const handleOpen = (e) => setAnchor(e.currentTarget)
   const handleClose = () => setAnchor(null)
@@ -52,30 +37,34 @@ const Topbar = () => {
           {APP_NAME}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        {location.pathname.startsWith('/catalog') && location.pathname !== '/search' && (
+        {!isChat && location.pathname.startsWith('/catalog') && location.pathname !== '/search' && (
           <IconButton size="small" onClick={() => navigate('/search')} sx={{ color: 'white', mr: 0.5 }}>
             <SearchIcon />
           </IconButton>
         )}
-        {username && isCollectionPage && (
-          <IconButton size="small" onClick={handleShare} sx={{ color: 'white', mr: 0.5 }}>
-            <ShareIcon />
-          </IconButton>
+        {user ? (
+          <>
+            <IconButton onClick={handleOpen} size="small">
+              <Avatar sx={{ width: 34, height: 34, bgcolor: 'white', color: 'primary.main', fontSize: 14, fontWeight: 700 }}>
+                {initial}
+              </Avatar>
+            </IconButton>
+            <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
+              <MenuItem onClick={() => { handleClose(); navigate(`/u/${username}`) }}>{t.nav.viewProfile}</MenuItem>
+              <MenuItem onClick={() => { handleClose(); navigate('/settings') }}>{t.nav.settings}</MenuItem>
+              <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>{t.profile.logout}</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={() => navigate('/login')}
+            sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
+          >
+            {t.login.signIn}
+          </Button>
         )}
-        {username && !location.pathname.startsWith('/catalog') && !isCollectionPage && (
-          <IconButton size="small" onClick={refresh} disabled={refreshing} sx={{ color: 'white', mr: 0.5 }}>
-            <RefreshIcon sx={{ transition: 'transform 0.6s linear', ...(refreshing && { animation: 'spin 0.8s linear infinite', '@keyframes spin': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } } }) }} />
-          </IconButton>
-        )}
-        <IconButton onClick={handleOpen} size="small">
-          <Avatar sx={{ width: 34, height: 34, bgcolor: 'white', color: 'primary.main', fontSize: 14, fontWeight: 700 }}>
-            {initial}
-          </Avatar>
-        </IconButton>
-        <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
-          <MenuItem onClick={() => { handleClose(); navigate('/profile') }}>{t.nav.profile}</MenuItem>
-          <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>{t.profile.logout}</MenuItem>
-        </Menu>
       </Toolbar>
     </AppBar>
   )

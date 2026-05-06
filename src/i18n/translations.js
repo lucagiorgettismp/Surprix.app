@@ -5,6 +5,9 @@ const translations = {
       missing: 'Mancanti',
       doubles: 'Doppi',
       profile: 'Profilo',
+      viewProfile: 'Vedi profilo',
+      settings: 'Impostazioni',
+      chat: 'Messaggi',
     },
     catalog: {
       producer: 'Produttore',
@@ -73,6 +76,8 @@ const translations = {
       noOther: 'Questo utente non ha altri pezzi che ti mancano.',
       contact: (name) => `Contatta ${name}`,
       viewProfile: 'Vedi profilo',
+      chatMessage: (ownerUsername, myUsername, items) =>
+        `Ciao, sono ${myUsername}, piacere di conoscerti!\n\nHo visto che hai disponibili:\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' — ')}`).join('\n')}\n\nSei interessato a uno scambio?`,
       emailSubject: (myUsername) => `Surprix - ${myUsername}`,
       emailBody: (ownerUsername, myUsername, items) =>
         `Ciao ${ownerUsername},\n\nSono ${myUsername} su Surprix. Ho visto che hai disponibili i seguenti pezzi:\n\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nSarei interessato a uno scambio!\n\n${myUsername}`,
@@ -108,7 +113,12 @@ const translations = {
       comment: 'Commento (opzionale)',
       alreadyLeft: 'Hai già lasciato una recensione per questo utente.',
       submit: 'Invia',
+      reviews: 'Recensioni',
+      eggScore: 'Punteggio uova',
+      ratingLow: '1 uovo = pessimo scambio',
+      ratingHigh: '5 uova = ottimo scambio',
       noFeedback: 'Nessuna recensione ancora.',
+      reviewCount: (n) => n === 1 ? '1 recensione' : `${n} recensioni`,
       viewAll: 'Vedi tutte le recensioni',
     },
     common: {
@@ -119,6 +129,7 @@ const translations = {
       tagline: 'Tieni in ordine le tue collezioni',
       linkCopied: 'Link copiato!',
       shareList: 'Condividi lista',
+      reportIssue: 'Segnala un problema',
     },
     undo: {
       addedToMissing: 'Aggiunto ai mancanti',
@@ -179,10 +190,24 @@ const translations = {
     },
     public: {
       emptyList: 'Nessun elemento.',
-      loginWall: (n) => `Accedi per vedere altri ${n} elementi`,
+      loginWall: (n) => `per vedere altri ${n} elementi`,
       signIn: 'Accedi',
       createAccount: 'Crea account',
       joinCta: 'Gestisci la tua collezione su Surprix — è gratis!',
+    },
+    chat: {
+      title: 'Messaggi',
+      placeholder: 'Scrivi un messaggio…',
+      send: 'Invia',
+      noChats: 'Nessuna conversazione.',
+      startChat: 'Scrivi',
+      report: 'Segnala messaggio',
+      reportConfirm: 'Segnala questo messaggio a info.surprix@gmail.com?',
+      deleteMessage: 'Elimina messaggio',
+      deletedMessage: 'Messaggio eliminato',
+      deletedMessageOwn: 'Hai eliminato questo messaggio',
+      deleteChat: 'Elimina conversazione',
+      deleteChatConfirm: 'La chat sparirà dalla tua lista. I messaggi verranno eliminati definitivamente solo quando anche l\'altro utente eliminerà la conversazione.',
     },
     rarity: {
       auto: 'Rarità secondo',
@@ -206,6 +231,9 @@ const translations = {
       missing: 'Missing',
       doubles: 'Doubles',
       profile: 'Profile',
+      viewProfile: 'View profile',
+      settings: 'Settings',
+      chat: 'Messages',
     },
     catalog: {
       producer: 'Producer',
@@ -274,6 +302,8 @@ const translations = {
       noOther: 'This user has no other pieces you need.',
       contact: (name) => `Contact ${name}`,
       viewProfile: 'View profile',
+      chatMessage: (ownerUsername, myUsername, items) =>
+        `Hi, I'm ${myUsername}, nice to meet you!\n\nI saw you have available:\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' — ')}`).join('\n')}\n\nAre you interested in a trade?`,
       emailSubject: (myUsername) => `Surprix - ${myUsername}`,
       emailBody: (ownerUsername, myUsername, items) =>
         `Hi ${ownerUsername},\n\nI'm ${myUsername} on Surprix. I saw you have the following pieces available:\n\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nI'd be interested in a trade!\n\n${myUsername}`,
@@ -309,7 +339,12 @@ const translations = {
       comment: 'Comment (optional)',
       alreadyLeft: 'You have already left a review for this user.',
       submit: 'Submit',
+      reviews: 'Reviews',
+      eggScore: 'Egg score',
+      ratingLow: '1 egg = bad trade',
+      ratingHigh: '5 eggs = great trade',
       noFeedback: 'No reviews yet.',
+      reviewCount: (n) => n === 1 ? '1 review' : `${n} reviews`,
       viewAll: 'View all reviews',
     },
     common: {
@@ -320,6 +355,7 @@ const translations = {
       tagline: 'Keep your collections in order',
       linkCopied: 'Link copied!',
       shareList: 'Share list',
+      reportIssue: 'Report an issue',
     },
     undo: {
       addedToMissing: 'Added to missing',
@@ -380,10 +416,24 @@ const translations = {
     },
     public: {
       emptyList: 'No items.',
-      loginWall: (n) => `Sign in to see ${n} more items`,
+      loginWall: (n) => `to see ${n} more items`,
       signIn: 'Sign in',
       createAccount: 'Create account',
       joinCta: 'Manage your collection on Surprix — it\'s free!',
+    },
+    chat: {
+      title: 'Messages',
+      placeholder: 'Write a message…',
+      send: 'Send',
+      noChats: 'No conversations.',
+      startChat: 'Message',
+      report: 'Report message',
+      reportConfirm: 'Report this message to info.surprix@gmail.com?',
+      deleteMessage: 'Delete message',
+      deletedMessage: 'Message deleted',
+      deletedMessageOwn: 'You deleted this message',
+      deleteChat: 'Delete conversation',
+      deleteChatConfirm: 'The chat will disappear from your list. Messages will be permanently deleted only when the other user also deletes the conversation.',
     },
     rarity: {
       auto: 'Rarity by',

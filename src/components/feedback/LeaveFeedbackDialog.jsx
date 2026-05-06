@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Box, CircularProgress } from '@mui/material'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Box, Typography, CircularProgress } from '@mui/material'
 import { addFeedback, updateFeedback } from '../../services/database.service'
 import { useT } from '../../store/LanguageContext'
 import EggRating from './EggRating'
@@ -35,8 +35,16 @@ const LeaveFeedbackDialog = ({ open, onClose, onSuccess, targetUsername, fromUse
       <DialogTitle>{isEdit ? t.feedback.editTitle : t.feedback.title}</DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 1 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <EggRating value={rating} onChange={(_, v) => setRating(v)} size="large" precision={1} />
+          <Box sx={{ textAlign: 'center', bgcolor: 'background.default', borderRadius: 2, py: 1.5 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              {t.feedback.eggScore}
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 0.5 }}>
+              <EggRating value={rating} onChange={(_, v) => setRating(v)} size="large" precision={1} />
+            </Box>
+            <Typography variant="caption" color="text.disabled" display="block" sx={{ mt: 0.5 }}>
+              {t.feedback.ratingLow} · {t.feedback.ratingHigh}
+            </Typography>
           </Box>
           <TextField
             label={t.feedback.comment}

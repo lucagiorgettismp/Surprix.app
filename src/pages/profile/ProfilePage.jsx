@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Box, Typography, Avatar, Button, Divider, Paper, ToggleButtonGroup, ToggleButton, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Alert, Skeleton } from '@mui/material'
+import { Box, Typography, Avatar, Button, Divider, Paper, ToggleButtonGroup, ToggleButton, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Alert, IconButton } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useNavigate } from 'react-router-dom'
@@ -12,12 +14,11 @@ import { getUserProfile, updateUserCountry, deleteUserData } from '../../service
 import { getCountryName, resolveCountryCode } from '../../utils/locale'
 import CountrySelect from '../../components/common/CountrySelect'
 import ConfirmDialog from '../../components/common/ConfirmDialog'
-import PolicyDialog from '../../components/common/PolicyDialog'
-import TosDialog from '../../components/common/TosDialog'
+import PublicFooter from '../../components/layout/PublicFooter'
 
 const ProfilePage = () => {
   const { user } = useAuth()
-  const { username, missing, doubles, itemsLoading } = useCollection()
+  const { username } = useCollection()
   const { mode, toggleTheme } = useThemeMode()
   const { lang, setLang } = useLanguage()
   const t = useT()
@@ -138,6 +139,8 @@ const ProfilePage = () => {
     }
   }
 
+  const theme = useTheme()
+  const isDark = theme.palette.mode === 'dark'
   const initial = (username?.[0] || user?.email?.[0] || '').toUpperCase()
 
   const reauthMessage = isGoogleUser
@@ -148,7 +151,27 @@ const ProfilePage = () => {
 
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', py: 4 }}>
+      {/* Page header */}
+      <Box sx={{
+        position: 'fixed',
+        top: { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' },
+        left: 0, right: 0,
+        height: '56px',
+        bgcolor: isDark ? '#111111' : 'primary.main',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        px: 1,
+        zIndex: 10,
+      }}>
+        <IconButton onClick={() => navigate(-1)} sx={{ color: 'inherit' }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h6" fontWeight={700}>{t.nav.settings}</Typography>
+      </Box>
+      <Box sx={{ height: '56px' }} />
+      <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, mb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', py: 3 }}>
         <Avatar sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main', color: 'white', fontSize: 32, fontWeight: 700 }}>
           {initial}
         </Avatar>
@@ -160,26 +183,7 @@ const ProfilePage = () => {
         </Typography>
       </Box>
 
-      <Paper elevation={2} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
-        <Box sx={{ py: 2.5, display: 'flex', justifyContent: 'space-around' }}>
-          <Box sx={{ textAlign: 'center' }}>
-            {itemsLoading
-              ? <Skeleton variant="text" width={48} height={56} sx={{ mx: 'auto' }} />
-              : <Typography variant="h4" sx={{ fontWeight: 800 }} color="warning.main">{missing.length}</Typography>
-            }
-            <Typography variant="caption" color="text.secondary">{t.missing.title}</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            {itemsLoading
-              ? <Skeleton variant="text" width={48} height={56} sx={{ mx: 'auto' }} />
-              : <Typography variant="h4" sx={{ fontWeight: 800 }} color="info.main">{doubles.length}</Typography>
-            }
-            <Typography variant="caption" color="text.secondary">{t.doubles.title}</Typography>
-          </Box>
-        </Box>
-      </Paper>
-
-      <Paper elevation={2} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
+<Paper elevation={2} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
         <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography variant="body2">{mode === 'light' ? t.profile.lightMode : t.profile.darkMode}</Typography>
           <ToggleButtonGroup value={mode} exclusive onChange={(_, val) => val && toggleTheme()} size="small" color="primary">
@@ -204,33 +208,7 @@ const ProfilePage = () => {
         </Box>
       </Paper>
 
-      <Paper elevation={2} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="body2">{t.policy.title}</Typography>
-          <Button size="small" variant="outlined" onClick={() => setPolicyOpen(true)}>
-            {t.policy.viewPolicy}
-          </Button>
-        </Box>
-        <Divider />
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="body2">{t.tos.title}</Typography>
-          <Button size="small" variant="outlined" onClick={() => setTosOpen(true)}>
-            {t.tos.viewTos}
-          </Button>
-        </Box>
-        <Divider />
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2 }}>
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="body2">{t.profile.contactUs}</Typography>
-            <Typography variant="caption" color="text.secondary">{t.profile.contactUsSummary}</Typography>
-          </Box>
-          <Button size="small" variant="outlined" onClick={() => { window.location.href = 'mailto:info.surprix@gmail.com' }} sx={{ flexShrink: 0 }}>
-            info.surprix@gmail.com
-          </Button>
-        </Box>
-      </Paper>
-
-      <Box sx={{ pt: 1, pb: 6, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+      <Box sx={{ pt: 1, pb: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         {isEmailUser && (
           <Button variant="outlined" fullWidth onClick={() => setPwOpen(true)}>
             {t.profile.changePassword}
@@ -334,8 +312,7 @@ const ProfilePage = () => {
         onCancel={() => setConfirmOpen(false)}
       />
 
-      <PolicyDialog open={policyOpen} onClose={() => setPolicyOpen(false)} />
-      <TosDialog open={tosOpen} onClose={() => setTosOpen(false)} />
+      <PublicFooter />
     </Box>
   )
 }

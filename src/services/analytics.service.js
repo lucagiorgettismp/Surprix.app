@@ -11,7 +11,7 @@ const pathToTitle = (pathname) => {
   if (pathname === '/missing') return 'Mancanti'
   if (pathname === '/doubles') return 'Doppi'
   if (pathname === '/catalog') return 'Catalogo'
-  if (pathname === '/profile') return 'Profilo'
+  if (pathname === '/settings') return 'Impostazioni'
   if (pathname === '/search') return 'Ricerca'
   if (/^\/missing-owners\//.test(pathname)) return 'Scambi'
   if (/^\/other-for-you\//.test(pathname)) return 'Offerte per te'

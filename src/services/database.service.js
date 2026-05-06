@@ -1,4 +1,4 @@
-import { ref, get, set, update, remove, query, orderByChild, equalTo, onValue, off, push } from 'firebase/database'
+import { ref, get, set, update, remove, query, orderByChild, equalTo, onValue, off, push, limitToLast } from 'firebase/database'
 import { rtdb } from './firebase'
 
 const snap2list = (snapshot) => {
@@ -168,6 +168,68 @@ export const updateFeedback = (targetUsername, reviewId, rating, comment) =>
 
 export const getFeedbackFor = (username) =>
   get(ref(rtdb, `feedback/${username}`)).then(snap2list)
+
+// --- Chat ---
+
+export const getChatId = (u1, u2) => [u1, u2].sort().join('_')
+
+export const sendMessage = async (chatId, fromUsername, toUsername, text) => {
+  const createdAt = new Date().toISOString()
+  const msgRef = push(ref(rtdb, `chats/${chatId}/messages`))
+  const preview = text.length > 40 ? text.slice(0, 40) + '…' : text
+  await Promise.all([
+    set(msgRef, { from: fromUsername, text, createdAt }),
+    update(ref(rtdb, `userChats/${fromUsername}/${chatId}`), { with: toUsername, lastMessage: preview, lastAt: createdAt, unread: false }),
+    update(ref(rtdb, `userChats/${toUsername}/${chatId}`), { with: fromUsername, lastMessage: preview, lastAt: createdAt, unread: true }),
+  ])
+}
+
+export const getMessages = (chatId) =>
+  get(query(ref(rtdb, `chats/${chatId}/messages`), limitToLast(50))).then(snap2list)
+
+export const getUserChats = (username) =>
+  get(ref(rtdb, `userChats/${username}`)).then((snap) => {
+    if (!snap.exists()) return []
+    return Object.entries(snap.val())
+      .map(([chatId, val]) => ({ chatId, ...val }))
+      .sort((a, b) => (b.lastAt || '').localeCompare(a.lastAt || ''))
+  })
+
+export const subscribeUserChats = (username, callback) => {
+  const r = ref(rtdb, `userChats/${username}`)
+  onValue(r, (snap) => {
+    if (!snap.exists()) { callback([]); return }
+    const result = Object.entries(snap.val())
+      .map(([chatId, val]) => ({ chatId, ...val }))
+      .sort((a, b) => (b.lastAt || '').localeCompare(a.lastAt || ''))
+    callback(result)
+  })
+  return () => off(r)
+}
+
+export const markAsRead = async (username, chatId) => {
+  const r = ref(rtdb, `userChats/${username}/${chatId}`)
+  const snap = await get(r)
+  if (snap.exists()) await update(r, { unread: false })
+}
+
+export const deleteMessage = (chatId, messageId) =>
+  update(ref(rtdb, `chats/${chatId}/messages/${messageId}`), { deleted: true, text: '' })
+
+export const deleteChatForUser = async (username, chatId, otherUsername) => {
+  await Promise.all([
+    remove(ref(rtdb, `userChats/${username}/${chatId}`)),
+    set(ref(rtdb, `chatDeletions/${chatId}/${username}`), true),
+  ])
+  const deletionsSnap = await get(ref(rtdb, `chatDeletions/${chatId}`))
+  const deletions = deletionsSnap.val() || {}
+  if (deletions[username] && deletions[otherUsername]) {
+    await Promise.all([
+      remove(ref(rtdb, `chats/${chatId}`)),
+      remove(ref(rtdb, `chatDeletions/${chatId}`)),
+    ])
+  }
+}
 
 // --- Search ---
 

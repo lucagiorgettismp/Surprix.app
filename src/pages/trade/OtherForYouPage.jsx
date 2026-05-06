@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { Box, List, CircularProgress, Button, Divider } from '@mui/material'
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'
-import { getOtherSurprisesForYou } from '../../services/database.service'
+import { Box, List, CircularProgress, Button } from '@mui/material'
+import { ChatBubbleOutlined as ChatBubbleOutlineIcon, PersonOutlined as PersonOutlinedIcon } from '@mui/icons-material'
+import { getOtherSurprisesForYou, getChatId } from '../../services/database.service'
 import { useT } from '../../store/LanguageContext'
-import { trackTradeEmail } from '../../services/analytics.service'
 import { useCollection } from '../../store/CollectionContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
@@ -18,7 +16,6 @@ const OtherForYouPage = () => {
   const navigate = useNavigate()
   const missingIds = state?.missingIds || []
   const surpriseLabel = state?.surpriseLabel
-  const ownerEmail = state?.ownerEmail
   const t = useT()
   const { username, producerColors } = useCollection()
 
@@ -39,12 +36,38 @@ const OtherForYouPage = () => {
     { label: ownerUsername, path: '' },
   ]
 
+  const handleContact = () => {
+    const chatId = getChatId(username, ownerUsername)
+    const initialText = t.trade.chatMessage(ownerUsername, username, surprises)
+    navigate(`/chat/${chatId}`, { state: { with: ownerUsername, initialText } })
+  }
+
   if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', pt: 8 }}><CircularProgress /></Box>
   if (error) return <ErrorMessage message={error.message} />
 
   return (
     <>
-      <PageHeader crumbs={crumbs} title={t.trade.otherTitle(ownerUsername)} />
+      <PageHeader crumbs={crumbs} title={t.trade.otherTitle(ownerUsername)} backButton />
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap', mb: 2 }}>
+        <Button
+          variant="contained"
+          startIcon={<ChatBubbleOutlineIcon />}
+          disabled={surprises.length === 0}
+          onClick={handleContact}
+          sx={{ borderRadius: 5 }}
+        >
+          {t.trade.contact(ownerUsername)}
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<PersonOutlinedIcon />}
+          onClick={() => navigate(`/u/${ownerUsername}`)}
+          sx={{ borderRadius: 5 }}
+        >
+          {t.trade.viewProfile}
+        </Button>
+      </Box>
 
       {surprises.length === 0 ? (
         <EmptyState message={t.trade.noOther} />
@@ -55,31 +78,6 @@ const OtherForYouPage = () => {
           ))}
         </List>
       )}
-
-      <Divider sx={{ my: 2 }} />
-
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, flexWrap: 'wrap' }}>
-        <Button
-          variant="outlined"
-          startIcon={<EmailOutlinedIcon />}
-          disabled={!ownerEmail || surprises.length === 0}
-          onClick={() => {
-            trackTradeEmail(surprises.length)
-            window.location.href = `mailto:${ownerEmail}?subject=${encodeURIComponent(t.trade.emailSubject(username))}&body=${encodeURIComponent(t.trade.emailBody(ownerUsername, username, surprises))}`
-          }}
-          sx={{ px: 4, borderRadius: 5 }}
-        >
-          {t.trade.contact(ownerUsername)}
-        </Button>
-        <Button
-          variant="text"
-          startIcon={<PersonOutlinedIcon />}
-          onClick={() => navigate(`/u/${ownerUsername}`)}
-          sx={{ borderRadius: 5 }}
-        >
-          {t.trade.viewProfile}
-        </Button>
-      </Box>
     </>
   )
 }

@@ -1,10 +1,11 @@
 import { useRef, useState, useLayoutEffect } from 'react'
-import { Box, Breadcrumbs, Link, Typography } from '@mui/material'
+import { Box, Breadcrumbs, Link, Typography, IconButton } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useNavigate } from 'react-router-dom'
 import { useScrollDirection } from '../../hooks/useScrollDirection'
 import { useTheme } from '@mui/material/styles'
 
-const PageHeader = ({ crumbs, title, subtitle, children }) => {
+const PageHeader = ({ crumbs, title, subtitle, children, backButton }) => {
   const navigate = useNavigate()
   const isVisible = useScrollDirection()
   const theme = useTheme()
@@ -16,6 +17,12 @@ const PageHeader = ({ crumbs, title, subtitle, children }) => {
   useLayoutEffect(() => {
     if (ref.current) setHeight(ref.current.offsetHeight)
   })
+
+  const handleBack = () => {
+    const backCrumb = crumbs?.[crumbs.length - 2]
+    if (backCrumb) navigate(backCrumb.path, { state: backCrumb.state })
+    else navigate(-1)
+  }
 
   return (
     <>
@@ -29,34 +36,50 @@ const PageHeader = ({ crumbs, title, subtitle, children }) => {
           zIndex: 10,
           bgcolor: isDark ? '#111111' : 'primary.main',
           color: isDark ? 'text.primary' : 'white',
-          px: 2,
-          pt: 1.25,
-          pb: 1,
+          px: backButton ? 1 : 2,
+          pt: backButton ? 0 : 1.25,
+          pb: backButton ? 0 : 1,
           transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
           pointerEvents: isVisible ? 'auto' : 'none',
+          ...(backButton && { display: 'flex', alignItems: 'center', gap: 1, height: '56px' }),
         }}
       >
-        {crumbs?.length > 1 && (
-          <Breadcrumbs sx={{ fontSize: '0.82rem', color: 'inherit', '& .MuiBreadcrumbs-separator': { color: 'inherit' } }} aria-label="breadcrumb">
-            {crumbs.slice(0, -1).map((crumb) => (
-              <Link
-                key={crumb.path}
-                underline="hover"
-                color="inherit"
-                sx={{ cursor: 'pointer', opacity: isDark ? 1 : 0.75 }}
-                onClick={() => navigate(crumb.path, { state: crumb.state })}
-              >
-                {crumb.label}
-              </Link>
-            ))}
-          </Breadcrumbs>
-        )}
-        {title && (
-          <Typography variant="h6" color="inherit" mt={crumbs?.length > 0 ? 0.25 : 0}>
-            {title}
-          </Typography>
+        {backButton ? (
+          <>
+            <IconButton onClick={handleBack} sx={{ color: 'inherit' }}>
+              <ArrowBackIcon />
+            </IconButton>
+            {title && (
+              <Typography variant="h6" fontWeight={700} color="inherit" noWrap>
+                {title}
+              </Typography>
+            )}
+          </>
+        ) : (
+          <>
+            {crumbs?.length > 1 && (
+              <Breadcrumbs sx={{ fontSize: '0.82rem', color: 'inherit', '& .MuiBreadcrumbs-separator': { color: 'inherit' } }} aria-label="breadcrumb">
+                {crumbs.slice(0, -1).map((crumb) => (
+                  <Link
+                    key={crumb.path}
+                    underline="hover"
+                    color="inherit"
+                    sx={{ cursor: 'pointer', opacity: isDark ? 1 : 0.75 }}
+                    onClick={() => navigate(crumb.path, { state: crumb.state })}
+                  >
+                    {crumb.label}
+                  </Link>
+                ))}
+              </Breadcrumbs>
+            )}
+            {title && (
+              <Typography variant="h6" color="inherit" mt={crumbs?.length > 0 ? 0.25 : 0}>
+                {title}
+              </Typography>
+            )}
+          </>
         )}
         {subtitle && (
           <Typography variant="caption" color="inherit" sx={{ fontWeight: 500, opacity: isDark ? 0.7 : 0.8 }}>

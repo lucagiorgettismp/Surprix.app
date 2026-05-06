@@ -22,6 +22,8 @@ const SearchPage         = lazy(() => import('../pages/search/SearchPage'))
 const NotFoundPage       = lazy(() => import('../pages/NotFoundPage'))
 const PublicProfilePage  = lazy(() => import('../pages/public/PublicProfilePage'))
 const AllReviewsPage     = lazy(() => import('../pages/public/AllReviewsPage'))
+const ChatListPage       = lazy(() => import('../pages/chat/ChatListPage'))
+const ChatPage           = lazy(() => import('../pages/chat/ChatPage'))
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth()
@@ -63,8 +65,10 @@ const AppRouter = () => (
           <Route path="missing-owners/:surpriseId" element={<MissingOwnersPage />} />
           <Route path="other-for-you/:ownerUsername" element={<OtherForYouPage />} />
           <Route path="doubles" element={<DoublesPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<ProfilePage />} />
           <Route path="search" element={<SearchPage />} />
+          <Route path="chat" element={<ChatListPage />} />
+          <Route path="chat/:chatId" element={<ChatPage />} />
         </Route>
       </Routes>
     </Suspense>

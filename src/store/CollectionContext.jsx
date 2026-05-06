@@ -10,6 +10,8 @@ import {
   removeMissing,
   addDouble,
   removeDouble,
+  subscribeUserChats,
+  markAsRead,
 } from '../services/database.service'
 import { trackToggleMissing, trackToggleDoubles, trackAddAllMissing } from '../services/analytics.service'
 import { cacheData, getCachedData } from '../utils/dataCache'
@@ -50,9 +52,34 @@ export const CollectionProvider = ({ children }) => {
   const [refreshing, setRefreshing] = useState(false)
   const [refreshCount, setRefreshCount] = useState(0)
   const [producerColors, setProducerColors] = useState({})
+  const [unreadChats, setUnreadChats] = useState(0)
+  const [chats, setChats] = useState(null)
+  const activeChatIdRef = useRef(null)
+  const setActiveChatId = (id) => { activeChatIdRef.current = id }
 
   useEffect(() => { missingRef.current = missing }, [missing])
   useEffect(() => { doublesRef.current = doubles }, [doubles])
+
+  useEffect(() => {
+    if (!username) {
+      setChats(null)
+      return
+    }
+    const unsubscribe = subscribeUserChats(username, (c) => {
+      const valid = c.filter((ch) => !!ch.with)
+      const activeId = activeChatIdRef.current
+      if (activeId) {
+        const active = valid.find((ch) => ch.chatId === activeId)
+        if (active?.unread) markAsRead(username, activeId).catch(() => {})
+      }
+      const normalized = valid.map((ch) =>
+        ch.chatId === activeId ? { ...ch, unread: false } : ch
+      )
+      setChats(normalized)
+      setUnreadChats(normalized.filter((x) => x.unread).length)
+    })
+    return unsubscribe
+  }, [username])
 
   useEffect(() => {
     getProducers().then((producers) => {
@@ -221,7 +248,7 @@ export const CollectionProvider = ({ children }) => {
 
   return (
     <CollectionContext.Provider
-      value={{ username, missing, doubles, loading, itemsLoading, refreshing, refreshCount, producerColors, toggleMissing, toggleDoubles, addAllMissing, refreshProfile, refresh }}
+      value={{ username, missing, doubles, loading, itemsLoading, refreshing, refreshCount, producerColors, unreadChats, setUnreadChats, chats, setChats, setActiveChatId, toggleMissing, toggleDoubles, addAllMissing, refreshProfile, refresh }}
     >
       {children}
     </CollectionContext.Provider>

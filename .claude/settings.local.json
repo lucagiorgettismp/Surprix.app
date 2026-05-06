@@ -31,7 +31,8 @@
       "Bash(SERVICE_ACCOUNT=\"./scripts/serviceAccount.json\" node scripts/calc-rarity-auto.mjs --dry-run --t2=0.80 --t3=0.93 --min=3 --min-recent=5 --min-d=2 --min-m3=15)",
       "Bash(SERVICE_ACCOUNT=\"./scripts/serviceAccount.json\" node scripts/calc-rarity-auto.mjs --dry-run --t2=0.80 --t3=0.93 --min=3 --min-recent=5 --min-m3=12 --min-m3-d1=12 --min-m3-d0=18)",
       "Bash(firebase deploy *)",
-      "PowerShell(Get-ChildItem \"D:\\\\Dev\\\\NODE\\\\ai\\\\surprix\" | Where-Object { $_.Name -ne 'node_modules' } | Select-Object -ExpandProperty Name)"
+      "PowerShell(Get-ChildItem \"D:\\\\Dev\\\\NODE\\\\ai\\\\surprix\" | Where-Object { $_.Name -ne 'node_modules' } | Select-Object -ExpandProperty Name)",
+      "Bash(git rm *)"
     ]
   }
 }

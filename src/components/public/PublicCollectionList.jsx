@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Skeleton, Typography, Button, Stack } from '@mui/material'
+import { Box, List, ListItem, Skeleton, Typography, Link } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useNavigate } from 'react-router-dom'
 import CollectionItem from '../lists/CollectionItem'
@@ -45,17 +45,12 @@ const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedI
       {showWall && (
         <Box sx={{ textAlign: 'center', pt: 2, pb: 3 }}>
           <LockOutlinedIcon sx={{ fontSize: 36, color: 'text.disabled', mb: 1 }} />
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            {t.public.loginWall(items.length - loginWallAfter)}
-          </Typography>
-          <Stack direction="row" spacing={1} justifyContent="center">
-            <Button variant="contained" size="small" onClick={() => navigate('/login')}>
+          <Typography variant="body2" color="text.secondary">
+            <Link component="button" onClick={() => navigate('/login')} sx={{ fontWeight: 600, verticalAlign: 'baseline' }}>
               {t.public.signIn}
-            </Button>
-            <Button variant="outlined" size="small" onClick={() => navigate('/signup')}>
-              {t.public.createAccount}
-            </Button>
-          </Stack>
+            </Link>
+            {' '}{t.public.loginWall(items.length - loginWallAfter)}
+          </Typography>
         </Box>
       )}
     </Box>
