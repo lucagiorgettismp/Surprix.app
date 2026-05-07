@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import CollectionItem from '../lists/CollectionItem'
 import EmptyState from '../common/EmptyState'
 import { useT } from '../../store/LanguageContext'
+import { useCollection } from '../../store/CollectionContext'
 
 const Skeleton_ = () => (
   <List disablePadding>
@@ -23,6 +24,7 @@ const Skeleton_ = () => (
 const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedIn, emptyMessage, emptyIcon }) => {
   const t = useT()
   const navigate = useNavigate()
+  const { producerColors } = useCollection()
 
   if (isLoading) return <Skeleton_ />
 
@@ -37,7 +39,7 @@ const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedI
     <Box>
       <List disablePadding sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: 'repeat(auto-fill, minmax(360px, 1fr))' }, gap: { md: 1 } }}>
         {visible.map((item) => (
-          <CollectionItem key={item.id} item={item} disableSetLink={!isLoggedIn} />
+          <CollectionItem key={item.id} item={item} disableSetLink={!isLoggedIn} accentColor={producerColors[item.set_producer_id]} />
         ))}
       </List>
 

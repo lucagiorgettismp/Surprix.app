@@ -153,7 +153,7 @@ const SetsPage = () => {
       </PageHeader>
 
       {selecting && visibleSelected > 0 && (
-        <Box sx={{ position: 'fixed', bottom: 'calc(85px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
+        <Box sx={{ position: 'fixed', bottom: 'calc(80px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
           <Button
             variant="contained"
             disabled={addingAll}

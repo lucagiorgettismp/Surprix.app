@@ -150,7 +150,7 @@ const ProfilePage = () => {
       : null
 
   return (
-    <Box sx={{ maxWidth: 480, mx: 'auto' }}>
+    <Box sx={{ maxWidth: { xs: 480, md: 780 }, mx: 'auto' }}>
       {/* Page header */}
       <Box sx={{
         position: 'fixed',
@@ -170,55 +170,66 @@ const ProfilePage = () => {
         <Typography variant="h6" fontWeight={700}>{t.nav.settings}</Typography>
       </Box>
       <Box sx={{ height: '56px' }} />
-      <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, mb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', py: 3 }}>
-        <Avatar sx={{ width: 80, height: 80, mb: 2, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontSize: 32, fontWeight: 700 }}>
-          {initial}
-        </Avatar>
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          {username || user?.displayName || t.profile.user}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {user?.email}
-        </Typography>
-      </Box>
 
-<Paper elevation={1} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="body2">{mode === 'light' ? t.profile.lightMode : t.profile.darkMode}</Typography>
-          <ToggleButtonGroup value={mode} exclusive onChange={(_, val) => val && toggleTheme()} size="small" color="primary">
-            <ToggleButton value="light"><LightModeIcon fontSize="small" /></ToggleButton>
-            <ToggleButton value="dark"><DarkModeIcon fontSize="small" /></ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
-        <Divider />
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="body2">{t.profile.language}</Typography>
-          <ToggleButtonGroup value={lang} exclusive onChange={(_, val) => val && setLang(val)} size="small" color="primary">
-            <ToggleButton value="it">🇮🇹 IT</ToggleButton>
-            <ToggleButton value="en">🇬🇧 EN</ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
-        <Divider />
-        <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="body2">{t.profile.changeCountry}</Typography>
-          <Button size="small" variant="outlined" onClick={() => setCountryOpen(true)}>
-            {country ? getCountryName(country, lang) : '—'}
-          </Button>
-        </Box>
-      </Paper>
+      <Box sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: '200px 1fr' }, gap: { md: 3 }, alignItems: 'flex-start' }}>
 
-      <Box sx={{ pt: 1, pb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {isEmailUser && (
-          <Button variant="outlined" fullWidth onClick={() => setPwOpen(true)}>
-            {t.profile.changePassword}
-          </Button>
-        )}
-        <Button variant="outlined" color="error" fullWidth onClick={() => setConfirmOpen(true)}>
-          {t.profile.logout}
-        </Button>
-        <Button variant="text" color="error" fullWidth size="small" onClick={() => { setDeleteError(null); setDeleteConfirmOpen(true) }}>
-          {t.profile.deleteAccount}
-        </Button>
+        {/* Left: avatar + identity */}
+        <Box sx={{ position: { md: 'sticky' }, top: { md: 'calc(128px + env(safe-area-inset-top))' } }}>
+          <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, mb: { xs: 2, md: 0 }, display: 'flex', flexDirection: 'column', alignItems: 'center', py: 3 }}>
+            <Avatar sx={{ width: 80, height: 80, mb: 2, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontSize: 32, fontWeight: 700 }}>
+              {initial}
+            </Avatar>
+            <Typography variant="h6" sx={{ fontWeight: 700, textAlign: 'center' }}>
+              {username || user?.displayName || t.profile.user}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center', wordBreak: 'break-all', px: 1 }}>
+              {user?.email}
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Right: settings + actions */}
+        <Box>
+          <Paper elevation={1} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
+            <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Typography variant="body2">{mode === 'light' ? t.profile.lightMode : t.profile.darkMode}</Typography>
+              <ToggleButtonGroup value={mode} exclusive onChange={(_, val) => val && toggleTheme()} size="small" color="primary">
+                <ToggleButton value="light"><LightModeIcon fontSize="small" /></ToggleButton>
+                <ToggleButton value="dark"><DarkModeIcon fontSize="small" /></ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+            <Divider />
+            <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Typography variant="body2">{t.profile.language}</Typography>
+              <ToggleButtonGroup value={lang} exclusive onChange={(_, val) => val && setLang(val)} size="small" color="primary">
+                <ToggleButton value="it">🇮🇹 IT</ToggleButton>
+                <ToggleButton value="en">🇬🇧 EN</ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+            <Divider />
+            <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Typography variant="body2">{t.profile.changeCountry}</Typography>
+              <Button size="small" variant="outlined" onClick={() => setCountryOpen(true)}>
+                {country ? getCountryName(country, lang) : '—'}
+              </Button>
+            </Box>
+          </Paper>
+
+          <Box sx={{ pt: 1, pb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {isEmailUser && (
+              <Button variant="outlined" fullWidth onClick={() => setPwOpen(true)}>
+                {t.profile.changePassword}
+              </Button>
+            )}
+            <Button variant="outlined" color="error" fullWidth onClick={() => setConfirmOpen(true)}>
+              {t.profile.logout}
+            </Button>
+            <Button variant="text" color="error" fullWidth size="small" onClick={() => { setDeleteError(null); setDeleteConfirmOpen(true) }}>
+              {t.profile.deleteAccount}
+            </Button>
+          </Box>
+        </Box>
+
       </Box>
 
       {/* Change password dialog */}

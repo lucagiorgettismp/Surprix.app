@@ -68,8 +68,10 @@ const PublicProfilePage = () => {
     ])
       .then(([p, m, d, f]) => {
         setProfile(p.status === 'fulfilled' ? p.value : null)
-        setMissing(m.status === 'fulfilled' ? m.value : [])
-        setDoubles(d.status === 'fulfilled' ? d.value : [])
+        const sortKey = (item) => ((item.isSet_effective_code || item.set_effective_code) && item.code ? item.code : `ZZZ_${item.id}`)
+        const sort = (arr) => [...arr].sort((a, b) => sortKey(a).localeCompare(sortKey(b)))
+        setMissing(m.status === 'fulfilled' ? sort(m.value) : [])
+        setDoubles(d.status === 'fulfilled' ? sort(d.value) : [])
         setFeedbacks(f.status === 'fulfilled' ? f.value : [])
       })
       .finally(() => setLoading(false))
@@ -130,7 +132,10 @@ const PublicProfilePage = () => {
       </Box>
       <Box sx={{ height: '56px' }} />
 
-    <Box sx={{ maxWidth: 600, mx: 'auto', pb: 6, px: 2, mt: 1 }}>
+    <Box sx={{ maxWidth: { xs: 600, md: 980 }, mx: 'auto', pb: 6, px: 2, mt: 1 }}>
+      <Box sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: '300px 1fr' }, gap: { md: 3 }, alignItems: 'flex-start' }}>
+      {/* Left sidebar */}
+      <Box sx={{ position: { md: 'sticky' }, top: { md: 'calc(128px + env(safe-area-inset-top))' }, mb: { xs: 0, md: 0 } }}>
       {/* Header */}
       <Paper elevation={0} sx={{ p: 3, mb: 2, borderRadius: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
@@ -194,6 +199,10 @@ const PublicProfilePage = () => {
         )}
       </Paper>
 
+      </Box> {/* end sticky sidebar */}
+
+      {/* Right column */}
+      <Box>
       {/* Tabs */}
       <Paper elevation={0} sx={{ borderRadius: 3, p: 0.5, mb: 2, display: 'flex', gap: 0.5 }}>
         {[
@@ -276,6 +285,9 @@ const PublicProfilePage = () => {
       )}
 
       {!isLoggedIn && <PublicFooter />}
+
+      </Box> {/* end right column */}
+      </Box> {/* end grid */}
 
       <LeaveFeedbackDialog
         open={feedbackOpen || !!editingReview}

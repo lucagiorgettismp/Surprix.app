@@ -60,7 +60,7 @@ const MissingPage = () => {
   const categoryCounters = useMemo(() => {
     const map = {}
     missing.forEach((i) => { if (i.set_category) map[i.set_category] = (map[i.set_category] || 0) + 1 })
-    return ['Hand_painted', 'Compo'].map((cat) => ({ label: cat === 'Hand_painted' ? t.catalog.handPaintedShort : getCategoryLabel(cat, lang), value: map[cat] || 0 }))
+    return ['Hand_painted', 'Compo'].map((cat) => ({ label: cat === 'Hand_painted' ? t.catalog.handPaintedShort : t.catalog.compoShort, value: map[cat] || 0 }))
   }, [missing, lang])
 
   const activeFilters = [

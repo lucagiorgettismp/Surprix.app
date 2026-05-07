@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import { Box, Button, Card, Checkbox, Chip, Dialog, DialogContent, IconButton, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
@@ -47,7 +47,6 @@ const SurpriseCardSkeleton = () => (
 
 const SurprisesPage = () => {
   const { producerId, yearId, setId } = useParams()
-  const navigate = useNavigate()
   const { state } = useLocation()
   const producerLabel = state?.producerLabel || producerId
   const yearLabel = state?.yearLabel || yearId
@@ -174,9 +173,6 @@ const SurprisesPage = () => {
             const isMissing = missing.some((m) => m.id === s.id)
             const isDouble = doubles.some((d) => d.id === s.id)
             const imageUrl = gsToHttps(s.img_path)
-            const useCode = (s.isSet_effective_code || s.set_effective_code) && s.code
-            const name = useCode ? s.code : s.description
-            const subtitle = useCode ? s.description : null
             return (
               <Card
                 key={s.id}
@@ -239,7 +235,7 @@ const SurprisesPage = () => {
       )}
 
       {selecting && selected.size > 0 && (
-        <Box sx={{ position: 'fixed', bottom: 'calc(85px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
+        <Box sx={{ position: 'fixed', bottom: 'calc(80px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
           <Button
             variant="contained"
             disabled={addingAll}

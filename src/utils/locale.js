@@ -34,11 +34,11 @@ const CATEGORY_LABELS = {
     Special: 'Speciali',
   },
   en: {
-    Hand_painted: 'Hand painted',
+    Hand_painted: 'Figures',
     Metallic: 'Metallic',
     Flocked: 'Flocked',
     Glow: 'Glow in the dark',
-    Compo: 'Assembly toys',
+    Compo: 'Toys',
     Special: 'Special editions',
   },
 }

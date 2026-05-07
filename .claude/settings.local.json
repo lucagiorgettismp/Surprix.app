@@ -35,7 +35,11 @@
       "Bash(git rm *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(Remove-Item *)"
+      "Bash(Remove-Item *)",
+      "Bash(git *)",
+      "Bash(Get-ChildItem \"D:\\\\Dev\\\\Surprix\\\\app\" -Recurse -File)",
+      "Bash(Select-Object -First 30 FullName)",
+      "PowerShell(Get-Process *)"
     ]
   }
 }

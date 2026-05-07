@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { List, Box, Skeleton, ListItem } from '@mui/material'
 import { useCollection } from '../../store/CollectionContext'
@@ -12,7 +12,6 @@ import { useCollectionFilter } from '../../hooks/useCollectionFilter'
 import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
-import { getCategoryLabel } from '../../utils/locale'
 import { trackSearch, trackFilter } from '../../services/analytics.service'
 
 const CollectionSkeleton = () => (
@@ -56,11 +55,11 @@ const DoublesPage = () => {
     if (activeCount > 0 && prevActiveCount.current === 0) trackFilter('doubles')
     prevActiveCount.current = activeCount
   }, [activeCount])
-const categoryCounters = useMemo(() => {
+const categoryCounters = (() => {
     const map = {}
     doubles.forEach((i) => { if (i.set_category) map[i.set_category] = (map[i.set_category] || 0) + 1 })
-    return ['Hand_painted', 'Compo'].map((cat) => ({ label: cat === 'Hand_painted' ? t.catalog.handPaintedShort : getCategoryLabel(cat, lang), value: map[cat] || 0 }))
-  }, [doubles, lang])
+    return ['Hand_painted', 'Compo'].map((cat) => ({ label: cat === 'Hand_painted' ? t.catalog.handPaintedShort : t.catalog.compoShort, value: map[cat] || 0 }))
+  })()
 
   const activeFilters = [
     ...selected.category.map((v) => ({ label: v, onRemove: () => toggleFilter('category', v) })),

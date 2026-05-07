@@ -17,7 +17,7 @@ const AnimatedCounter = ({ value, label, primary = false }) => {
   const valueColor = primary ? theme.palette.secondary.onContainer : 'text.primary'
   return (
     <Box sx={{ flex: 1, borderRadius: 2, px: 1.5, py: 1, bgcolor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-      <Typography variant="caption" sx={{ color: labelColor, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', lineHeight: 1.2, overflowWrap: 'break-word', hyphens: 'auto', whiteSpace: 'normal' }}>
+      <Typography variant="caption" sx={{ color: labelColor, fontWeight: 600, fontSize: '0.7rem', letterSpacing: 1.2, textTransform: 'uppercase', lineHeight: 1.2, overflowWrap: 'break-word', hyphens: 'auto', whiteSpace: 'normal' }}>
         {label}
       </Typography>
       <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1, mt: 0.25, color: valueColor }}>
@@ -27,7 +27,7 @@ const AnimatedCounter = ({ value, label, primary = false }) => {
   )
 }
 
-const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [], search, setSearch, activeFilters = [], onOpenFilter, activeCount = 0 }) => {
+const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [], search, setSearch, onOpenFilter, activeCount = 0 }) => {
   const t = useT()
   const { refreshCount } = useCollection()
   const isVisible = useScrollDirection()
@@ -36,7 +36,7 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
 
   useLayoutEffect(() => {
     if (ref.current) setHeight(ref.current.offsetHeight)
-  })
+  }, [])
 
   return (
     <>
@@ -59,7 +59,7 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
       }}
     >
       <Box sx={{ display: 'flex', mb: 1, maxWidth: 800, mx: 'auto', width: '100%' }}>
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end', flex: 1 }}>
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end', flex: 1 }}>
           <AnimatedCounter key={`main-${refreshCount}`} value={count} label={title} primary />
           {seriesCount != null && seriesLabel && (
             <AnimatedCounter key={`series-${refreshCount}`} value={seriesCount} label={seriesLabel} />

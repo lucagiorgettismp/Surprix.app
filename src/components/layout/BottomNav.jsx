@@ -127,7 +127,7 @@ const BottomNav = () => {
                 activeIcon={tab.activeIcon}
                 label={tab.label}
                 active={pathname.startsWith(tab.path)}
-                onClick={() => navigate(tab.path)}
+                onClick={() => navigate(tab.path, { replace: true })}
               />
             ))}
           </Box>

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 
 const normalize = (s) => (s || '').toLowerCase()
+const sortKey = (item) => ((item.isSet_effective_code || item.set_effective_code) && item.code ? item.code : `ZZZ_${item.id}`)
 
 export const useCollectionFilter = (items) => {
   const [search, setSearch] = useState('')
@@ -38,7 +39,7 @@ export const useCollectionFilter = (items) => {
       const yearLabel = item.set_year_name || String(item.set_year_year)
       if (selected.year.length && !selected.year.includes(yearLabel)) return false
       return true
-    })
+    }).sort((a, b) => sortKey(a).localeCompare(sortKey(b)))
   }, [items, search, selected])
 
   return { filtered, search, setSearch, selected, toggleFilter, clearFilters, activeCount, options }
