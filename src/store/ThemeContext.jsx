@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import { createAppTheme } from '../theme/theme'
 
-const THEME_COLORS = { light: '#00838f', dark: '#111111' }
+const THEME_COLORS = { light: '#ffffff', dark: '#171D1E' }
 
 const applyThemeColor = (mode) => {
   const meta = document.querySelector('meta[name="theme-color"]')

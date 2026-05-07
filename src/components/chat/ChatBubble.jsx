@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Box, Typography, Avatar, IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogActions, Button } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { alpha } from '@mui/material/styles'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useT } from '../../store/LanguageContext'
 
@@ -7,6 +9,9 @@ const AVATAR_SIZE = 28
 
 const ChatBubble = ({ message, isOwn, onDelete, showAvatar }) => {
   const t = useT()
+  const theme = useTheme()
+  const bubbleBg = theme.palette.secondary.container
+  const bubbleFg = theme.palette.secondary.onContainer
   const [menuAnchor, setMenuAnchor] = useState(null)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
@@ -46,7 +51,7 @@ const ChatBubble = ({ message, isOwn, onDelete, showAvatar }) => {
   )
 
   const avatarEl = showAvatar ? (
-    <Avatar sx={{ width: AVATAR_SIZE, height: AVATAR_SIZE, bgcolor: isOwn ? 'primary.dark' : 'grey.500', color: 'white', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>
+    <Avatar sx={{ width: AVATAR_SIZE, height: AVATAR_SIZE, bgcolor: isOwn ? bubbleBg : 'grey.500', color: isOwn ? bubbleFg : 'white', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>
       {message.from[0]?.toUpperCase()}
     </Avatar>
   ) : (
@@ -65,7 +70,7 @@ const ChatBubble = ({ message, isOwn, onDelete, showAvatar }) => {
         {isOwn ? <Box sx={{ width: AVATAR_SIZE, flexShrink: 0 }} /> : avatarEl}
         <Box sx={{
           maxWidth: '70%',
-          px: 1.5,
+          px: 2,
           py: 1,
           borderRadius: showAvatar
             ? (isOwn ? '16px 16px 4px 16px' : '16px 16px 16px 4px')
@@ -102,20 +107,20 @@ const ChatBubble = ({ message, isOwn, onDelete, showAvatar }) => {
           onContextMenu={handleOpen}
           sx={{
             maxWidth: '70%',
-            px: 1.5,
+            px: 2,
             py: 1,
             borderRadius: showAvatar
               ? (isOwn ? '16px 16px 4px 16px' : '16px 16px 16px 4px')
               : '16px',
-            bgcolor: isOwn ? 'primary.main' : 'background.paper',
+            bgcolor: isOwn ? bubbleBg : theme.palette.background.paper,
             boxShadow: 1,
             userSelect: 'none',
           }}
         >
-          <Typography variant="body2" sx={{ color: isOwn ? 'white' : 'text.primary', wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}>
+          <Typography variant="body2" sx={{ color: isOwn ? bubbleFg : 'text.primary', wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}>
             {message.text}
           </Typography>
-          <Typography variant="caption" sx={{ color: isOwn ? 'rgba(255,255,255,0.6)' : 'text.disabled', display: 'block', textAlign: 'right', mt: 0.25 }}>
+          <Typography variant="caption" sx={{ color: isOwn ? alpha(bubbleFg, 0.6) : 'text.disabled', display: 'block', textAlign: 'right', mt: 0.25 }}>
             {time}
           </Typography>
         </Box>

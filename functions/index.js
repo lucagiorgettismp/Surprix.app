@@ -1,9 +1,14 @@
 const { onSchedule } = require('firebase-functions/v2/scheduler')
-const { logger }     = require('firebase-functions')
-const admin          = require('firebase-admin')
+const { onRequest, onCall } = require('firebase-functions/v2/https')
+const { defineSecret }      = require('firebase-functions/params')
+const { logger }            = require('firebase-functions')
+const admin                 = require('firebase-admin')
 
-admin.initializeApp()
+admin.initializeApp({ databaseURL: 'https://collectionhelper.firebaseio.com' })
 const db = admin.database()
+
+const telegramToken   = defineSecret('TELEGRAM_TOKEN')
+const TELEGRAM_CHAT_ID = '135432052'
 
 // --- Parametri algoritmo ---
 const T2         = 0.80
@@ -27,12 +32,20 @@ const assignRarity = (m, d, cat) => {
   const ratio = rawScore(m, d)
   const minM2 = getMinM2(cat)
   if (ratio >= T3) {
-    if (d >= 2 && m >= MIN_M3)   return 3
+    if (d >= 2 && m >= MIN_M3)     return 3
     if (d === 1 && m >= MIN_M3_D1) return 3
     if (d === 0 && m >= MIN_M3_D0) return 3
   }
   if (ratio >= T2 && m >= minM2) return 2
   return 1
+}
+
+const sendTelegram = async (token, text) => {
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text }),
+  }).catch(err => logger.warn('Telegram notify failed', err))
 }
 
 // --- Funzione principale ---
@@ -89,10 +102,10 @@ const calcRarityAuto = async () => {
     if (m + d < threshold) { skipped++; return }
 
     const rarity = assignRarity(m, d, s.set_category || '')
-    updates[`surprises/${c.key}/rarity`]         = rarity
-    updates[`surprises/${c.key}/rarity_auto`]    = true
-    updates[`surprises/${c.key}/missing_count`]  = m
-    updates[`surprises/${c.key}/double_count`]   = d
+    updates[`surprises/${c.key}/rarity`]        = rarity
+    updates[`surprises/${c.key}/rarity_auto`]   = true
+    updates[`surprises/${c.key}/missing_count`] = m
+    updates[`surprises/${c.key}/double_count`]  = d
     assigned++
   })
 
@@ -105,20 +118,77 @@ const calcRarityAuto = async () => {
   }
 
   logger.info('calcRarityAuto: done')
+  return { assigned, skipped }
 }
 
-// Schedulata ogni domenica alle 3:00 (Europe/Rome)
+// Schedulata ogni 2 giorni alle 3:00 (Europe/Rome)
 exports.calcRarityAutoWeekly = onSchedule(
-  { schedule: 'every sunday 03:00', timeZone: 'Europe/Rome', region: 'europe-west1' },
-  async () => { await calcRarityAuto() }
+  { schedule: '0 3 */2 * *', timeZone: 'Europe/Rome', region: 'europe-west1', secrets: [telegramToken] },
+  async () => {
+    const { assigned, skipped } = await calcRarityAuto()
+    await sendTelegram(
+      telegramToken.value(),
+      `Surprix — calcolo rarita completato\nAssegnate: ${assigned}\nSkippate: ${skipped}`
+    )
+  }
 )
 
 // Callable manuale via Firebase Console o CLI
-exports.calcRarityAutoManual = require('firebase-functions/v2/https').onCall(
-  { region: 'europe-west1' },
+exports.calcRarityAutoManual = onCall(
+  { region: 'europe-west1', secrets: [telegramToken] },
   async (req) => {
     if (!req.auth) throw new Error('Unauthenticated')
-    await calcRarityAuto()
-    return { success: true }
+    const { assigned, skipped } = await calcRarityAuto()
+    await sendTelegram(
+      telegramToken.value(),
+      `Surprix — calcolo rarita completato (manuale)\nAssegnate: ${assigned}\nSkippate: ${skipped}`
+    )
+    return { success: true, assigned, skipped }
+  }
+)
+
+// --- OG meta injector per /u/:username ---
+const RTDB_URL    = 'https://collectionhelper.firebaseio.com'
+const HOSTING_URL = 'https://surprix.app'
+
+const escapeHtml = (s) =>
+  String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+exports.profilemeta = onRequest(
+  { region: 'europe-west1', invoker: 'public' },
+  async (req, res) => {
+    const match = req.path.match(/^\/u\/([^/?#]+)/)
+    if (!match) { res.status(404).send('Not found'); return }
+    const username = match[1]
+
+    const [profileRes, pageRes] = await Promise.all([
+      fetch(`${RTDB_URL}/users/${username}.json`).catch(() => null),
+      fetch(`${HOSTING_URL}/index.html`).catch(() => null),
+    ])
+
+    const profile = profileRes?.ok ? await profileRes.json().catch(() => null) : null
+    const html    = pageRes?.ok    ? await pageRes.text()                       : null
+
+    if (!html) { res.status(503).send('Service unavailable'); return }
+
+    const title = escapeHtml(`${username} — Surprix`)
+    const desc  = escapeHtml(
+      profile
+        ? `Scopri la collezione di ${username} su Surprix.`
+        : 'Tieni in ordine le tue collezioni di sorprese Kinder.'
+    )
+    const modified = html
+      .replace(/(<meta\s+property="og:title"[^>]*>)/i,        `<meta property="og:title" content="${title}"/>`)
+      .replace(/(<meta\s+property="og:description"[^>]*>)/i,  `<meta property="og:description" content="${desc}"/>`)
+      .replace(/(<meta\s+property="og:type"[^>]*>)/i,         `<meta property="og:type" content="profile"/>`)
+      .replace(/(<meta\s+property="og:url"[^>]*>)/i,          `<meta property="og:url" content="${HOSTING_URL}/u/${username}"/>`)
+      .replace(/(<meta\s+property="og:image"[^>]*>)/i,        `<meta property="og:image" content="${HOSTING_URL}/icon-maskable.png"/>`)
+      .replace(/(<meta\s+name="twitter:title"[^>]*>)/i,       `<meta name="twitter:title" content="${title}"/>`)
+      .replace(/(<meta\s+name="twitter:description"[^>]*>)/i, `<meta name="twitter:description" content="${desc}"/>`)
+
+    res.set('Content-Type', 'text/html;charset=UTF-8')
+    res.set('Cache-Control', 'public, max-age=300')
+    res.send(modified)
   }
 )

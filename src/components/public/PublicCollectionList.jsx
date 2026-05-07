@@ -2,12 +2,13 @@ import { Box, List, ListItem, Skeleton, Typography, Link } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useNavigate } from 'react-router-dom'
 import CollectionItem from '../lists/CollectionItem'
+import EmptyState from '../common/EmptyState'
 import { useT } from '../../store/LanguageContext'
 
 const Skeleton_ = () => (
   <List disablePadding>
     {Array.from({ length: 4 }).map((_, i) => (
-      <ListItem key={i} sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2, gap: 2 }}>
+      <ListItem key={i} sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2, gap: 2, boxShadow: 1 }}>
         <Skeleton variant="rounded" width={72} height={88} sx={{ flexShrink: 0 }} />
         <Box sx={{ flex: 1 }}>
           <Skeleton variant="text" width="60%" height={24} />
@@ -19,16 +20,14 @@ const Skeleton_ = () => (
   </List>
 )
 
-const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedIn }) => {
+const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedIn, emptyMessage, emptyIcon }) => {
   const t = useT()
   const navigate = useNavigate()
 
   if (isLoading) return <Skeleton_ />
 
   if (!items.length) return (
-    <Box sx={{ py: 4, textAlign: 'center' }}>
-      <Typography color="text.secondary">{t.public.emptyList}</Typography>
-    </Box>
+    <EmptyState icon={emptyIcon} message={emptyMessage || t.public.emptyList} />
   )
 
   const visible = isLoggedIn ? items : items.slice(0, loginWallAfter)
@@ -38,7 +37,7 @@ const PublicCollectionList = ({ items, isLoading, loginWallAfter = 10, isLoggedI
     <Box>
       <List disablePadding sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: 'repeat(auto-fill, minmax(360px, 1fr))' }, gap: { md: 1 } }}>
         {visible.map((item) => (
-          <CollectionItem key={item.id} item={item} />
+          <CollectionItem key={item.id} item={item} disableSetLink={!isLoggedIn} />
         ))}
       </List>
 

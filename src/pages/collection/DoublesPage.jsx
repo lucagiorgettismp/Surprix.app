@@ -6,6 +6,8 @@ import CollectionItem from '../../components/lists/CollectionItem'
 import CollectionFilterPopover from '../../components/lists/CollectionFilterPopover'
 import CollectionHero from '../../components/collection/CollectionHero'
 import EmptyState from '../../components/common/EmptyState'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import SearchOffIcon from '@mui/icons-material/SearchOff'
 import { useCollectionFilter } from '../../hooks/useCollectionFilter'
 import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
@@ -85,6 +87,7 @@ const categoryCounters = useMemo(() => {
           <CollectionSkeleton />
         ) : filtered.length === 0 ? (
           <EmptyState
+            icon={doubles.length === 0 ? AutoAwesomeIcon : SearchOffIcon}
             message={doubles.length === 0 ? t.doubles.empty : t.doubles.noResults}
             hint={doubles.length === 0 ? t.doubles.emptyHint : undefined}
             action={doubles.length === 0 ? { label: t.nav.catalog, onClick: () => navigate('/catalog') } : undefined}

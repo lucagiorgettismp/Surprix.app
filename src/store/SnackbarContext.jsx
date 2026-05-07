@@ -49,7 +49,7 @@ export const SnackbarProvider = ({ children }) => {
             sx={{ width: '100%', bgcolor: 'grey.800', color: 'white', '& .MuiAlert-action': { alignItems: 'center' } }}
             action={
               undoRef.current ? (
-                <Button size="small" color="primary" onClick={handleUndo}>
+                <Button size="small" onClick={handleUndo} sx={{ color: '#9DF0FB' }}>
                   {t.common.undo}
                 </Button>
               ) : null

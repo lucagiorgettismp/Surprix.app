@@ -11,12 +11,16 @@ import { useScrollDirection } from '../../hooks/useScrollDirection'
 
 const AnimatedCounter = ({ value, label, primary = false }) => {
   const animated = useCountUp(value ?? 0)
+  const theme = useTheme()
+  const bg = primary ? theme.palette.secondary.container : 'background.default'
+  const labelColor = primary ? theme.palette.secondary.onContainer : 'text.secondary'
+  const valueColor = primary ? theme.palette.secondary.onContainer : 'text.primary'
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-      <Typography variant="caption" sx={{ color: primary ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)', fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', lineHeight: 1.2 }}>
+    <Box sx={{ flex: 1, borderRadius: 2, px: 1.5, py: 1, bgcolor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+      <Typography variant="caption" sx={{ color: labelColor, fontWeight: 600, letterSpacing: 1.5, textTransform: 'uppercase', lineHeight: 1.2, overflowWrap: 'break-word', hyphens: 'auto', whiteSpace: 'normal' }}>
         {label}
       </Typography>
-      <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1, mt: 0.25, color: primary ? 'white' : 'rgba(255,255,255,0.45)' }}>
+      <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1, mt: 0.25, color: valueColor }}>
         {animated}
       </Typography>
     </Box>
@@ -26,8 +30,6 @@ const AnimatedCounter = ({ value, label, primary = false }) => {
 const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [], search, setSearch, activeFilters = [], onOpenFilter, activeCount = 0 }) => {
   const t = useT()
   const { refreshCount } = useCollection()
-  const theme = useTheme()
-  const heroBg = theme.palette.mode === 'dark' ? '#111111' : 'primary.main'
   const isVisible = useScrollDirection()
   const ref = useRef(null)
   const [height, setHeight] = useState(0)
@@ -46,7 +48,7 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
         left: 0,
         right: 0,
         zIndex: 10,
-        bgcolor: heroBg,
+        bgcolor: 'background.paper',
         px: 2,
         pt: 1.25,
         pb: 1,
@@ -56,8 +58,8 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 1 }}>
-        <Box sx={{ display: 'flex', gap: 2.5, alignItems: 'flex-end' }}>
+      <Box sx={{ display: 'flex', mb: 1, maxWidth: 800, mx: 'auto', width: '100%' }}>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-end', flex: 1 }}>
           <AnimatedCounter key={`main-${refreshCount}`} value={count} label={title} primary />
           {seriesCount != null && seriesLabel && (
             <AnimatedCounter key={`series-${refreshCount}`} value={seriesCount} label={seriesLabel} />
@@ -77,23 +79,21 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
           onChange={(e) => setSearch(e.target.value)}
           sx={{
             '& .MuiOutlinedInput-root': {
-              bgcolor: 'rgba(255,255,255,0.15)',
+              bgcolor: 'action.hover',
               borderRadius: 3,
-              color: 'white',
               '& fieldset': { border: 'none' },
             },
-            '& input::placeholder': { color: 'rgba(255,255,255,0.6)', opacity: 1 },
           }}
           slotProps={{
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'rgba(255,255,255,0.6)' }} fontSize="small" />
+                  <SearchIcon sx={{ color: 'text.disabled' }} fontSize="small" />
                 </InputAdornment>
               ),
               endAdornment: search ? (
                 <InputAdornment position="end">
-                  <IconButton size="small" onClick={() => setSearch('')} sx={{ color: 'rgba(255,255,255,0.6)' }}>
+                  <IconButton size="small" onClick={() => setSearch('')}>
                     <ClearIcon fontSize="small" />
                   </IconButton>
                 </InputAdornment>
@@ -101,7 +101,7 @@ const CollectionHero = ({ title, count, seriesCount, seriesLabel, counters = [],
             },
           }}
         />
-        <IconButton onClick={onOpenFilter} sx={{ color: 'white' }}>
+        <IconButton onClick={onOpenFilter} disabled={count === 0}>
           <Badge badgeContent={activeCount} color="error">
             <TuneIcon />
           </Badge>

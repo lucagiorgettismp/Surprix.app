@@ -31,21 +31,21 @@ const Topbar = () => {
   const initial = (username?.[0] || user?.email?.[0] || '').toUpperCase()
 
   return (
-    <AppBar position="fixed" elevation={0} sx={{ bgcolor: theme.palette.mode === 'dark' ? '#111111' : 'primary.main', paddingTop: 'env(safe-area-inset-top)' }}>
+    <AppBar position="fixed" color="default" elevation={0} sx={{ bgcolor: 'background.paper', paddingTop: 'env(safe-area-inset-top)' }}>
       <Toolbar>
-        <Typography variant="h6" onClick={() => navigate('/')} sx={{ color: 'white', fontWeight: 700, letterSpacing: 1, cursor: 'pointer' }}>
+        <Typography variant="h6" onClick={() => navigate('/')} sx={{ fontWeight: 700, letterSpacing: 1, cursor: 'pointer' }}>
           {APP_NAME}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         {!isChat && location.pathname.startsWith('/catalog') && location.pathname !== '/search' && (
-          <IconButton size="small" onClick={() => navigate('/search')} sx={{ color: 'white', mr: 0.5 }}>
+          <IconButton size="small" onClick={() => navigate('/search')} sx={{ color: 'text.secondary', mr: 0.5 }}>
             <SearchIcon />
           </IconButton>
         )}
         {user ? (
           <>
             <IconButton onClick={handleOpen} size="small">
-              <Avatar sx={{ width: 34, height: 34, bgcolor: 'white', color: 'primary.main', fontSize: 14, fontWeight: 700 }}>
+              <Avatar sx={{ width: 34, height: 34, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontSize: 14, fontWeight: 700 }}>
                 {initial}
               </Avatar>
             </IconButton>
@@ -56,12 +56,7 @@ const Topbar = () => {
             </Menu>
           </>
         ) : (
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => navigate('/login')}
-            sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
-          >
+          <Button size="small" variant="outlined" color="primary" onClick={() => navigate('/login')}>
             {t.login.signIn}
           </Button>
         )}

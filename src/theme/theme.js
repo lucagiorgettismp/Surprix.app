@@ -1,19 +1,59 @@
 import { createTheme } from '@mui/material/styles'
 
-const DARK_BG = '#1c1c1c'
-const DARK_PAPER = '#272727'
+const light = {
+  primary:            '#006972',
+  onPrimary:          '#FFFFFF',
+  primaryContainer:   '#9DF0FB',
+  onPrimaryContainer: '#004F56',
+  secondary:          '#4A6366',
+  secondaryContainer:   '#CDE7EB',
+  onSecondaryContainer: '#324B4E',
+  background:         '#F5FAFB',
+  paper:              '#FFFFFF',
+  onSurface:          '#171D1E',
+  onSurfaceVariant:   '#3F484A',
+  outlineVariant:     '#BEC8CA',
+  error:              '#BA1A1A',
+}
 
-export const createAppTheme = (mode) =>
-  createTheme({
+const dark = {
+  primary:            '#81D3DF',
+  onPrimary:          '#00363C',
+  primaryContainer:   '#004F56',
+  onPrimaryContainer: '#9DF0FB',
+  secondary:          '#B1CBCF',
+  secondaryContainer:   '#324B4E',
+  onSecondaryContainer: '#CDE7EB',
+  background:         '#0E1415',
+  paper:              '#171D1E',
+  onSurface:          '#DEE4E4',
+  onSurfaceVariant:   '#BEC8CA',
+  outlineVariant:     '#3F484A',
+  error:              '#FFB4AB',
+}
+
+export const createAppTheme = (mode) => {
+  const s = mode === 'light' ? light : dark
+  return createTheme({
     palette: {
       mode,
-      primary: { main: '#00838f' },
-      secondary: { main: '#ffa726' },
+      primary: {
+        main: s.primary,
+        contrastText: s.onPrimary,
+        container: s.primaryContainer,
+        onContainer: s.onPrimaryContainer,
+      },
+      secondary: {
+        main: s.secondary,
+        container: s.secondaryContainer,
+        onContainer: s.onSecondaryContainer,
+      },
       warning: { main: '#ffa726' },
-      info: { main: '#00838f' },
-      ...(mode === 'dark'
-        ? { background: { default: DARK_BG, paper: DARK_PAPER } }
-        : { background: { default: '#d4edef', paper: '#FFFFFF' } }),
+      info: { main: s.primary },
+      error: { main: s.error },
+      background: { default: s.background, paper: s.paper },
+      text: { primary: s.onSurface, secondary: s.onSurfaceVariant },
+      divider: s.outlineVariant,
     },
     typography: {
       fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -28,17 +68,12 @@ export const createAppTheme = (mode) =>
           'html, body': { overscrollBehavior: 'none' },
         },
       },
-      MuiCard: { styleOverrides: { root: { backgroundImage: 'none' } } },
       MuiAppBar: { styleOverrides: { root: { backgroundImage: 'none' } } },
       MuiBottomNavigation: {
         styleOverrides: {
-          root: { backgroundColor: mode === 'dark' ? DARK_BG : '#FFFFFF' },
-        },
-      },
-      MuiPaper: {
-        styleOverrides: {
-          root: { backgroundImage: 'none' },
+          root: { backgroundColor: s.paper },
         },
       },
     },
   })
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
 import { Box, Button, Card, Checkbox, Chip, Dialog, DialogContent, IconButton, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import StarIcon from '@mui/icons-material/Star'
@@ -8,6 +9,8 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone'
 import CloseIcon from '@mui/icons-material/Close'
+import BrushIcon from '@mui/icons-material/Brush'
+import SmartToyIcon from '@mui/icons-material/SmartToy'
 import PageHeader from '../../components/catalog/PageHeader'
 import RarityBadge from '../../components/common/RarityBadge'
 import ErrorMessage from '../../components/common/ErrorMessage'
@@ -30,7 +33,7 @@ const GRID_SX = {
 const SurpriseCardSkeleton = () => (
   <Box sx={GRID_SX}>
     {Array.from({ length: 6 }).map((_, i) => (
-      <Card key={i} elevation={2} sx={{ display: 'flex', borderRadius: 2, overflow: 'hidden', height: 88 }}>
+      <Card key={i} elevation={1} sx={{ display: 'flex', borderRadius: 2, overflow: 'hidden', height: 88 }}>
         <Skeleton variant="rectangular" width={70} height={88} />
         <Box sx={{ flex: 1, p: 1.5 }}>
           <Skeleton variant="text" width="60%" height={20} />
@@ -50,7 +53,12 @@ const SurprisesPage = () => {
   const yearLabel = state?.yearLabel || yearId
   const setLabel = state?.setLabel || setId
 
-  const { missing, doubles, toggleMissing, toggleDoubles, addAllMissing } = useCollection()
+  const theme = useTheme()
+  const { missing, doubles, toggleMissing, toggleDoubles, addAllMissing, producerColors } = useCollection()
+  const tintAmount = theme.palette.mode === 'dark' ? '8%' : '6%'
+  const tintedBg = producerColors[producerId]
+    ? `color-mix(in srgb, ${producerColors[producerId]} ${tintAmount}, ${theme.palette.background.paper})`
+    : theme.palette.background.paper
   const { showUndo, showWarning } = useSnackbar()
   const { lang } = useLanguage()
   const t = useT()
@@ -105,8 +113,9 @@ const SurprisesPage = () => {
   if (error) return <ErrorMessage message={error.message} />
 
   const first = data[0]
+  const CATEGORY_ICONS = { Hand_painted: <BrushIcon fontSize="small" />, Compo: <SmartToyIcon fontSize="small" /> }
   const metaChips = first ? [
-    first.set_category ? { label: getCategoryLabel(first.set_category, lang), primary: true } : null,
+    first.set_category ? { label: getCategoryLabel(first.set_category, lang), icon: CATEGORY_ICONS[first.set_category], primary: true } : null,
     first.set_nation ? { label: getCountryName(first.set_nation, lang) } : null,
   ].filter(Boolean) : []
 
@@ -116,7 +125,7 @@ const SurprisesPage = () => {
         <Stack direction="row" sx={{ alignItems: 'center', gap: 0.75, justifyContent: 'space-between' }}>
           <Stack direction="row" sx={{ gap: 0.75 }}>
             {metaChips.map((chip) => (
-              <Chip key={chip.label} label={chip.label} size="small" variant="outlined" color={chip.primary ? 'primary' : 'default'} />
+              <Chip key={chip.label} label={chip.label} icon={chip.icon} size="small" variant="outlined" color={chip.primary ? 'primary' : 'default'} />
             ))}
           </Stack>
           {!loading && data.length > 0 && (
@@ -171,11 +180,12 @@ const SurprisesPage = () => {
             return (
               <Card
                 key={s.id}
-                elevation={2}
+                elevation={1}
                 onClick={selecting ? () => toggleSelect(s.id) : undefined}
                 sx={{
                   display: 'flex', borderRadius: 2, overflow: 'hidden', alignItems: 'center',
-                  px: 1.5, py: 0.5, gap: 1.5, boxShadow: 2, position: 'relative',
+                  px: 2, py: 0.5, gap: 2, boxShadow: 1, position: 'relative',
+                  bgcolor: tintedBg,
                   ...(selecting && selected.has(s.id) && { outline: '2px solid', outlineColor: 'primary.main' }),
                   ...(selecting && { cursor: 'pointer' }),
                 }}
@@ -232,7 +242,6 @@ const SurprisesPage = () => {
         <Box sx={{ position: 'fixed', bottom: 'calc(85px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
           <Button
             variant="contained"
-            color="warning"
             disabled={addingAll}
             onClick={handleAddSelected}
             sx={{ px: 4, borderRadius: 5, boxShadow: 4, pointerEvents: 'auto' }}

@@ -21,7 +21,7 @@ const ProducersPage = () => {
       {!loading && data.length === 0 ? (
         <EmptyState message={t.catalog.noProducers} />
       ) : (
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }, gap: 1.5 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }, gap: 2 }}>
           {data.map((item) => (
             <ProducerCard
               key={item.id}

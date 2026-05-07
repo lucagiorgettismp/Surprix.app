@@ -157,22 +157,21 @@ const ProfilePage = () => {
         top: { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' },
         left: 0, right: 0,
         height: '56px',
-        bgcolor: isDark ? '#111111' : 'primary.main',
-        color: 'white',
+        bgcolor: 'background.paper',
         display: 'flex',
         alignItems: 'center',
         gap: 1,
         px: 1,
         zIndex: 10,
       }}>
-        <IconButton onClick={() => navigate(-1)} sx={{ color: 'inherit' }}>
+        <IconButton onClick={() => navigate(-1)}>
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" fontWeight={700}>{t.nav.settings}</Typography>
       </Box>
       <Box sx={{ height: '56px' }} />
       <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, mb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', py: 3 }}>
-        <Avatar sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main', color: 'white', fontSize: 32, fontWeight: 700 }}>
+        <Avatar sx={{ width: 80, height: 80, mb: 2, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontSize: 32, fontWeight: 700 }}>
           {initial}
         </Avatar>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
@@ -183,7 +182,7 @@ const ProfilePage = () => {
         </Typography>
       </Box>
 
-<Paper elevation={2} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
+<Paper elevation={1} sx={{ borderRadius: 2, mb: 2, overflow: 'hidden' }}>
         <Box sx={{ px: 2, py: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Typography variant="body2">{mode === 'light' ? t.profile.lightMode : t.profile.darkMode}</Typography>
           <ToggleButtonGroup value={mode} exclusive onChange={(_, val) => val && toggleTheme()} size="small" color="primary">
@@ -208,7 +207,7 @@ const ProfilePage = () => {
         </Box>
       </Paper>
 
-      <Box sx={{ pt: 1, pb: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+      <Box sx={{ pt: 1, pb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
         {isEmailUser && (
           <Button variant="outlined" fullWidth onClick={() => setPwOpen(true)}>
             {t.profile.changePassword}

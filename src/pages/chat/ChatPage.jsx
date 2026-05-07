@@ -113,18 +113,17 @@ const ChatPage = () => {
         top: TOPBAR_H,
         left: 0, right: 0,
         height: CHAT_HEADER_H,
-        bgcolor: isDark ? '#111111' : 'primary.main',
-        color: isDark ? 'text.primary' : 'white',
+        bgcolor: 'background.paper',
         display: 'flex',
         alignItems: 'center',
-        gap: 1.5,
+        gap: 2,
         px: 1,
         zIndex: 10,
       }}>
-        <IconButton onClick={() => navigate('/chat')} sx={{ color: 'inherit' }}>
+        <IconButton onClick={() => navigate('/chat')}>
           <ArrowBackIcon />
         </IconButton>
-        <Avatar sx={{ width: 34, height: 34, bgcolor: isDark ? 'primary.dark' : 'rgba(255,255,255,0.25)', color: 'inherit', fontWeight: 700, fontSize: '0.95rem' }}>
+        <Avatar sx={{ width: 34, height: 34, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontWeight: 700, fontSize: '0.95rem' }}>
           {withUsername?.[0]?.toUpperCase()}
         </Avatar>
         <Box
@@ -144,7 +143,7 @@ const ChatPage = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Box sx={{ position: 'fixed', top: MESSAGES_TOP, bottom: INPUT_H, left: 0, right: 0, overflowY: 'auto', px: 1.5, pt: 1 }}>
+        <Box sx={{ position: 'fixed', top: MESSAGES_TOP, bottom: INPUT_H, left: 0, right: 0, overflowY: 'auto', px: 2, pt: 1 }}>
           {(chats !== null && !chats.some(c => c.chatId === chatId) ? [] : messages).map((msg, i) => (
             <ChatBubble
               key={msg.id}

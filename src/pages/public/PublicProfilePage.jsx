@@ -4,6 +4,8 @@ import { Box, Avatar, Typography, CircularProgress, Button, Divider, Paper, Icon
 import { useTheme } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ShareIcon from '@mui/icons-material/Share'
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import Topbar from '../../components/layout/Topbar'
 import PublicFooter from '../../components/layout/PublicFooter'
 import { getUserProfile, getPublicMissing, getPublicDoubles, getFeedbackFor, getChatId } from '../../services/database.service'
@@ -18,7 +20,7 @@ import FeedbackList from '../../components/feedback/FeedbackList'
 import EggRating from '../../components/feedback/EggRating'
 import LeaveFeedbackDialog from '../../components/feedback/LeaveFeedbackDialog'
 
-const LOGIN_WALL_AFTER = 10
+const LOGIN_WALL_AFTER = 5
 const REVIEWS_PAGE_SIZE = 5
 
 const PublicProfilePage = () => {
@@ -112,15 +114,14 @@ const PublicProfilePage = () => {
         top: { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' },
         left: 0, right: 0,
         height: '56px',
-        bgcolor: isDark ? '#111111' : 'primary.main',
-        color: 'white',
+        bgcolor: 'background.paper',
         display: 'flex',
         alignItems: 'center',
         gap: 1,
         px: 1,
         zIndex: 10,
       }}>
-        <IconButton onClick={() => canGoBack ? navigate(-1) : navigate('/', { replace: true })} sx={{ color: 'inherit' }}>
+        <IconButton onClick={() => canGoBack ? navigate(-1) : navigate('/', { replace: true })}>
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" fontWeight={700} noWrap>
@@ -133,7 +134,7 @@ const PublicProfilePage = () => {
       {/* Header */}
       <Paper elevation={0} sx={{ p: 3, mb: 2, borderRadius: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Avatar sx={{ width: 56, height: 56, bgcolor: 'primary.main', fontSize: '1.5rem' }}>
+          <Avatar sx={{ width: 56, height: 56, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontSize: '1.5rem' }}>
             {profile.username?.[0]?.toUpperCase()}
           </Avatar>
           <Box sx={{ flex: 1 }}>
@@ -147,19 +148,19 @@ const PublicProfilePage = () => {
         </Box>
 
         {/* Rating */}
-        <Box sx={{ textAlign: 'center', py: 1.5, mb: 2, bgcolor: 'background.default', borderRadius: 2 }}>
-          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+        <Box sx={{ textAlign: 'center', py: 2.5, mb: 2, bgcolor: theme.palette.secondary.container, borderRadius: 2 }}>
+          <Typography variant="caption" sx={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: theme.palette.secondary.onContainer, opacity: 0.7 }}>
             {t.feedback.eggScore}
           </Typography>
-          <Box sx={{ mt: 0.5 }}>
+          <Box sx={{ mt: 1 }}>
             <EggRating value={avgRating} readOnly size="large" />
           </Box>
           {feedbacks.length > 0 && (
-            <Typography variant="h5" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
+            <Typography variant="h3" sx={{ fontWeight: 800, lineHeight: 1.2, color: theme.palette.secondary.onContainer, mt: 0.5 }}>
               {avgRating.toFixed(1)}
             </Typography>
           )}
-          <Typography variant="caption" color="text.secondary" display="block">
+          <Typography variant="caption" display="block" sx={{ color: theme.palette.secondary.onContainer, opacity: 0.7, mt: 0.5 }}>
             {t.feedback.reviewCount(feedbacks.length)}
           </Typography>
         </Box>
@@ -208,8 +209,8 @@ const PublicProfilePage = () => {
               textAlign: 'center',
               py: 0.75,
               borderRadius: 2.5,
-              bgcolor: tab === i ? (isDark ? 'primary.dark' : 'primary.main') : 'transparent',
-              color: tab === i ? 'white' : 'text.secondary',
+              bgcolor: tab === i ? theme.palette.secondary.container : 'transparent',
+              color: tab === i ? theme.palette.secondary.onContainer : 'text.secondary',
               cursor: 'pointer',
               transition: 'background-color 0.2s',
               userSelect: 'none',
@@ -228,6 +229,8 @@ const PublicProfilePage = () => {
           isLoading={false}
           loginWallAfter={LOGIN_WALL_AFTER}
           isLoggedIn={isLoggedIn}
+          emptyIcon={EmojiEventsIcon}
+          emptyMessage={isSelf ? t.missing.empty : t.public.emptyMissing}
         />
       )}
 
@@ -237,6 +240,8 @@ const PublicProfilePage = () => {
           isLoading={false}
           loginWallAfter={LOGIN_WALL_AFTER}
           isLoggedIn={isLoggedIn}
+          emptyIcon={AutoAwesomeIcon}
+          emptyMessage={isSelf ? t.doubles.empty : t.public.emptyDoubles}
         />
       )}
 
@@ -270,7 +275,7 @@ const PublicProfilePage = () => {
         </Box>
       )}
 
-      <PublicFooter />
+      {!isLoggedIn && <PublicFooter />}
 
       <LeaveFeedbackDialog
         open={feedbackOpen || !!editingReview}

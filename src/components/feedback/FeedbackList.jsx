@@ -1,23 +1,23 @@
 import { Avatar, Box, Paper, Typography, IconButton } from '@mui/material'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
 import { useT } from '../../store/LanguageContext'
 import EggRating from './EggRating'
+import EmptyState from '../common/EmptyState'
 
 const FeedbackList = ({ feedbacks, limit, myUsername, onEdit }) => {
   const t = useT()
   const items = limit ? feedbacks.slice(0, limit) : feedbacks
 
   if (!items.length) return (
-    <Box sx={{ py: 4, textAlign: 'center' }}>
-      <Typography color="text.secondary">{t.feedback.noFeedback}</Typography>
-    </Box>
+    <EmptyState icon={StarBorderIcon} message={t.feedback.noFeedback} hint={t.feedback.noFeedbackHint} />
   )
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       {items.map((fb) => (
-        <Paper key={fb.id} elevation={0} sx={{ p: 2, borderRadius: 2 }}>
-          <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
+        <Paper key={fb.id} elevation={1} sx={{ p: 2, borderRadius: 2 }}>
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
             <Avatar sx={{ bgcolor: 'primary.main', color: 'white', width: 36, height: 36, fontSize: '0.9rem' }}>
               {fb.from?.[0]?.toUpperCase()}
             </Avatar>

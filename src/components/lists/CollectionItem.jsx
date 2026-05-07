@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
 import { ListItem, ListItemText, IconButton, Box, Stack, Dialog, DialogContent, Chip, Typography } from '@mui/material'
+import BrushIcon from '@mui/icons-material/Brush'
+import SmartToyIcon from '@mui/icons-material/SmartToy'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import { gsToHttps, onImgError } from '../../utils/storage'
@@ -15,7 +18,7 @@ const surpriseLabel = (item) =>
     ? `${item.code} · ${item.description}`
     : item.description || item.id
 
-const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
+const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLink = false }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [swipeX, setSwipeX] = useState(0)
   const touchStartX = useRef(null)
@@ -23,6 +26,11 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
   const isHSwipe = useRef(false)
   const { lang } = useLanguage()
   const navigate = useNavigate()
+  const theme = useTheme()
+  const tintAmount = theme.palette.mode === 'dark' ? '8%' : '6%'
+  const tintedBg = accentColor
+    ? `color-mix(in srgb, ${accentColor} ${tintAmount}, ${theme.palette.background.paper})`
+    : theme.palette.background.paper
   const title = surpriseLabel(item)
   const year = item.set_year_name || item.set_year_year
 
@@ -65,7 +73,7 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
   }
 
   return (
-    <Box sx={{ position: 'relative', mb: 1, borderRadius: 2, overflow: 'hidden' }}>
+    <Box sx={{ position: 'relative', mb: { xs: 1, md: 0 }, borderRadius: 2, overflow: 'hidden', boxShadow: 1, bgcolor: tintedBg }}>
       {onRemove && (
         <Box sx={{
           position: 'absolute',
@@ -101,18 +109,16 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
           </Stack>
         }
         sx={{
-          bgcolor: 'background.paper',
+          bgcolor: tintedBg,
           borderRadius: 2,
-          px: 1.5,
+          px: 2,
           py: 0.5,
           pr: 6,
-          boxShadow: 2,
           overflow: 'hidden',
           touchAction: 'pan-y',
           transform: `translateX(${swipeX}px)`,
           transition: swipeX === 0 ? 'transform 0.3s ease' : 'none',
           willChange: swipeX !== 0 ? 'transform' : 'auto',
-          ...(accentColor && { borderLeft: `4px solid ${accentColor}` }),
         }}
       >
         {item.img_path && (
@@ -156,13 +162,13 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
                 <Typography
                   variant="caption"
                   color="text.secondary"
-                  onClick={item.set_id ? handleNavigateToSet : undefined}
+                  onClick={item.set_id && !disableSetLink ? handleNavigateToSet : undefined}
                   sx={{
                     display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', mt: 0.25,
-                    ...(item.set_id && { cursor: 'pointer', '&:hover': { color: 'primary.main' } }),
+                    ...(item.set_id && !disableSetLink && { cursor: 'pointer', '&:hover': { color: 'primary.main' } }),
                   }}
                 >
-                  {item.set_name}{item.set_id ? ' ›' : ''}
+                  {item.set_name}{item.set_id && !disableSetLink ? ' ›' : ''}
                 </Typography>
               )}
               <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
@@ -191,6 +197,7 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor }) => {
                 {item.set_category && (
                   <Chip
                     label={getCategoryLabel(item.set_category, lang)}
+                    icon={{ Hand_painted: <BrushIcon />, Compo: <SmartToyIcon /> }[item.set_category]}
                     size="small"
                     variant="outlined"
                     color="primary"

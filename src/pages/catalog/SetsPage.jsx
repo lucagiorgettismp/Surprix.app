@@ -5,6 +5,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone'
 import CloseIcon from '@mui/icons-material/Close'
+import BrushIcon from '@mui/icons-material/Brush'
+import SmartToyIcon from '@mui/icons-material/SmartToy'
 import { useLanguage, useT } from '../../store/LanguageContext'
 import { useCollection } from '../../store/CollectionContext'
 import { trackSelectMode, trackAddSelected } from '../../services/analytics.service'
@@ -25,7 +27,8 @@ const SetsPage = () => {
   const yearLabel = state?.yearLabel || yearId
   const { lang } = useLanguage()
   const t = useT()
-  const { addAllMissing } = useCollection()
+  const { addAllMissing, producerColors } = useCollection()
+  const accentColor = producerColors[producerId]
 
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState(new Set())
@@ -109,10 +112,14 @@ const SetsPage = () => {
             />
             <Stack direction="row" sx={{ gap: 0.75, alignItems: 'center', justifyContent: 'space-between' }}>
               <Stack direction="row" sx={{ gap: 0.75 }}>
-                {['Hand_painted', 'Compo'].map((cat) => (
+                {[
+                  { cat: 'Hand_painted', icon: <BrushIcon fontSize="small" /> },
+                  { cat: 'Compo', icon: <SmartToyIcon fontSize="small" /> },
+                ].map(({ cat, icon }) => (
                   <Chip
                     key={cat}
                     label={getCategoryLabel(cat, lang)}
+                    icon={icon}
                     size="small"
                     color={categoryFilter.includes(cat) ? 'primary' : 'default'}
                     variant={categoryFilter.includes(cat) ? 'filled' : 'outlined'}
@@ -149,7 +156,6 @@ const SetsPage = () => {
         <Box sx={{ position: 'fixed', bottom: 'calc(85px + env(safe-area-inset-bottom))', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 9 }}>
           <Button
             variant="contained"
-            color="warning"
             disabled={addingAll}
             onClick={handleAddSelected}
             sx={{ px: 4, borderRadius: 5, boxShadow: 4, pointerEvents: 'auto' }}
@@ -173,6 +179,7 @@ const SetsPage = () => {
           wrapText
           selecting={selecting}
           selectedIds={selected}
+          accentColor={accentColor}
           onItemClick={(item) => {
             if (selecting) { toggleSelect(item.id); return }
             navigate(`/catalog/${producerId}/${yearId}/${item.id}`, {

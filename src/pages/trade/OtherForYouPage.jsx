@@ -7,6 +7,7 @@ import { useT } from '../../store/LanguageContext'
 import { useCollection } from '../../store/CollectionContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import CollectionItem from '../../components/lists/CollectionItem'
 import PageHeader from '../../components/catalog/PageHeader'
 
@@ -70,7 +71,7 @@ const OtherForYouPage = () => {
       </Box>
 
       {surprises.length === 0 ? (
-        <EmptyState message={t.trade.noOther} />
+        <EmptyState icon={SwapHorizIcon} message={t.trade.noOther} hint={t.trade.noOtherHint} />
       ) : (
         <List disablePadding>
           {surprises.map((item) => (

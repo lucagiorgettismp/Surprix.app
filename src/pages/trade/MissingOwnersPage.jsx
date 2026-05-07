@@ -7,6 +7,7 @@ import { getCountryName } from '../../utils/locale'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
+import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import PageHeader from '../../components/catalog/PageHeader'
 import RatingBadge from '../../components/feedback/RatingBadge'
 
@@ -67,7 +68,7 @@ const MissingOwnersPage = () => {
     <>
       <PageHeader crumbs={crumbs} title={t.trade.ownersTitle} backButton />
       {owners.length === 0 ? (
-        <EmptyState message={t.trade.noOwners} />
+        <EmptyState icon={PersonSearchIcon} message={t.trade.noOwners} hint={t.trade.noOwnersHint} />
       ) : (
         <List disablePadding>
           {owners.map((owner) => {
@@ -75,7 +76,7 @@ const MissingOwnersPage = () => {
               <ListItem
                 key={owner.username}
                 disablePadding
-                sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2 }}
+                sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2, boxShadow: 1 }}
               >
                 <ListItemButton
                   sx={{ borderRadius: 2 }}

@@ -6,6 +6,8 @@ import CollectionItem from '../../components/lists/CollectionItem'
 import CollectionFilterPopover from '../../components/lists/CollectionFilterPopover'
 import CollectionHero from '../../components/collection/CollectionHero'
 import EmptyState from '../../components/common/EmptyState'
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import SearchOffIcon from '@mui/icons-material/SearchOff'
 import { useCollectionFilter } from '../../hooks/useCollectionFilter'
 import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
@@ -88,6 +90,7 @@ const MissingPage = () => {
           <CollectionSkeleton />
         ) : filtered.length === 0 ? (
           <EmptyState
+            icon={missing.length === 0 ? EmojiEventsIcon : SearchOffIcon}
             message={missing.length === 0 ? t.missing.empty : t.missing.noResults}
             hint={missing.length === 0 ? t.missing.emptyHint : undefined}
             action={missing.length === 0 ? { label: t.nav.catalog, onClick: () => navigate('/catalog') } : undefined}

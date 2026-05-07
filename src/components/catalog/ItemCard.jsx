@@ -1,19 +1,25 @@
+import { useTheme } from '@mui/material/styles'
 import { Box, Card, CardActionArea, CardContent, CardMedia, Checkbox, Chip, Stack, Typography, Rating } from '@mui/material'
 import { onImgError } from '../../utils/storage'
 
-const ItemCard = ({ item, onClick, imagePadding = 1, imageAspectRatio, nameVariant = 'body2', wrapText = false, selecting = false, selected = false }) => {
+const ItemCard = ({ item, onClick, imagePadding = 1, imageAspectRatio, nameVariant = 'body2', wrapText = false, selecting = false, selected = false, accentColor }) => {
+  const theme = useTheme()
   const hasColor = Boolean(item.color)
+  const tintAmount = theme.palette.mode === 'dark' ? '8%' : '6%'
+  const tintedBg = !hasColor && accentColor
+    ? `color-mix(in srgb, ${accentColor} ${tintAmount}, ${theme.palette.background.paper})`
+    : theme.palette.background.paper
 
   return (
     <Card
-      elevation={2}
+      elevation={1}
       sx={{
         height: '100%',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        ...(hasColor && { bgcolor: item.color }),
+        bgcolor: hasColor ? item.color : tintedBg,
         ...(selecting && selected && { outline: '2px solid', outlineColor: 'primary.main' }),
         '&:hover .card-overlay': { opacity: 1 },
       }}

@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material'
 import ItemCard from './ItemCard'
 
-const ItemGrid = ({ items, loading, onItemClick, minItemWidth = 150, imagePadding, imageAspectRatio, nameVariant, selecting = false, selectedIds, mobileColumns, wrapText = false }) => {
+const ItemGrid = ({ items, loading, onItemClick, minItemWidth = 150, imagePadding, imageAspectRatio, nameVariant, selecting = false, selectedIds, mobileColumns, wrapText = false, accentColor }) => {
   const gridSx = {
     display: 'grid',
     gridTemplateColumns: mobileColumns
@@ -33,6 +33,7 @@ const ItemGrid = ({ items, loading, onItemClick, minItemWidth = 150, imagePaddin
           wrapText={wrapText}
           selecting={selecting}
           selected={selectedIds?.has(item.id) ?? false}
+          accentColor={accentColor}
         />
       ))}
     </Box>

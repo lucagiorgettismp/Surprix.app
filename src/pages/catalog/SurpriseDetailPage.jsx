@@ -122,7 +122,6 @@ const SurpriseDetailPage = () => {
           variant={isMissing ? 'contained' : 'outlined'}
           startIcon={isMissing ? <StarIcon /> : <StarBorderIcon />}
           onClick={() => toggleMissing(surprise)}
-          color="warning"
         >
           {isMissing ? t.surprise.isMissing : t.surprise.addMissing}
         </Button>
@@ -130,7 +129,6 @@ const SurpriseDetailPage = () => {
           variant={isDouble ? 'contained' : 'outlined'}
           startIcon={<ContentCopyIcon />}
           onClick={() => toggleDoubles(surprise)}
-          color="info"
         >
           {isDouble ? t.surprise.isDouble : t.surprise.addDouble}
         </Button>

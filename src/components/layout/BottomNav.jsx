@@ -13,7 +13,6 @@ import { useCollection } from '../../store/CollectionContext'
 
 const NavItem = ({ icon, activeIcon, label, active, onClick }) => {
   const theme = useTheme()
-  const isDark = theme.palette.mode === 'dark'
 
   return (
     <Box
@@ -36,9 +35,7 @@ const NavItem = ({ icon, activeIcon, label, active, onClick }) => {
           px: 2.5,
           py: 0.5,
           borderRadius: 3,
-          bgcolor: active
-            ? isDark ? 'primary.dark' : 'primary.main'
-            : 'transparent',
+          bgcolor: active ? theme.palette.secondary.container : 'transparent',
           transition: 'background-color 0.2s',
           display: 'flex',
           alignItems: 'center',
@@ -46,7 +43,7 @@ const NavItem = ({ icon, activeIcon, label, active, onClick }) => {
         }}
       >
         {active
-          ? <Box sx={{ color: 'white', display: 'flex' }}>{activeIcon || icon}</Box>
+          ? <Box sx={{ color: theme.palette.secondary.onContainer, display: 'flex' }}>{activeIcon || icon}</Box>
           : <Box sx={{ color: 'text.secondary', display: 'flex' }}>{icon}</Box>
         }
       </Box>
@@ -55,7 +52,7 @@ const NavItem = ({ icon, activeIcon, label, active, onClick }) => {
         sx={{
           fontSize: '0.7rem',
           fontWeight: active ? 700 : 400,
-          color: active ? 'primary.main' : 'text.secondary',
+          color: active ? theme.palette.secondary.onContainer : 'text.secondary',
           lineHeight: 1,
         }}
       >
@@ -119,7 +116,7 @@ const BottomNav = () => {
           sx={{
             borderRadius: 5,
             overflow: 'hidden',
-            bgcolor: theme.palette.mode === 'dark' ? '#1e1e1e' : 'background.paper',
+            bgcolor: 'background.paper',
           }}
         >
           <Box sx={{ display: 'flex', height: 60, px: 1 }}>

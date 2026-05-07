@@ -43,7 +43,7 @@ const RarityBadge = ({ rarity, rarityAuto, missingCount, doubleCount, size = 'sm
       : null
     tooltipTitle = (
       <Box component="span" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
-        <span>{t.rarity.auto} <Box component="span" sx={{ color: 'secondary.light', fontWeight: 700 }}>Surprix AI</Box></span>
+        <span>{t.rarity.auto} <Box component="span" sx={{ color: 'warning.main', fontWeight: 700 }}>Surprix AI</Box></span>
         {counts && <span style={{ opacity: 0.75, fontSize: '0.8em' }}>{counts}</span>}
       </Box>
     )

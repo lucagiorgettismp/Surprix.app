@@ -6,6 +6,7 @@ import { deleteChatForUser } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
 import { useT } from '../../store/LanguageContext'
 import EmptyState from '../../components/common/EmptyState'
+import ForumIcon from '@mui/icons-material/Forum'
 
 const TOPBAR_H = { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' }
 const PAGE_HEADER_H = '56px'
@@ -52,13 +53,13 @@ const ChatListPage = () => {
         top: TOPBAR_H,
         left: 0, right: 0,
         height: PAGE_HEADER_H,
-        bgcolor: isDark ? '#111111' : 'primary.main',
+        bgcolor: 'background.paper',
         display: 'flex',
         alignItems: 'center',
         px: 2,
         zIndex: 10,
       }}>
-        <Typography variant="h6" fontWeight={700} sx={{ color: 'white' }}>
+        <Typography variant="h6" fontWeight={700}>
           {t.chat.title}
         </Typography>
       </Box>
@@ -69,7 +70,7 @@ const ChatListPage = () => {
       {chats === null
         ? <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4 }}><CircularProgress /></Box>
         : !chats.length
-          ? <EmptyState message={t.chat.noChats} />
+          ? <EmptyState icon={ForumIcon} message={t.chat.noChats} hint={t.chat.noChatsHint} />
           : (
             <List disablePadding>
               {chats.map((chat) => (
@@ -78,11 +79,11 @@ const ChatListPage = () => {
                   disablePadding
                   onClick={() => navigate(`/chat/${chat.chatId}`, { state: { with: chat.with } })}
                   onContextMenu={(e) => handleContextMenu(e, chat)}
-                  sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2, px: 2, py: 1, cursor: 'pointer' }}
+                  sx={{ bgcolor: 'background.paper', mb: 1, borderRadius: 2, px: 2, py: 1, cursor: 'pointer', boxShadow: 1 }}
                 >
                   <ListItemAvatar>
                     <Badge color="error" variant="dot" invisible={!chat.unread}>
-                      <Avatar sx={{ bgcolor: 'primary.main', color: 'white' }}>
+                      <Avatar sx={{ bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer }}>
                         {chat.with?.[0]?.toUpperCase()}
                       </Avatar>
                     </Badge>
