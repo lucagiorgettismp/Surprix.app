@@ -183,9 +183,10 @@ exports.profilemeta = onRequest(
       .replace(/(<meta\s+property="og:description"[^>]*>)/i,  `<meta property="og:description" content="${desc}"/>`)
       .replace(/(<meta\s+property="og:type"[^>]*>)/i,         `<meta property="og:type" content="profile"/>`)
       .replace(/(<meta\s+property="og:url"[^>]*>)/i,          `<meta property="og:url" content="${HOSTING_URL}/u/${username}"/>`)
-      .replace(/(<meta\s+property="og:image"[^>]*>)/i,        `<meta property="og:image" content="${HOSTING_URL}/icon-maskable.png"/>`)
+      .replace(/(<meta\s+property="og:image"[^>]*>)/i,        `<meta property="og:image" content="${HOSTING_URL}/og-image.png?v=2"/>`)
       .replace(/(<meta\s+name="twitter:title"[^>]*>)/i,       `<meta name="twitter:title" content="${title}"/>`)
       .replace(/(<meta\s+name="twitter:description"[^>]*>)/i, `<meta name="twitter:description" content="${desc}"/>`)
+      .replace(/(<meta\s+name="twitter:image"[^>]*>)/i,       `<meta name="twitter:image" content="${HOSTING_URL}/og-image.png?v=2"/>`)
 
     res.set('Content-Type', 'text/html;charset=UTF-8')
     res.set('Cache-Control', 'public, max-age=300')

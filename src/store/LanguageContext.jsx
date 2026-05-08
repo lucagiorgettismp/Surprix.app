@@ -7,7 +7,12 @@ export const useLanguage = () => useContext(LanguageContext)
 export const useT = () => useContext(LanguageContext).t
 
 export const LanguageProvider = ({ children }) => {
-  const [lang, setLangState] = useState(() => localStorage.getItem('lang') || 'it')
+  const [lang, setLangState] = useState(() => {
+    const saved = localStorage.getItem('lang')
+    if (saved) return saved
+    const browser = navigator.language?.slice(0, 2).toLowerCase()
+    return browser === 'it' ? 'it' : 'en'
+  })
 
   const setLang = (l) => {
     localStorage.setItem('lang', l)
