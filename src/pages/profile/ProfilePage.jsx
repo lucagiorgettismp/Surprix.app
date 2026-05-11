@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import ShareIcon from '@mui/icons-material/Share'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../store/AuthContext'
 import { useCollection } from '../../store/CollectionContext'
@@ -12,6 +13,7 @@ import { useLanguage, useT } from '../../store/LanguageContext'
 import { logout, changePassword, deleteAccount, reauthWithGoogle, reauthWithFacebook } from '../../services/auth.service'
 import { getUserProfile, updateUserCountry, deleteUserData } from '../../services/database.service'
 import { getCountryName, resolveCountryCode } from '../../utils/locale'
+import { useSnackbar } from '../../store/SnackbarContext'
 import CountrySelect from '../../components/common/CountrySelect'
 import ConfirmDialog from '../../components/common/ConfirmDialog'
 import PublicFooter from '../../components/layout/PublicFooter'
@@ -139,6 +141,18 @@ const ProfilePage = () => {
     }
   }
 
+  const { showSnackbar } = useSnackbar()
+
+  const handleShare = async () => {
+    const url = `${window.location.origin}/u/${username}`
+    if (navigator.share) {
+      await navigator.share({ title: `${username} su Surprix`, url })
+    } else {
+      await navigator.clipboard.writeText(url)
+      showSnackbar(t.common.linkCopied)
+    }
+  }
+
   const theme = useTheme()
   const isDark = theme.palette.mode === 'dark'
   const initial = (username?.[0] || user?.email?.[0] || '').toUpperCase()
@@ -185,6 +199,16 @@ const ProfilePage = () => {
             <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center', wordBreak: 'break-all', px: 1 }}>
               {user?.email}
             </Typography>
+            {username && (
+              <Box sx={{ display: 'flex', gap: 1, mt: 2, px: 1, width: '100%' }}>
+                <Button size="small" variant="outlined" fullWidth onClick={() => navigate(`/u/${username}`)}>
+                  {t.nav.viewProfile}
+                </Button>
+                <Button size="small" variant="outlined" fullWidth startIcon={<ShareIcon />} onClick={handleShare}>
+                  {t.common.shareProfile}
+                </Button>
+              </Box>
+            )}
           </Box>
         </Box>
 

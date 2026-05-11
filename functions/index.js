@@ -173,6 +173,22 @@ const escapeHtml = (s) =>
   String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;')
     .replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+const buildOgSvg = (username) => {
+  const len = username.length
+  const fontSize = len <= 8 ? 96 : len <= 12 ? 76 : len <= 16 ? 60 : 46
+  const safe = escapeHtml(username)
+  const subtitleY = 340 + Math.round(fontSize * 0.72) + 14
+  return `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#006972"/>
+  <circle cx="1120" cy="-80" r="300" fill="#00838f" opacity="0.28"/>
+  <circle cx="80" cy="720" r="240" fill="#004A50" opacity="0.35"/>
+  <text x="60" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="bold" fill="white" opacity="0.55" letter-spacing="6">SURPRIX</text>
+  <text x="60" y="340" font-family="DejaVu Sans,Arial,sans-serif" font-size="${fontSize}" font-weight="bold" fill="white">${safe}</text>
+  <text x="60" y="${subtitleY}" font-family="DejaVu Sans,Arial,sans-serif" font-size="30" fill="white" opacity="0.65">collezionista su Surprix</text>
+  <text x="60" y="600" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="white" opacity="0.4">surprix.app/u/${safe}</text>
+</svg>`
+}
+
 exports.profilemeta = onRequest(
   { region: 'europe-west1', invoker: 'public' },
   async (req, res) => {
@@ -180,31 +196,63 @@ exports.profilemeta = onRequest(
     if (!match) { res.status(404).send('Not found'); return }
     const username = match[1]
 
-    const [profileRes, pageRes] = await Promise.all([
+    // Serve dynamic OG image for /u/:username/og.png
+    if (req.path.endsWith('/og.png')) {
+      try {
+        const { Resvg } = require('@resvg/resvg-js')
+        const svg = buildOgSvg(username)
+        const resvg = new Resvg(svg, {
+          fontDirs: ['/usr/share/fonts', '/usr/share/fonts/truetype', '/usr/share/fonts/truetype/dejavu'],
+        })
+        const png = resvg.render().asPng()
+        res.set('Content-Type', 'image/png')
+        res.set('Cache-Control', 'public, max-age=86400')
+        res.send(Buffer.from(png))
+      } catch (e) {
+        logger.error('OG image generation failed', e)
+        res.redirect(302, `${HOSTING_URL}/og-image.png?v=2`)
+      }
+      return
+    }
+
+    const [profileRes, feedbackRes, missingRes, pageRes] = await Promise.all([
       fetch(`${RTDB_URL}/users/${username}.json`).catch(() => null),
+      fetch(`${RTDB_URL}/feedback/${username}.json`).catch(() => null),
+      fetch(`${RTDB_URL}/missings/${username}.json?shallow=true`).catch(() => null),
       fetch(`${HOSTING_URL}/index.html`).catch(() => null),
     ])
 
-    const profile = profileRes?.ok ? await profileRes.json().catch(() => null) : null
-    const html    = pageRes?.ok    ? await pageRes.text()                       : null
+    const profile     = profileRes?.ok  ? await profileRes.json().catch(() => null)  : null
+    const feedbackRaw = feedbackRes?.ok  ? await feedbackRes.json().catch(() => null) : null
+    const missingRaw  = missingRes?.ok   ? await missingRes.json().catch(() => null)  : null
+    const html        = pageRes?.ok      ? await pageRes.text()                       : null
 
     if (!html) { res.status(503).send('Service unavailable'); return }
 
+    const feedbacks    = feedbackRaw && typeof feedbackRaw === 'object' ? Object.values(feedbackRaw) : []
+    const avgRating    = feedbacks.length > 0
+      ? (feedbacks.reduce((sum, fb) => sum + (fb.rating || 0), 0) / feedbacks.length).toFixed(1)
+      : null
+    const missingCount = missingRaw && typeof missingRaw === 'object' ? Object.keys(missingRaw).length : null
+
     const title = escapeHtml(`${username} — Surprix`)
-    const desc  = escapeHtml(
-      profile
-        ? `Scopri la collezione di ${username} su Surprix.`
-        : 'Tieni in ordine le tue collezioni di sorprese Kinder.'
-    )
+    const descParts = profile ? [
+      `Scopri la collezione di ${username} su Surprix.`,
+      missingCount != null ? `${missingCount} mancanti` : null,
+      avgRating ? `Punteggio: ${avgRating}/5 (${feedbacks.length} ${feedbacks.length === 1 ? 'recensione' : 'recensioni'})` : null,
+    ].filter(Boolean) : ['Tieni in ordine le tue collezioni di sorprese Kinder.']
+    const desc  = escapeHtml(descParts.join(' • '))
+    const ogImg = `${HOSTING_URL}/u/${username}/og.png`
+
     const modified = html
       .replace(/(<meta\s+property="og:title"[^>]*>)/i,        `<meta property="og:title" content="${title}"/>`)
       .replace(/(<meta\s+property="og:description"[^>]*>)/i,  `<meta property="og:description" content="${desc}"/>`)
       .replace(/(<meta\s+property="og:type"[^>]*>)/i,         `<meta property="og:type" content="profile"/>`)
       .replace(/(<meta\s+property="og:url"[^>]*>)/i,          `<meta property="og:url" content="${HOSTING_URL}/u/${username}"/>`)
-      .replace(/(<meta\s+property="og:image"[^>]*>)/i,        `<meta property="og:image" content="${HOSTING_URL}/og-image.png?v=2"/>`)
+      .replace(/(<meta\s+property="og:image"[^>]*>)/i,        `<meta property="og:image" content="${ogImg}"/>`)
       .replace(/(<meta\s+name="twitter:title"[^>]*>)/i,       `<meta name="twitter:title" content="${title}"/>`)
       .replace(/(<meta\s+name="twitter:description"[^>]*>)/i, `<meta name="twitter:description" content="${desc}"/>`)
-      .replace(/(<meta\s+name="twitter:image"[^>]*>)/i,       `<meta name="twitter:image" content="${HOSTING_URL}/og-image.png?v=2"/>`)
+      .replace(/(<meta\s+name="twitter:image"[^>]*>)/i,       `<meta name="twitter:image" content="${ogImg}"/>`)
 
     res.set('Content-Type', 'text/html;charset=UTF-8')
     res.set('Cache-Control', 'public, max-age=300')

@@ -194,7 +194,7 @@ const PublicProfilePage = () => {
         )}
         {isSelf && (
           <Button size="small" variant="outlined" startIcon={<ShareIcon />} onClick={handleShare} fullWidth>
-            {t.common.shareList}
+            {t.common.shareProfile}
           </Button>
         )}
       </Paper>

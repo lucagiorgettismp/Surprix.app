@@ -134,6 +134,7 @@ const translations = {
       tagline: 'Tieni in ordine le tue collezioni',
       linkCopied: 'Link copiato!',
       shareList: 'Condividi lista',
+      shareProfile: 'Condividi profilo',
       reportIssue: 'Segnala un problema',
     },
     undo: {
@@ -375,6 +376,7 @@ const translations = {
       tagline: 'Keep your collections in order',
       linkCopied: 'Link copied!',
       shareList: 'Share list',
+      shareProfile: 'Share profile',
       reportIssue: 'Report an issue',
     },
     undo: {
