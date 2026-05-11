@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { Box, List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, CircularProgress, ListItemButton } from '@mui/material'
-import { getOwnersForSurprise, getUserProfile, getFeedbackFor } from '../../services/database.service'
+import { getOwnersForSurprise, getFeedbackFor } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
 import { getCountryName } from '../../utils/locale'
 import { useT, useLanguage } from '../../store/LanguageContext'
@@ -15,11 +15,10 @@ const MissingOwnersPage = () => {
   const { surpriseId } = useParams()
   const { state } = useLocation()
   const navigate = useNavigate()
-  const { username, missing } = useCollection()
+  const { username, userCountry, missing } = useCollection()
 
   const [owners, setOwners] = useState([])
   const [ratings, setRatings] = useState({})
-  const [myProfile, setMyProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -28,16 +27,11 @@ const MissingOwnersPage = () => {
   const { lang } = useLanguage()
 
   useEffect(() => {
-    Promise.all([
-      getOwnersForSurprise(surpriseId),
-      username ? getUserProfile(username) : Promise.resolve(null),
-    ])
-      .then(async ([fetchedOwners, profile]) => {
-        setMyProfile(profile)
-        const myCountry = profile?.country
+    getOwnersForSurprise(surpriseId)
+      .then(async (fetchedOwners) => {
         const sorted = [...fetchedOwners].sort((a, b) => {
-          if (a.country === myCountry && b.country !== myCountry) return -1
-          if (b.country === myCountry && a.country !== myCountry) return 1
+          if (a.country === userCountry && b.country !== userCountry) return -1
+          if (b.country === userCountry && a.country !== userCountry) return 1
           return 0
         })
         setOwners(sorted)
@@ -54,7 +48,7 @@ const MissingOwnersPage = () => {
       })
       .catch(setError)
       .finally(() => setLoading(false))
-  }, [surpriseId, username])
+  }, [surpriseId])
 
   const crumbs = [
     { label: t.missing.title, path: '/missing' },
@@ -84,7 +78,6 @@ const MissingOwnersPage = () => {
                     navigate(`/other-for-you/${owner.username}`, {
                       state: {
                         ownerUsername: owner.username,
-                        ownerEmail: owner.email?.replace(/,/g, '.'),
                         missingIds: missing.map((m) => m.id),
                         surpriseLabel,
                       },

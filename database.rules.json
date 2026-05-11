@@ -1,6 +1,9 @@
 {
   "rules": {
+    ".read":  "root.child('uids').child(auth.uid).child('admin').exists()",
+    ".write": "root.child('uids').child(auth.uid).child('admin').exists()",
     "missings": {
+      ".read": "root.child('uids').child(auth.uid).child('admin').exists()",
       "$user_id": {
         ".read": true,
         ".write": "$user_id === root.child('uids').child(auth.uid).child('username').val() || root.child('uids').child(auth.uid).child('admin').exists()"

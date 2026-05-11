@@ -173,12 +173,11 @@ const run = async () => {
   for (const [yid, { anno, sids }] of Object.entries(newYearSets)) {
     console.log(`  + year: ${yid}`)
     updates[`years/${yid}`] = {
-      id:             yid,
-      year:           Number(anno),
-      descr:          anno,
-      producerId:     PRODUCER_ID,
-      producer_color: PRODUCER_COLOR,
-      sets:           Object.fromEntries([...sids].map((sid) => [sid, true])),
+      id:         yid,
+      year:       Number(anno),
+      descr:      anno,
+      producerId: PRODUCER_ID,
+      sets:       Object.fromEntries([...sids].map((sid) => [sid, true])),
     }
     updates[`producers/${PRODUCER_ID}/years/${yid}`] = true
     existingYearIds.add(yid)
@@ -210,11 +209,10 @@ const run = async () => {
         set_year_name:      meta.anno,
         set_producer_name:  PRODUCER_NAME,
         set_producer_id:    PRODUCER_ID,
-        set_producer_color: PRODUCER_COLOR,
         set_nation:         NATION,
         set_category:       meta.category,
         set_effective_code: effCode,
-        ...(s.rarita != null ? { rarity: s.rarita, intRarity: s.rarita, rarity_auto: false } : {}),
+        ...(s.rarita != null ? { rarity: s.rarita, rarity_auto: false } : {}),
       }
       surprisesMap[spid] = true
       surprisesCreated++
@@ -231,13 +229,9 @@ const run = async () => {
       console.log(`  + set: ${sid} — ${meta.serie_nome}`)
       updates[`sets/${sid}`] = {
         id:             sid,
-        code:           pad3(meta.serie_codice),
         name:           meta.serie_nome,
         year_id:        yid,
-        year_desc:      meta.anno,
-        year_year:      annoN,
         producer_id:    PRODUCER_ID,
-        producer_name:  PRODUCER_NAME,
         producer_color: PRODUCER_COLOR,
         nation:         NATION,
         img_path:       meta.serie_img_path || mkSetImgPath(meta.anno, meta.serie_codice),

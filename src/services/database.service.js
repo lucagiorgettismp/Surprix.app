@@ -50,6 +50,11 @@ export const getUsername = (uid) =>
     }, reject, { onlyOnce: true })
   })
 
+export const getUserCountry = async (username) => {
+  const snap = await get(ref(rtdb, `users/${username}/country`))
+  return snap.exists() ? snap.val() : null
+}
+
 export const updateUserCountry = (username, country) =>
   update(ref(rtdb, `users/${username}`), { country })
 
@@ -61,7 +66,7 @@ export const checkUsernameExists = async (username) => {
 export const createUserProfile = async (uid, email, username, country, provider) => {
   const emailKey = email.replace(/\./g, ',')
   const privacyAcceptedAt = new Date().toISOString()
-  await set(ref(rtdb, `uids/${uid}`), { uid, username, provider })
+  await set(ref(rtdb, `uids/${uid}`), { username })
   await set(ref(rtdb, `users/${username}`), { email: emailKey, username, country, provider, privacyAcceptedAt })
 }
 
@@ -85,10 +90,10 @@ export const getDoublesIds = async (username) => {
   return snap.val() || {}
 }
 
-export const addDouble = (username, surpriseId, sortCode) =>
+export const addDouble = (username, surpriseId, sortCode, country) =>
   Promise.all([
     set(ref(rtdb, `user_doubles/${username}/${surpriseId}`), sortCode),
-    set(ref(rtdb, `surprise_doubles/${surpriseId}/${username}`), true),
+    set(ref(rtdb, `surprise_doubles/${surpriseId}/${username}`), country || true),
   ])
 
 export const removeDouble = (username, surpriseId) =>
@@ -107,9 +112,10 @@ export const getUserProfile = async (username) => {
 export const getOwnersForSurprise = async (surpriseId) => {
   const snap = await get(ref(rtdb, `surprise_doubles/${surpriseId}`))
   if (!snap.exists()) return []
-  const usernames = Object.keys(snap.val())
-  const users = await Promise.all(usernames.map(getUserProfile))
-  return users.filter(Boolean)
+  return Object.entries(snap.val()).map(([username, val]) => ({
+    username,
+    country: typeof val === 'string' ? val : '',
+  }))
 }
 
 export const getOtherSurprisesForYou = async (ownerUsername, myMissingIds) => {

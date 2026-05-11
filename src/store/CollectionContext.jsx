@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { useAuth } from './AuthContext'
 import {
   getUsername,
+  getUserCountry,
   getMissingIds,
   getDoublesIds,
   getSurprisesByIds,
@@ -51,7 +52,9 @@ export const CollectionProvider = ({ children }) => {
   const [itemsLoading, setItemsLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
   const [refreshCount, setRefreshCount] = useState(0)
+  const [producers, setProducers] = useState([])
   const [producerColors, setProducerColors] = useState({})
+  const [userCountry, setUserCountry] = useState(null)
   const [unreadChats, setUnreadChats] = useState(0)
   const [chats, setChats] = useState(null)
   const activeChatIdRef = useRef(null)
@@ -82,9 +85,10 @@ export const CollectionProvider = ({ children }) => {
   }, [username])
 
   useEffect(() => {
-    getProducers().then((producers) => {
+    getProducers().then((list) => {
+      setProducers(list)
       const map = {}
-      producers.forEach((p) => { if (p.color) map[p.id] = p.color })
+      list.forEach((p) => { if (p.color) map[p.id] = p.color })
       setProducerColors(map)
     })
   }, [])
@@ -137,6 +141,7 @@ export const CollectionProvider = ({ children }) => {
           // Fetch RTDB in background (aggiorna silenziosamente)
           const { missingItems, doublesItems } = await fetchItems(uname)
           if (cancelled) return
+          getUserCountry(uname).then(setUserCountry).catch(() => {})
           setMissing(missingItems)
           setDoubles(doublesItems)
           setItemsLoading(false)
@@ -204,6 +209,7 @@ export const CollectionProvider = ({ children }) => {
     try {
       if (exists) await removeMissing(username, surprise.id)
       else await addMissing(username, surprise.id, sortCode(surprise))
+
     } catch (err) {
       console.error('Error toggling missing:', err)
     }
@@ -240,7 +246,7 @@ export const CollectionProvider = ({ children }) => {
     cacheData('doubles', newDoubles)
     try {
       if (exists) await removeDouble(username, surprise.id)
-      else await addDouble(username, surprise.id, sortCode(surprise))
+      else await addDouble(username, surprise.id, sortCode(surprise), userCountry)
     } catch (err) {
       console.error('Error toggling double:', err)
     }
@@ -248,7 +254,7 @@ export const CollectionProvider = ({ children }) => {
 
   return (
     <CollectionContext.Provider
-      value={{ username, missing, doubles, loading, itemsLoading, refreshing, refreshCount, producerColors, unreadChats, setUnreadChats, chats, setChats, setActiveChatId, toggleMissing, toggleDoubles, addAllMissing, refreshProfile, refresh }}
+      value={{ username, userCountry, missing, doubles, loading, itemsLoading, refreshing, refreshCount, producers, producerColors, unreadChats, setUnreadChats, chats, setChats, setActiveChatId, toggleMissing, toggleDoubles, addAllMissing, refreshProfile, refresh }}
     >
       {children}
     </CollectionContext.Provider>

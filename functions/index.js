@@ -1,5 +1,5 @@
 const { onSchedule } = require('firebase-functions/v2/scheduler')
-const { onRequest, onCall } = require('firebase-functions/v2/https')
+const { onRequest, onCall, HttpsError } = require('firebase-functions/v2/https')
 const { defineSecret }      = require('firebase-functions/params')
 const { logger }            = require('firebase-functions')
 const admin                 = require('firebase-admin')
@@ -144,6 +144,24 @@ exports.calcRarityAutoManual = onCall(
       `Surprix — calcolo rarita completato (manuale)\nAssegnate: ${assigned}\nSkippate: ${skipped}`
     )
     return { success: true, assigned, skipped }
+  }
+)
+
+// --- Admin: elimina utente da Firebase Auth ---
+exports.deleteAuthUser = onCall(
+  { region: 'europe-west1' },
+  async (req) => {
+    if (!req.auth) throw new HttpsError('unauthenticated', 'Unauthenticated')
+    const callerSnap = await db.ref(`uids/${req.auth.uid}/admin`).once('value')
+    if (!callerSnap.exists()) throw new HttpsError('permission-denied', 'Unauthorized')
+    const { uid } = req.data
+    if (!uid) throw new HttpsError('invalid-argument', 'Missing uid')
+    try {
+      await admin.auth().deleteUser(uid)
+    } catch (e) {
+      if (e.code !== 'auth/user-not-found') throw new HttpsError('internal', e.message)
+    }
+    return { success: true }
   }
 )
 
