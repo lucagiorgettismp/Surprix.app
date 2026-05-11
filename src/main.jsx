@@ -18,6 +18,7 @@ import { AppThemeProvider } from './store/ThemeContext'
 import { LanguageProvider } from './store/LanguageContext'
 import { SnackbarProvider } from './store/SnackbarContext'
 import OfflineOverlay from './components/common/OfflineOverlay'
+import CookieBanner from './components/common/CookieBanner'
 import AppRouter from './router/AppRouter'
 
 createRoot(document.getElementById('root')).render(
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
             <SnackbarProvider>
               <OfflineOverlay />
               <AppRouter />
+              <CookieBanner />
             </SnackbarProvider>
           </CollectionProvider>
         </AuthProvider>

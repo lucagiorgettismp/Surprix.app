@@ -14,7 +14,7 @@ const POLICY_EN = `<p>This privacy policy has been compiled to inform users abou
     <div>To do so, all the Authentication is handled by Google Firebase Authentication, which stores, protect and provide services for password recovery and data deletion.</div>
     <div>Other information, are maintained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems and are required to keep the information confidential.</div>
     <div><strong>Do we use 'cookies'?</strong></div>
-    <div>We do not use cookies for tracking purposes</div>
+    <div>We use Google Analytics (GA4) to collect anonymous, aggregated data about how the app is used (pages visited, features used). This service may use cookies or similar technologies. No personally identifiable information is collected through analytics. You can accept or reject analytics cookies via the banner shown on your first visit.</div>
     <div><strong>Third-party disclosure</strong></div>
     <div>We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.</div>
     <div><strong>Third-party links</strong></div>
@@ -50,7 +50,7 @@ const POLICY_IT = `<p>I termini e condizioni per la protezione dei dati personal
         <div>Per fare questo, tutta l\'autenticazione &egrave; gestita da Google Firebase Authenticatication, il quale salva, protegge i tuoi dati e fornisce servizi per il recupero della password e dell\' eliminazione dei dati.</div>
     </div>
     <div><strong>Viene fatto utilizzo dei 'cookies'?</strong></div>
-    <div>Non utilizziamo i cookies per il tracciamento degli utenti.</div>
+    <div>Utilizziamo Google Analytics (GA4) per raccogliere dati anonimi e aggregati su come viene usata l'app (pagine visitate, funzionalità usate). Questo servizio può utilizzare cookie o tecnologie simili. Nessuna informazione personalmente identificabile viene raccolta tramite le analytics. Puoi accettare o rifiutare i cookie analitici tramite il banner mostrato alla prima visita.</div>
     <div><strong>I dati vengono ceduti a terze parti?</strong></div>
     <div>Non vendiamo, commercializziamo o trasferiamo i tuoi dati personali a terze parti.</div>
     <div><strong>Collegamenti a terze parti</strong></div>

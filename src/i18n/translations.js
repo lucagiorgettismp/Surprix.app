@@ -223,6 +223,13 @@ const translations = {
       missing: 'mancanti',
       doubles: 'doppi',
     },
+    cookies: {
+      title: 'Chi vuole un biscottino?',
+      description: 'Usiamo Google Analytics per capire quali funzionalità sono più usate e rendere Surprix sempre migliore. Nessun dato personale — solo numeri anonimi che ci aiutano a capire cosa funziona e cosa no!',
+      accept: 'Certo!',
+      reject: 'No grazie',
+      learnMore: 'Scopri di più',
+    },
     policy: {
       title: 'Privacy Policy',
       close: 'Chiudi',
@@ -456,6 +463,13 @@ const translations = {
       consolidated: 'Consolidated rarity',
       missing: 'missing',
       doubles: 'doubles',
+    },
+    cookies: {
+      title: 'Care for a cookie?',
+      description: 'We use Google Analytics to understand which features people use most and make Surprix better over time. No personal data — just anonymous numbers that help us know what\'s working and what is not!',
+      accept: 'Sure!',
+      reject: 'No thanks',
+      learnMore: 'Learn more',
     },
     policy: {
       title: 'Privacy Policy',
