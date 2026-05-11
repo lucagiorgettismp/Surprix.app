@@ -9,8 +9,6 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone'
 import CloseIcon from '@mui/icons-material/Close'
-import BrushIcon from '@mui/icons-material/Brush'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
 import PageHeader from '../../components/catalog/PageHeader'
 import RarityBadge from '../../components/common/RarityBadge'
 import ErrorMessage from '../../components/common/ErrorMessage'
@@ -112,9 +110,8 @@ const SurprisesPage = () => {
   if (error) return <ErrorMessage message={error.message} />
 
   const first = data[0]
-  const CATEGORY_ICONS = { Hand_painted: <BrushIcon fontSize="small" />, Compo: <SmartToyIcon fontSize="small" /> }
   const metaChips = first ? [
-    first.set_category ? { label: getCategoryLabel(first.set_category, lang), icon: CATEGORY_ICONS[first.set_category], primary: true } : null,
+    first.set_category ? { label: getCategoryLabel(first.set_category, lang), primary: true } : null,
     first.set_nation ? { label: getCountryName(first.set_nation, lang) } : null,
   ].filter(Boolean) : []
 
@@ -124,7 +121,7 @@ const SurprisesPage = () => {
         <Stack direction="row" sx={{ alignItems: 'center', gap: 0.75, justifyContent: 'space-between' }}>
           <Stack direction="row" sx={{ gap: 0.75 }}>
             {metaChips.map((chip) => (
-              <Chip key={chip.label} label={chip.label} icon={chip.icon} size="small" variant="outlined" color={chip.primary ? 'primary' : 'default'} />
+              <Chip key={chip.label} label={chip.label} size="small" variant="outlined" color={chip.primary ? 'primary' : 'default'} />
             ))}
           </Stack>
           {!loading && data.length > 0 && (
@@ -161,6 +158,11 @@ const SurprisesPage = () => {
             sx={{ maxWidth: '100%', maxHeight: 220, borderRadius: 2, display: 'block' }}
           />
         </Box>
+      )}
+      {setData?.thanks_to && (
+        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', textAlign: 'center', mb: 1.5, fontStyle: 'italic' }}>
+          Thanks to {setData.thanks_to}
+        </Typography>
       )}
 
       {loading ? (

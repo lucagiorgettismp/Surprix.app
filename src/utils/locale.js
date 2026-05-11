@@ -43,9 +43,19 @@ const CATEGORY_LABELS = {
   },
 }
 
+const CATEGORY_SHORT = {
+  it: { Hand_painted: 'Dipinti', Metallic: 'Metal', Flocked: 'Flock', Glow: 'Fosfo', Compo: 'Compo', Special: 'Spec' },
+  en: { Hand_painted: 'Figures', Metallic: 'Metal', Flocked: 'Flock', Glow: 'Glow', Compo: 'Toys', Special: 'Spec' },
+}
+
 export const getCategoryLabel = (category, lang = 'it') => {
   if (!category) return ''
   return CATEGORY_LABELS[lang]?.[category] ?? category.replace(/_/g, ' ')
+}
+
+export const getCategoryShortLabel = (category, lang = 'it') => {
+  if (!category) return ''
+  return CATEGORY_SHORT[lang]?.[category] ?? category
 }
 
 const CUSTOM_REGIONS = {

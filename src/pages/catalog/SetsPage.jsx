@@ -5,8 +5,6 @@ import SearchIcon from '@mui/icons-material/Search'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone'
 import CloseIcon from '@mui/icons-material/Close'
-import BrushIcon from '@mui/icons-material/Brush'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
 import { useLanguage, useT } from '../../store/LanguageContext'
 import { useCollection } from '../../store/CollectionContext'
 import { trackSelectMode, trackAddSelected } from '../../services/analytics.service'
@@ -34,7 +32,7 @@ const SetsPage = () => {
   const [selected, setSelected] = useState(new Set())
   const [addingAll, setAddingAll] = useState(false)
   const [search, setSearch] = useState('')
-  const [categoryFilter, setCategoryFilter] = useState(['Hand_painted', 'Compo'])
+  const [categoryFilter, setCategoryFilter] = useState([])
 
   const { data, loading, error } = useDatabaseQuery(() => getSets(yearId), [yearId])
 
@@ -72,8 +70,7 @@ const SetsPage = () => {
   const items = useMemo(() => {
     const q = search.trim().toLowerCase()
     return allItems.filter((s) => {
-      if (categoryFilter.length === 0) return false
-      if (categoryFilter.length === 1 && !categoryFilter.includes(s.category)) return false
+      if (categoryFilter.length > 0 && !categoryFilter.includes(s.category)) return false
       if (!q) return true
       if (s.name?.toLowerCase().includes(q)) return true
       if ((s.codes || []).some((c) => c.toLowerCase().includes(q))) return true
@@ -112,22 +109,21 @@ const SetsPage = () => {
             />
             <Stack direction="row" sx={{ gap: 0.75, alignItems: 'center', justifyContent: 'space-between' }}>
               <Stack direction="row" sx={{ gap: 0.75 }}>
-                {[
-                  { cat: 'Hand_painted', icon: <BrushIcon fontSize="small" /> },
-                  { cat: 'Compo', icon: <SmartToyIcon fontSize="small" /> },
-                ].map(({ cat, icon }) => (
-                  <Chip
-                    key={cat}
-                    label={getCategoryLabel(cat, lang)}
-                    icon={icon}
-                    size="small"
-                    color={categoryFilter.includes(cat) ? 'primary' : 'default'}
-                    variant={categoryFilter.includes(cat) ? 'filled' : 'outlined'}
-                    onClick={() => setCategoryFilter((prev) =>
-                      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
-                    )}
-                  />
-                ))}
+                {['Hand_painted', 'Compo'].map((cat) => {
+                  const active = categoryFilter.includes(cat)
+                  return (
+                    <Chip
+                      key={cat}
+                      label={getCategoryLabel(cat, lang)}
+                      size="small"
+                      variant={active ? 'filled' : 'outlined'}
+                      onClick={() => setCategoryFilter((prev) =>
+                        prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+                      )}
+                      sx={active && accentColor ? { bgcolor: `${accentColor}22`, color: accentColor, borderColor: `${accentColor}55`, fontWeight: 700 } : {}}
+                    />
+                  )
+                })}
               </Stack>
               {selecting ? (
                 <Stack direction="row" sx={{ gap: 0.5 }}>
@@ -168,7 +164,7 @@ const SetsPage = () => {
       {!loading && allItems.length === 0 ? (
         <EmptyState message={t.catalog.noSets} />
       ) : !loading && items.length === 0 ? (
-        <EmptyState message={categoryFilter.length === 0 ? t.catalog.selectCategoryWarning : t.catalog.noResults} />
+        <EmptyState message={t.catalog.noResults} />
       ) : (
         <ItemGrid
           items={items}

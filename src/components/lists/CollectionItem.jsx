@@ -1,14 +1,12 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
-import { ListItem, ListItemText, IconButton, Box, Stack, Dialog, DialogContent, Chip, Typography } from '@mui/material'
-import BrushIcon from '@mui/icons-material/Brush'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
+import { ListItem, ListItemText, IconButton, Box, Stack, Dialog, DialogContent, Chip, Tooltip, Typography, ClickAwayListener } from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import { gsToHttps, onImgError } from '../../utils/storage'
 import { useLanguage } from '../../store/LanguageContext'
-import { getCategoryLabel } from '../../utils/locale'
+import { getCategoryLabel, getCategoryShortLabel } from '../../utils/locale'
 import RarityBadge from '../common/RarityBadge'
 
 const SWIPE_THRESHOLD = 72
@@ -20,6 +18,7 @@ const surpriseLabel = (item) =>
 
 const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLink = false }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [categoryOpen, setCategoryOpen] = useState(false)
   const [swipeX, setSwipeX] = useState(0)
   const touchStartX = useRef(null)
   const touchStartY = useRef(null)
@@ -112,7 +111,7 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLi
           bgcolor: tintedBg,
           borderRadius: 2,
           px: 2,
-          py: 0.5,
+          py: 0,
           pr: 6,
           overflow: 'hidden',
           touchAction: 'pan-y',
@@ -195,14 +194,28 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLi
                   />
                 )}
                 {item.set_category && (
-                  <Chip
-                    label={getCategoryLabel(item.set_category, lang)}
-                    icon={{ Hand_painted: <BrushIcon />, Compo: <SmartToyIcon /> }[item.set_category]}
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    sx={{ height: 20, fontSize: '0.65rem' }}
-                  />
+                  <ClickAwayListener onClickAway={() => setCategoryOpen(false)}>
+                    <Tooltip
+                      title={getCategoryLabel(item.set_category, lang)}
+                      open={categoryOpen}
+                      onClose={() => setCategoryOpen(false)}
+                      disableFocusListener
+                      disableHoverListener
+                      disableTouchListener
+                      placement="top"
+                      arrow
+                      slotProps={{ popper: { sx: { zIndex: 9 }, modifiers: [{ name: 'offset', options: { offset: [0, -16] } }] } }}
+                    >
+                      <Chip
+                        label={getCategoryShortLabel(item.set_category, lang)}
+                        size="small"
+                        variant="outlined"
+                        color="primary"
+                        onClick={(e) => { e.stopPropagation(); setCategoryOpen((v) => { if (!v) setTimeout(() => setCategoryOpen(false), 2000); return !v }) }}
+                        sx={{ height: 20, fontSize: '0.65rem', cursor: 'pointer' }}
+                      />
+                    </Tooltip>
+                  </ClickAwayListener>
                 )}
               </Stack>
               <Box sx={{ mt: 0.5 }}>

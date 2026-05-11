@@ -1,18 +1,21 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Box, TextField, List, ListItem, ListItemButton, ListItemAvatar,
-  ListItemText, Avatar, Typography, CircularProgress, InputAdornment,
+  Box, Chip, TextField, List, ListItem, ListItemButton, ListItemAvatar,
+  ListItemText, Avatar, Typography, CircularProgress, InputAdornment, Stack,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { fetchAllSurprises, getSet } from '../../services/database.service'
 import { gsToHttps } from '../../utils/storage'
 import { useT } from '../../store/LanguageContext'
+import { useCollection } from '../../store/CollectionContext'
 
 const SearchPage = () => {
   const t = useT()
   const navigate = useNavigate()
+  const { producers, producerColors } = useCollection()
   const [query, setQuery] = useState('')
+  const [producerFilter, setProducerFilter] = useState([])
   const [surprises, setSurprises] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -26,13 +29,16 @@ const SearchPage = () => {
     const q = query.trim().toLowerCase()
     if (q.length < 2) return []
     return surprises
-      .filter((s) =>
-        s.code?.toLowerCase().includes(q) ||
-        s.description?.toLowerCase().includes(q) ||
-        s.set_name?.toLowerCase().includes(q)
-      )
+      .filter((s) => {
+        if (producerFilter.length > 0 && !producerFilter.includes(s.set_producer_id)) return false
+        return (
+          s.code?.toLowerCase().includes(q) ||
+          s.description?.toLowerCase().includes(q) ||
+          s.set_name?.toLowerCase().includes(q)
+        )
+      })
       .slice(0, 50)
-  }, [surprises, query])
+  }, [surprises, query, producerFilter])
 
   const handleClick = async (s) => {
     if (!s.set_producer_id || !s.set_year_id) return
@@ -75,8 +81,26 @@ const SearchPage = () => {
             ),
           },
         }}
-        sx={{ mb: 1.5 }}
+        sx={{ mb: 1 }}
       />
+      {producers.length > 0 && (
+        <Stack direction="row" sx={{ gap: 0.75, mb: 1.5, flexWrap: 'wrap' }}>
+          {producers.map((p) => {
+            const active = producerFilter.includes(p.id)
+            const color = producerColors[p.id]
+            return (
+              <Chip
+                key={p.id}
+                label={p.name}
+                size="small"
+                onClick={() => setProducerFilter((prev) => prev.includes(p.id) ? prev.filter((id) => id !== p.id) : [...prev, p.id])}
+                variant={active ? 'filled' : 'outlined'}
+                sx={active && color ? { bgcolor: `${color}22`, color, borderColor: `${color}55`, fontWeight: 700 } : {}}
+              />
+            )
+          })}
+        </Stack>
+      )}
 
       {loading && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, py: 4, justifyContent: 'center' }}>
