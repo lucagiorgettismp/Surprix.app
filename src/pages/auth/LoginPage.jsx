@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Box, Button, Dialog, DialogContent, DialogTitle, Divider, Paper, TextField, Typography, CircularProgress, Alert } from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
-import { useTheme } from '@mui/material/styles'
+import { useTheme, alpha } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
-import { loginWithEmail, loginWithGoogle, loginWithFacebook, resetPassword, handleRedirectResult } from '../../services/auth.service'
+import { loginWithEmail, loginWithGoogle, resetPassword, handleRedirectResult } from '../../services/auth.service'
 import { useT } from '../../store/LanguageContext'
 import AppLogo from '../../components/common/AppLogo'
 import PublicFooter from '../../components/layout/PublicFooter'
@@ -79,7 +79,7 @@ const LoginPage = () => {
     }
   }
 
-  const heroGradient = `radial-gradient(ellipse at 50% 0%, ${theme.palette.secondary.container} 0%, ${theme.palette.background.default} 60%)`
+  const heroGradient = `radial-gradient(ellipse at 50% 0%, ${alpha(theme.palette.secondary.container, 0.4)} 0%, ${theme.palette.background.default} 60%)`
 
   return (
     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: heroGradient }}>
@@ -141,16 +141,6 @@ const LoginPage = () => {
               disabled={loading}
             >
               {t.login.continueWithGoogle}
-            </Button>
-
-            <Button
-              variant="outlined"
-              fullWidth
-              onClick={() => handle(loginWithFacebook)}
-              disabled={loading}
-              sx={{ borderColor: '#1877F2', color: '#1877F2', '&:hover': { borderColor: '#1877F2' } }}
-            >
-              {t.login.continueWithFacebook}
             </Button>
 
             <Typography variant="body2" sx={{ textAlign: 'center' }} color="text.secondary">

@@ -21,6 +21,7 @@ const OtherForYouPage    = lazy(() => import('../pages/trade/OtherForYouPage'))
 const SearchPage         = lazy(() => import('../pages/search/SearchPage'))
 const NotFoundPage       = lazy(() => import('../pages/NotFoundPage'))
 const PublicProfilePage  = lazy(() => import('../pages/public/PublicProfilePage'))
+const PrivacyPage        = lazy(() => import('../pages/public/PrivacyPage'))
 const ChatListPage       = lazy(() => import('../pages/chat/ChatListPage'))
 const ChatPage           = lazy(() => import('../pages/chat/ChatPage'))
 
@@ -45,6 +46,7 @@ const AppRouter = () => (
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/u/:username" element={<PublicProfilePage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route
           path="/"
