@@ -8,16 +8,19 @@ export const useScrollDirection = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
-      // Se scrolls up → mostra
-      if (currentScrollY < lastScrollY.current) {
+      if (currentScrollY <= 0) {
         setIsVisible(true)
-      }
-      // Se scrolls down di più di 50px dall'ultimo → nascondi
-      else if (currentScrollY > lastScrollY.current + 50) {
-        setIsVisible(false)
+        lastScrollY.current = 0
+        return
       }
 
-      lastScrollY.current = currentScrollY
+      if (currentScrollY < lastScrollY.current - 4) {
+        setIsVisible(true)
+        lastScrollY.current = currentScrollY
+      } else if (currentScrollY > lastScrollY.current + 8) {
+        setIsVisible(false)
+        lastScrollY.current = currentScrollY
+      }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })

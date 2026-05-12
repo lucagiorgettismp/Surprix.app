@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
-import { Box, Button, Card, Checkbox, Chip, Dialog, DialogContent, IconButton, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Card, Checkbox, Chip, Dialog, DialogContent, IconButton, Paper, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import StarIcon from '@mui/icons-material/Star'
 import DifferenceIcon from '@mui/icons-material/Difference'
@@ -147,6 +147,20 @@ const SurprisesPage = () => {
         </Stack>
       </PageHeader>
 
+      {setData?.thanks_to && (
+        <Paper elevation={0} sx={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1,
+          px: 2, py: 1.25, mb: 1.5, borderRadius: 2,
+          bgcolor: theme.palette.secondary.container,
+          maxWidth: { md: 420 }, mx: { md: 'auto' },
+        }}>
+          <Typography variant="body2" lineHeight={1}>🙏</Typography>
+          <Typography variant="caption" sx={{ color: theme.palette.secondary.onContainer, fontStyle: 'italic' }}>
+            Thanks to <strong>{setData.thanks_to}</strong>
+          </Typography>
+        </Paper>
+      )}
+
       {setImageUrl && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1.5 }}>
           <Box
@@ -158,11 +172,6 @@ const SurprisesPage = () => {
             sx={{ maxWidth: '100%', maxHeight: 220, borderRadius: 2, display: 'block' }}
           />
         </Box>
-      )}
-      {setData?.thanks_to && (
-        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', textAlign: 'center', mb: 1.5, fontStyle: 'italic' }}>
-          Thanks to {setData.thanks_to}
-        </Typography>
       )}
 
       {loading ? (

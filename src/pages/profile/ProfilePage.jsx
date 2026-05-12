@@ -164,7 +164,7 @@ const ProfilePage = () => {
       : null
 
   return (
-    <Box sx={{ maxWidth: { xs: 480, md: 780 }, mx: 'auto' }}>
+    <Box sx={{ maxWidth: { xs: 600, md: 980 }, mx: 'auto', px: 2 }}>
       {/* Page header */}
       <Box sx={{
         position: 'fixed',
@@ -185,7 +185,7 @@ const ProfilePage = () => {
       </Box>
       <Box sx={{ height: '56px' }} />
 
-      <Box sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: '200px 1fr' }, gap: { md: 3 }, alignItems: 'flex-start' }}>
+      <Box sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: '300px 1fr' }, gap: { md: 3 }, alignItems: 'flex-start' }}>
 
         {/* Left: avatar + identity */}
         <Box sx={{ position: { md: 'sticky' }, top: { md: 'calc(128px + env(safe-area-inset-top))' } }}>

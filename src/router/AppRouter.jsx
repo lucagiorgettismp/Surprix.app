@@ -5,6 +5,7 @@ import { useCollection } from '../store/CollectionContext'
 import AppLayout from '../components/layout/AppLayout'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import { usePageTracking } from '../hooks/usePageTracking'
+import IosPwaPrompt from '../components/common/IosPwaPrompt'
 
 const LoginPage         = lazy(() => import('../pages/auth/LoginPage'))
 const SignUpPage        = lazy(() => import('../pages/auth/SignUpPage'))
@@ -40,6 +41,7 @@ const PageTracker = () => { usePageTracking(); return null }
 const AppRouter = () => (
   <BrowserRouter>
     <PageTracker />
+    <IosPwaPrompt />
     <Suspense fallback={<LoadingSpinner fullScreen />}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />

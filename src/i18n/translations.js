@@ -224,6 +224,13 @@ const translations = {
       missing: 'mancanti',
       doubles: 'doppi',
     },
+    pwa: {
+      title: 'Installa Surprix',
+      subtitle: 'Tieni sempre la tua collezione a portata di mano e non perderti neanche uno scambio!',
+      step1: "Tocca il tasto Condividi in basso",
+      step2: "Scegli 'Aggiungi alla schermata Home'",
+      cta: 'Ho capito!',
+    },
     cookies: {
       title: 'Chi vuole un biscottino?',
       description: 'Usiamo Google Analytics per capire quali funzionalità sono più usate e rendere Surprix sempre migliore. Nessun dato personale — solo numeri anonimi che ci aiutano a capire cosa funziona e cosa no!',
@@ -465,6 +472,13 @@ const translations = {
       consolidated: 'Consolidated rarity',
       missing: 'missing',
       doubles: 'doubles',
+    },
+    pwa: {
+      title: 'Install Surprix',
+      subtitle: 'Always keep your collection at your fingertips and never miss a trade!',
+      step1: 'Tap the Share button at the bottom',
+      step2: "Choose 'Add to Home Screen'",
+      cta: 'Got it!',
     },
     cookies: {
       title: 'Care for a cookie?',

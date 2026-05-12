@@ -40,7 +40,7 @@ const CookieBanner = () => {
           borderRadius: '16px 16px 0 0',
         }}
       >
-        <Stack direction="row" spacing={2} alignItems="flex-start">
+        <Stack direction="row" spacing={2} sx={{ alignItems: 'flex-start' }}>
           <Box sx={{ fontSize: 40, lineHeight: 1, flexShrink: 0, mt: 0.25 }}>🍪</Box>
           <Box sx={{ flex: 1 }}>
             <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>

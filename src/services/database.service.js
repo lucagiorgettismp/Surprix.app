@@ -4,7 +4,7 @@ import { rtdb } from './firebase'
 const snap2list = (snapshot) => {
   const items = []
   snapshot.forEach((child) => {
-    items.push({ id: child.key, ...child.val() })
+    items.push({ ...child.val(), id: child.key })
   })
   return items
 }

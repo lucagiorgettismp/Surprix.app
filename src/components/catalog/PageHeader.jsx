@@ -34,7 +34,7 @@ const PageHeader = ({ crumbs, title, subtitle, children, backButton }) => {
           px: backButton ? 1 : 2,
           pt: backButton ? 0 : 1.25,
           pb: backButton ? 0 : 1,
-          transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
+          transition: 'opacity 0.2s ease, transform 0.2s ease',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
           pointerEvents: isVisible ? 'auto' : 'none',

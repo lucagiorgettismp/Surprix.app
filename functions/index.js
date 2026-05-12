@@ -3,6 +3,8 @@ const { onRequest, onCall, HttpsError } = require('firebase-functions/v2/https')
 const { defineSecret }      = require('firebase-functions/params')
 const { logger }            = require('firebase-functions')
 const admin                 = require('firebase-admin')
+const fs                    = require('fs')
+const path                  = require('path')
 
 admin.initializeApp({ databaseURL: 'https://collectionhelper.firebaseio.com' })
 const db = admin.database()
@@ -169,24 +171,74 @@ exports.deleteAuthUser = onCall(
 const RTDB_URL    = 'https://collectionhelper.firebaseio.com'
 const HOSTING_URL = 'https://surprix.app'
 
+const TEMPLATE_SVG = fs.readFileSync(path.join(__dirname, 'og_image.svg'), 'utf8')
+const FONT_OPTIONS = {
+  fontFiles: [path.join(__dirname, 'fonts', 'Inter-Bold.ttf')],
+  loadSystemFonts: false,
+  defaultFontFamily: 'Inter',
+}
+
 const escapeHtml = (s) =>
   String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;')
     .replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-const buildOgSvg = (username) => {
-  const len = username.length
-  const fontSize = len <= 8 ? 96 : len <= 12 ? 76 : len <= 16 ? 60 : 46
-  const safe = escapeHtml(username)
-  const subtitleY = 340 + Math.round(fontSize * 0.72) + 14
-  return `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#006972"/>
-  <circle cx="1120" cy="-80" r="300" fill="#00838f" opacity="0.28"/>
-  <circle cx="80" cy="720" r="240" fill="#004A50" opacity="0.35"/>
-  <text x="60" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="26" font-weight="bold" fill="white" opacity="0.55" letter-spacing="6">SURPRIX</text>
-  <text x="60" y="340" font-family="DejaVu Sans,Arial,sans-serif" font-size="${fontSize}" font-weight="bold" fill="white">${safe}</text>
-  <text x="60" y="${subtitleY}" font-family="DejaVu Sans,Arial,sans-serif" font-size="30" fill="white" opacity="0.65">collezionista su Surprix</text>
-  <text x="60" y="600" font-family="DejaVu Sans,Arial,sans-serif" font-size="22" fill="white" opacity="0.4">surprix.app/u/${safe}</text>
-</svg>`
+// Centri X delle 5 uova nel template (sinistra → destra)
+const EGG_CX = [262.32, 370.45, 478.59, 586.72, 694.85]
+const eggPath = (cx) =>
+  `M${cx},322.3c-19.13,0-45.9,28.69-45.9,70.13,0,33.79,20.66,57.38,45.9,57.38s45.9-23.59,45.9-57.38c0-41.44-26.78-70.13-45.9-70.13Z`
+
+const buildEggGroup = (avgRating) => {
+  const score   = avgRating ? parseFloat(avgRating) : 0
+  const rounded = Math.round(score * 2) / 2
+  const label   = avgRating ? avgRating.replace('.', ',') : '0,0'
+
+  const defs = []
+  const eggs = []
+
+  EGG_CX.forEach((cx, i) => {
+    const v      = i + 1
+    const isFull = v <= Math.floor(rounded)
+    const isHalf = v - 0.5 === rounded
+
+    if (isHalf) {
+      defs.push(`<clipPath id="ehalf${i}"><rect x="${cx - 45.9}" y="318" width="45.9" height="135"/></clipPath>`)
+      eggs.push(`<path d="${eggPath(cx)}" fill="#fff" opacity="0.18" stroke="#fff" stroke-miterlimit="10" stroke-width="1.84"/>`)
+      eggs.push(`<path d="${eggPath(cx)}" fill="#FAAF00" clip-path="url(#ehalf${i})"/>`)
+    } else {
+      const color = isFull ? '#FAAF00' : '#fff'
+      const op    = isFull ? '1' : '0.18'
+      eggs.push(`<path d="${eggPath(cx)}" fill="${color}" opacity="${op}" stroke="${color}" stroke-miterlimit="10" stroke-width="1.84"/>`)
+    }
+  })
+
+  const defsBlock  = defs.length ? `<defs>${defs.join('')}</defs>\n    ` : ''
+  const scoreText  =
+    `<text transform="translate(770.48 421.25) scale(1.02 1)" fill="#fff" font-family="Inter" font-weight="700">` +
+    `<tspan font-size="96">${label}</tspan>` +
+    `<tspan font-size="48"> /5</tspan></text>`
+
+  return `<g id="og-eggs">\n    ${defsBlock}${scoreText}\n    ${eggs.join('\n    ')}\n  </g>`
+}
+
+const buildOgSvg = (username, avgRating) => {
+  const len      = username.length
+  const fontSize = len <= 8 ? 90 : len <= 12 ? 74 : len <= 16 ? 58 : 44
+  const urlSize  = (len + 14) <= 28 ? 40 : (len + 14) <= 34 ? 34 : 28
+  const safe     = escapeHtml(username)
+
+  return TEMPLATE_SVG
+    .replace(
+      /<text\b[^>]*\bid="og-username"[^>]*>[\s\S]*?<\/text>/,
+      `<text transform="translate(600 268.82) scale(1.02 1)" text-anchor="middle" fill="#fff" font-family="Inter" font-size="${fontSize}" font-weight="700">${safe}</text>`
+    )
+    .replace(
+      /<text\b[^>]*\bid="og-url"[^>]*>[\s\S]*?<\/text>/,
+      `<text transform="translate(600 531.44) scale(1.02 1)" text-anchor="middle" fill="#fff" font-family="Inter" font-size="${urlSize}" font-weight="700">surprix.app/u/${safe}</text>`
+    )
+    .replace(
+      /<g\b[^>]*\bid="og-eggs"[^>]*>[\s\S]*?<\/g>/,
+      buildEggGroup(avgRating)
+    )
 }
 
 exports.profilemeta = onRequest(
@@ -200,10 +252,14 @@ exports.profilemeta = onRequest(
     if (req.path.endsWith('/og.png')) {
       try {
         const { Resvg } = require('@resvg/resvg-js')
-        const svg = buildOgSvg(username)
-        const resvg = new Resvg(svg, {
-          fontDirs: ['/usr/share/fonts', '/usr/share/fonts/truetype', '/usr/share/fonts/truetype/dejavu'],
-        })
+        const feedRes  = await fetch(`${RTDB_URL}/feedback/${username}.json`).catch(() => null)
+        const feedRaw  = feedRes?.ok ? await feedRes.json().catch(() => null) : null
+        const feeds    = feedRaw && typeof feedRaw === 'object' ? Object.values(feedRaw) : []
+        const avgRating = feeds.length > 0
+          ? (feeds.reduce((s, f) => s + (f.rating || 0), 0) / feeds.length).toFixed(1)
+          : null
+        const svg = buildOgSvg(username, avgRating)
+        const resvg = new Resvg(svg, { font: FONT_OPTIONS })
         const png = resvg.render().asPng()
         res.set('Content-Type', 'image/png')
         res.set('Cache-Control', 'public, max-age=86400')
@@ -236,11 +292,9 @@ exports.profilemeta = onRequest(
     const missingCount = missingRaw && typeof missingRaw === 'object' ? Object.keys(missingRaw).length : null
 
     const title = escapeHtml(`${username} — Surprix`)
-    const descParts = profile ? [
-      `Scopri la collezione di ${username} su Surprix.`,
-      missingCount != null ? `${missingCount} mancanti` : null,
-      avgRating ? `Punteggio: ${avgRating}/5 (${feedbacks.length} ${feedbacks.length === 1 ? 'recensione' : 'recensioni'})` : null,
-    ].filter(Boolean) : ['Tieni in ordine le tue collezioni di sorprese Kinder.']
+    const descParts = profile
+      ? [`Discover ${username}'s surprise collection on Surprix.`]
+      : ['Keep track of your surprise collection on Surprix.']
     const desc  = escapeHtml(descParts.join(' • '))
     const ogImg = `${HOSTING_URL}/u/${username}/og.png`
 
