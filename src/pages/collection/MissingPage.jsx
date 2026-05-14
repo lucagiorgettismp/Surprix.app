@@ -12,6 +12,7 @@ import { useCollectionFilter } from '../../hooks/useCollectionFilter'
 import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
+import { celebrateSeries } from '../../utils/confetti'
 import { getCategoryLabel } from '../../utils/locale'
 import { trackSearch, trackFilter } from '../../services/analytics.service'
 
@@ -39,8 +40,12 @@ const MissingPage = () => {
 
   const handleRemove = async (item) => {
     const index = missing.findIndex((m) => m.id === item.id)
-    await toggleMissing(item)
-    showUndo(t.undo.removedFromMissing, () => toggleMissing(item, index))
+    const result = await toggleMissing(item)
+    if (result?.seriesCompleted) celebrateSeries()
+    showUndo(
+      result?.seriesCompleted ? t.undo.seriesCompleted(result.setName) : t.undo.removedFromMissing,
+      () => toggleMissing(item, index)
+    )
   }
   const [anchorEl, setAnchorEl] = useState(null)
   const { filtered, search, setSearch, selected, toggleFilter, clearFilters, activeCount, options } = useCollectionFilter(missing)

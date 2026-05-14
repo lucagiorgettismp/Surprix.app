@@ -138,6 +138,7 @@ const translations = {
       reportIssue: 'Segnala un problema',
     },
     undo: {
+      seriesCompleted: (name) => `Serie completata: ${name}`,
       addedToMissing: 'Aggiunto ai mancanti',
       removedFromMissing: 'Rimosso dai mancanti',
       addedToDoubles: 'Aggiunto ai doppi',
@@ -408,6 +409,7 @@ const translations = {
       reportIssue: 'Report an issue',
     },
     undo: {
+      seriesCompleted: (name) => `Series completed: ${name}`,
       addedToMissing: 'Added to missing',
       removedFromMissing: 'Removed from missing',
       addedToDoubles: 'Added to doubles',

@@ -18,8 +18,9 @@ const MESSAGES_TOP = { xs: 'calc(112px + env(safe-area-inset-top))', sm: 'calc(1
 
 const ChatPage = () => {
   const { chatId } = useParams()
-  const { state } = useLocation()
+  const { state, key } = useLocation()
   const navigate = useNavigate()
+  const canGoBack = key !== 'default'
   const { username, setActiveChatId, chats } = useCollection()
   const t = useT()
   const theme = useTheme()
@@ -121,7 +122,7 @@ const ChatPage = () => {
         px: 1,
         zIndex: 10,
       }}>
-        <IconButton onClick={() => navigate('/chat')}>
+        <IconButton onClick={() => canGoBack ? navigate(-1) : navigate('/chat')}>
           <ArrowBackIcon />
         </IconButton>
         <Avatar sx={{ width: 34, height: 34, bgcolor: theme.palette.secondary.container, color: theme.palette.secondary.onContainer, fontWeight: 700, fontSize: '0.95rem' }}>

@@ -21,6 +21,7 @@ import { useCollection } from '../../store/CollectionContext'
 import { useLanguage, useT } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
 import { trackLightbox, trackSelectMode, trackAddSelected } from '../../services/analytics.service'
+import { celebrateSeries } from '../../utils/confetti'
 
 const GRID_SX = {
   display: 'grid',
@@ -87,8 +88,12 @@ const SurprisesPage = () => {
   const handleToggleMissing = async (s) => {
     const wasIn = missing.some((m) => m.id === s.id)
     const index = wasIn ? missing.findIndex((m) => m.id === s.id) : -1
-    await toggleMissing(s)
-    showUndo(wasIn ? t.undo.removedFromMissing : t.undo.addedToMissing, () => toggleMissing(s, index))
+    const result = await toggleMissing(s)
+    if (result?.seriesCompleted) celebrateSeries()
+    showUndo(
+      result?.seriesCompleted ? t.undo.seriesCompleted(result.setName) : wasIn ? t.undo.removedFromMissing : t.undo.addedToMissing,
+      () => toggleMissing(s, index)
+    )
     if (!wasIn && doubles.some((d) => d.id === s.id)) showWarning(t.undo.bothListsWarning)
   }
 
@@ -231,7 +236,7 @@ const SurprisesPage = () => {
                     />
                   </Box>
                 </Box>
-                <Stack direction="column" alignItems="center" justifyContent="center" sx={{ gap: 0.25, flexShrink: 0, pr: 0.5 }}>
+                <Stack direction="column" sx={{ alignItems: 'center', justifyContent: 'center', gap: 0.25, flexShrink: 0, pr: 0.5 }}>
                   <IconButton size="small" color="warning" onClick={() => handleToggleMissing(s)}>
                     {isMissing ? <StarIcon fontSize="small" /> : <StarBorderIcon fontSize="small" />}
                   </IconButton>

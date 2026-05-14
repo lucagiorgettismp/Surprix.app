@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { Box, List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, CircularProgress, ListItemButton } from '@mui/material'
+import { Box, List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, ListItemButton } from '@mui/material'
 import { getOwnersForSurprise, getFeedbackFor } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
 import { getCountryName } from '../../utils/locale'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
+import SkeletonList from '../../components/common/SkeletonList'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import PageHeader from '../../components/catalog/PageHeader'
 import RatingBadge from '../../components/feedback/RatingBadge'
@@ -55,7 +56,7 @@ const MissingOwnersPage = () => {
     { label: surpriseLabel, path: '' },
   ]
 
-  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', pt: 8 }}><CircularProgress /></Box>
+  if (loading) return <><PageHeader crumbs={crumbs} title={t.trade.ownersTitle} backButton /><SkeletonList rows={4} /></>
   if (error) return <ErrorMessage message={error.message} />
 
   return (
@@ -80,6 +81,7 @@ const MissingOwnersPage = () => {
                         ownerUsername: owner.username,
                         missingIds: missing.map((m) => m.id),
                         surpriseLabel,
+                        surpriseId,
                       },
                     })
                   }

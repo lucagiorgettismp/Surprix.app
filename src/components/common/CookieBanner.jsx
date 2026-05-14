@@ -52,7 +52,7 @@ const CookieBanner = () => {
                 {t.cookies.learnMore}
               </a>
             </Typography>
-            <Stack direction="row" spacing={1} justifyContent="flex-end">
+            <Stack direction="row" spacing={1} sx={{ justifyContent: 'flex-end' }}>
               <Button size="small" variant="outlined" color="inherit" onClick={reject}>
                 {t.cookies.reject}
               </Button>

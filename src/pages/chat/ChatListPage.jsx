@@ -6,6 +6,7 @@ import { deleteChatForUser } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
 import { useT } from '../../store/LanguageContext'
 import EmptyState from '../../components/common/EmptyState'
+import SkeletonList from '../../components/common/SkeletonList'
 import ForumIcon from '@mui/icons-material/Forum'
 
 const TOPBAR_H = { xs: 'calc(56px + env(safe-area-inset-top))', sm: 'calc(64px + env(safe-area-inset-top))' }
@@ -68,7 +69,7 @@ const ChatListPage = () => {
       <Box sx={{ height: PAGE_HEADER_H, mb: 1 }} />
 
       {chats === null
-        ? <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4 }}><CircularProgress /></Box>
+        ? <SkeletonList rows={5} />
         : !chats.length
           ? <EmptyState icon={ForumIcon} message={t.chat.noChats} hint={t.chat.noChatsHint} />
           : (

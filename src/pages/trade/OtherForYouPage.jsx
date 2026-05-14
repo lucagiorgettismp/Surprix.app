@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import { Box, List, CircularProgress, Button } from '@mui/material'
+import { Box, List, Button } from '@mui/material'
 import { ChatBubbleOutlined as ChatBubbleOutlineIcon, PersonOutlined as PersonOutlinedIcon } from '@mui/icons-material'
 import { getOtherSurprisesForYou, getChatId } from '../../services/database.service'
 import { useT } from '../../store/LanguageContext'
 import { useCollection } from '../../store/CollectionContext'
 import ErrorMessage from '../../components/common/ErrorMessage'
 import EmptyState from '../../components/common/EmptyState'
+import SkeletonList from '../../components/common/SkeletonList'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import CollectionItem from '../../components/lists/CollectionItem'
 import PageHeader from '../../components/catalog/PageHeader'
@@ -17,6 +18,7 @@ const OtherForYouPage = () => {
   const navigate = useNavigate()
   const missingIds = state?.missingIds || []
   const surpriseLabel = state?.surpriseLabel
+  const surpriseId = state?.surpriseId
   const t = useT()
   const { username, producerColors } = useCollection()
 
@@ -33,7 +35,7 @@ const OtherForYouPage = () => {
 
   const crumbs = [
     { label: t.missing.title, path: '/missing' },
-    { label: surpriseLabel || '...', path: -1 },
+    { label: surpriseLabel || '...', path: surpriseId ? `/missing-owners/${surpriseId}` : '/missing' },
     { label: ownerUsername, path: '' },
   ]
 
@@ -43,7 +45,7 @@ const OtherForYouPage = () => {
     navigate(`/chat/${chatId}`, { state: { with: ownerUsername, initialText } })
   }
 
-  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', pt: 8 }}><CircularProgress /></Box>
+  if (loading) return <><PageHeader crumbs={crumbs} title={t.trade.otherTitle(ownerUsername)} backButton /><SkeletonList rows={4} hasAvatar={false} /></>
   if (error) return <ErrorMessage message={error.message} />
 
   return (

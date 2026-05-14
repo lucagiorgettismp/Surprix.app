@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { Box, Avatar, Typography, CircularProgress, Button, Divider, Paper, IconButton } from '@mui/material'
+import { Box, Avatar, Typography, CircularProgress, Button, Divider, Paper, IconButton, Skeleton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ShareIcon from '@mui/icons-material/Share'
@@ -112,8 +112,36 @@ const PublicProfilePage = () => {
   })
 
   if (loading) return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', pt: 10 }}>
-      <CircularProgress />
+    <Box sx={{ maxWidth: { xs: 600, md: 980 }, mx: 'auto', px: 2, mt: 1 }}>
+      <Box sx={{ display: { md: 'grid' }, gridTemplateColumns: { md: '300px 1fr' }, gap: { md: 3 } }}>
+        <Paper elevation={0} sx={{ p: 3, mb: 2, borderRadius: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Skeleton variant="circular" width={56} height={56} />
+            <Box sx={{ flex: 1 }}>
+              <Skeleton variant="text" width="60%" height={24} />
+              <Skeleton variant="text" width="40%" height={18} />
+            </Box>
+          </Box>
+          <Skeleton variant="rectangular" height={100} sx={{ borderRadius: 2, mb: 2 }} />
+          <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+            <Skeleton variant="rectangular" sx={{ flex: 1, height: 60, borderRadius: 2 }} />
+            <Skeleton variant="rectangular" sx={{ flex: 1, height: 60, borderRadius: 2 }} />
+          </Box>
+          <Skeleton variant="rectangular" height={32} sx={{ borderRadius: 1 }} />
+        </Paper>
+        <Box>
+          <Skeleton variant="rectangular" height={44} sx={{ borderRadius: 3, mb: 2 }} />
+          {[1,2,3,4].map(i => (
+            <Box key={i} sx={{ display: 'flex', gap: 2, mb: 1.5, alignItems: 'center' }}>
+              <Skeleton variant="rectangular" width={60} height={72} sx={{ borderRadius: 1, flexShrink: 0 }} />
+              <Box sx={{ flex: 1 }}>
+                <Skeleton variant="text" width="40%" height={18} />
+                <Skeleton variant="text" width="65%" height={14} />
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Box>
   )
 

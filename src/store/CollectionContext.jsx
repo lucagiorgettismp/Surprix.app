@@ -192,8 +192,13 @@ export const CollectionProvider = ({ children }) => {
     if (!username) return
     const exists = missingRef.current.find((m) => m.id === surprise.id)
     let newMissing
+    let seriesCompleted = false
     if (exists) {
       newMissing = missingRef.current.filter((m) => m.id !== surprise.id)
+      const setId = surprise.set_id
+if (setId && !newMissing.some((m) => m.set_id === setId)) {
+        seriesCompleted = true
+      }
       trackToggleMissing('remove')
     } else {
       if (insertAtIndex >= 0 && insertAtIndex < missingRef.current.length) {
@@ -209,10 +214,10 @@ export const CollectionProvider = ({ children }) => {
     try {
       if (exists) await removeMissing(username, surprise.id)
       else await addMissing(username, surprise.id, sortCode(surprise))
-
     } catch (err) {
       console.error('Error toggling missing:', err)
     }
+    return { seriesCompleted, setName: surprise.set_name || surprise.set_id || '' }
   }, [username])
 
   const addAllMissing = async (surprises) => {
