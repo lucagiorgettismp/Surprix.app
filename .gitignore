@@ -42,3 +42,6 @@ pnpm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated marketing screenshots
+fake-screens-export/

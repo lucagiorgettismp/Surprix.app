@@ -17,7 +17,7 @@ import {
 import { trackToggleMissing, trackToggleDoubles, trackAddAllMissing } from '../services/analytics.service'
 import { cacheData, getCachedData } from '../utils/dataCache'
 
-const CollectionContext = createContext(null)
+export const CollectionContext = createContext(null)
 
 const sortCode = (surprise) =>
   surprise.isSet_effective_code ? surprise.code : `ZZZ_${surprise.id}`

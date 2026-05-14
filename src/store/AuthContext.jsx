@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../services/firebase'
 
-const AuthContext = createContext(null)
+export const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
   // undefined = still loading, null = not logged in, object = logged in

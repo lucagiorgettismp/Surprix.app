@@ -10,12 +10,12 @@
       }
     },
     "producers": {
-      ".read": "auth !== null",
+      ".read": true,
       ".write": "root.child('uids').child(auth.uid).child('admin').exists()",
       ".indexOn": ["order"]
     },
     "sets": {
-      ".read": "auth !== null",
+      ".read": true,
       ".write": "root.child('uids').child(auth.uid).child('admin').exists()",
       ".indexOn": ["year_id"]
     },

@@ -25,6 +25,7 @@ const PublicProfilePage  = lazy(() => import('../pages/public/PublicProfilePage'
 const PrivacyPage        = lazy(() => import('../pages/public/PrivacyPage'))
 const ChatListPage       = lazy(() => import('../pages/chat/ChatListPage'))
 const ChatPage           = lazy(() => import('../pages/chat/ChatPage'))
+const FakeScreensRoot    = import.meta.env.DEV ? lazy(() => import('../pages/fake-screens/FakeScreensRoot')) : null
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth()
@@ -48,6 +49,7 @@ const AppRouter = () => (
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/u/:username" element={<PublicProfilePage />} />
+        {FakeScreensRoot && <Route path="/fake-screens/*" element={<FakeScreensRoot />} />}
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route
