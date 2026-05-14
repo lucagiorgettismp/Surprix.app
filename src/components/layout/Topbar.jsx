@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Button, Divider, Stack } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Button, Divider } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate, useLocation } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
@@ -13,7 +13,6 @@ import { useT } from '../../store/LanguageContext'
 import { logout } from '../../services/auth.service'
 import useDatabaseQuery from '../../hooks/useDatabaseQuery'
 import { getStats } from '../../services/database.service'
-import StatCounter from '../common/StatCounter'
 
 const Topbar = () => {
   const { user } = useAuth()
@@ -57,14 +56,6 @@ const Topbar = () => {
               </Avatar>
             </IconButton>
             <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
-              <Box sx={{ px: 1.5, pt: 1, pb: 0.5 }}>
-                <Stack direction="row" spacing={1} sx={{ minWidth: 210 }}>
-                  <StatCounter value={stats?.surprises ?? null} label={t.landing.statsSurprises} primary />
-                  <StatCounter value={stats?.sets ?? null}      label={t.landing.statsSeries}    primary />
-                  <StatCounter value={stats?.users ?? null}     label={t.landing.statsUsers}     primary />
-                </Stack>
-              </Box>
-              <Divider sx={{ my: 0.5 }} />
               <MenuItem onClick={() => { handleClose(); navigate(`/u/${username}`) }}>
                 <PersonOutlinedIcon fontSize="small" sx={{ mr: 1.5, color: 'text.secondary' }} />{t.nav.viewProfile}
               </MenuItem>
@@ -74,6 +65,30 @@ const Topbar = () => {
               <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>
                 <LogoutIcon fontSize="small" sx={{ mr: 1.5 }} />{t.profile.logout}
               </MenuItem>
+              {stats && (
+                <>
+                  <Divider sx={{ my: 0.5 }} />
+                  <Box sx={{ mx: 1, my: 0.5, px: 1.5, py: 1.25, borderRadius: 2, bgcolor: 'action.hover' }}>
+                    <Typography variant="caption" fontWeight={700} color="text.disabled" sx={{ textTransform: 'uppercase', letterSpacing: 1.2, fontSize: '0.62rem' }}>
+                      {t.landing.statsTitle}
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, mt: 0.75 }}>
+                      {[
+                        { value: stats.surprises, label: t.landing.statsSurprises },
+                        { value: stats.sets,      label: t.landing.statsSeries },
+                        { value: stats.users,     label: t.landing.statsUsers },
+                      ].map(({ value, label }) => (
+                        <Box key={label} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 2 }}>
+                          <Typography variant="caption" color="text.secondary">{label}</Typography>
+                          <Typography variant="caption" fontWeight={700} color="text.primary">
+                            {value?.toLocaleString('it-IT')}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+                </>
+              )}
             </Menu>
           </>
         ) : (

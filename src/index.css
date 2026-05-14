@@ -1,15 +1,21 @@
 *, *::before, *::after {
   box-sizing: border-box;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  cursor: default !important;
 }
 
 body {
   margin: 0;
   padding: 0;
-  -webkit-user-select: none;
-  user-select: none;
+}
+
+button, a, [role="button"], .MuiButtonBase-root {
+  cursor: pointer !important;
 }
 
 input, textarea, [contenteditable] {
-  -webkit-user-select: text;
-  user-select: text;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  cursor: text !important;
 }

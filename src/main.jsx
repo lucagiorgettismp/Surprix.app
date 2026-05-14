@@ -1,6 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+document.addEventListener('mousedown', (e) => {
+  if (!e.target.closest('input, textarea, select, [contenteditable], [data-selectable]')) {
+    e.preventDefault()
+  }
+})
+
 if ('serviceWorker' in navigator) {
   if (import.meta.env.PROD) {
     window.addEventListener('load', () => {

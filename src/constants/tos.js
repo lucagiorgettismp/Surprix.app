@@ -20,7 +20,7 @@ const TOS_IT = `
 </ul>
 
 <div><strong>5. Contenuto del catalogo</strong></div>
-<div>Le immagini, i nomi e i marchi delle sorprese presenti nel catalogo appartengono ai rispettivi produttori e detentori dei diritti. Surprix non rivendica alcuna proprietà su tali contenuti, che vengono utilizzati esclusivamente a scopo informativo e collezionistico.</div>
+<div>Le immagini, i nomi e i marchi delle sorprese appartengono ai rispettivi produttori e detentori dei diritti. Surprix non è affiliata con alcun brand e non ne rivendica la proprietà. Le immagini presenti nel catalogo sono state raccolte e organizzate da Surprix: è vietata la loro estrazione, riproduzione o utilizzo al di fuori dell'app senza autorizzazione.</div>
 
 <div><strong>6. Limitazione di responsabilità</strong></div>
 <div>Surprix è fornita "così com'è", senza garanzie di alcun tipo. Il titolare non è responsabile per eventuali danni derivanti dall'uso o dall'impossibilità di utilizzare il servizio, dalla perdita di dati o da interruzioni del servizio.</div>
@@ -60,7 +60,7 @@ const TOS_EN = `
 </ul>
 
 <div><strong>5. Catalogue content</strong></div>
-<div>Images, names and trademarks of surprises in the catalogue belong to their respective manufacturers and rights holders. Surprix does not claim any ownership of such content, which is used solely for informational and collecting purposes.</div>
+<div>Images, names and trademarks of surprises belong to their respective manufacturers and rights holders. Surprix is not affiliated with any brand and does not claim ownership thereof. The images in the catalogue have been collected and organised by Surprix: extraction, reproduction or use outside the app without authorisation is prohibited.</div>
 
 <div><strong>6. Limitation of liability</strong></div>
 <div>Surprix is provided "as is", without warranties of any kind. The owner is not liable for any damages arising from the use or inability to use the service, data loss, or service interruptions.</div>

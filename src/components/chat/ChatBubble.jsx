@@ -117,7 +117,7 @@ const ChatBubble = ({ message, isOwn, onDelete, showAvatar }) => {
             userSelect: 'none',
           }}
         >
-          <Typography variant="body2" sx={{ color: isOwn ? bubbleFg : 'text.primary', wordBreak: 'break-word', whiteSpace: 'pre-wrap', userSelect: 'text', WebkitUserSelect: 'text' }}>
+          <Typography data-selectable variant="body2" sx={{ color: isOwn ? bubbleFg : 'text.primary', wordBreak: 'break-word', whiteSpace: 'pre-wrap', userSelect: 'text', WebkitUserSelect: 'text' }}>
             {message.text}
           </Typography>
           <Typography variant="caption" sx={{ color: isOwn ? alpha(bubbleFg, 0.6) : 'text.disabled', display: 'block', textAlign: 'right', mt: 0.25 }}>
