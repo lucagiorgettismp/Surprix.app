@@ -4,6 +4,7 @@ import { Box, IconButton, CircularProgress, Avatar, Typography, Paper } from '@m
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import SendIcon from '@mui/icons-material/Send'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { useTheme } from '@mui/material/styles'
 import { getMessages, sendMessage, markAsRead, deleteMessage } from '../../services/database.service'
 import { useCollection } from '../../store/CollectionContext'
@@ -144,6 +145,10 @@ const ChatPage = () => {
         </Box>
       ) : (
         <Box sx={{ position: 'fixed', top: MESSAGES_TOP, bottom: INPUT_H, left: 0, right: 0, overflowY: 'auto', px: 2, pt: 1 }}>
+          <Paper elevation={0} sx={{ display: 'flex', gap: 1, alignItems: 'flex-start', px: 1.5, py: 1.25, mb: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+            <InfoOutlinedIcon sx={{ fontSize: 16, mt: 0.2, flexShrink: 0, color: 'text.secondary' }} />
+            <Typography variant="caption" color="text.secondary">{t.chat.disclaimer}</Typography>
+          </Paper>
           {(chats !== null && !chats.some(c => c.chatId === chatId) ? [] : messages).map((msg, i) => (
             <ChatBubble
               key={msg.id}

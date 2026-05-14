@@ -9,7 +9,7 @@ const EggFilled = (props) => (
   </SvgIcon>
 )
 
-const EggOutline = (props) => (
+export const EggOutline = (props) => (
   <SvgIcon {...props} viewBox="0 0 24 24">
     <path d={EGG_PATH} fill="none" stroke="currentColor" strokeWidth="1.5" />
   </SvgIcon>

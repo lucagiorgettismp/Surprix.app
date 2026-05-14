@@ -237,6 +237,22 @@ export const deleteChatForUser = async (username, chatId, otherUsername) => {
   }
 }
 
+// --- Stats ---
+
+const DB_URL = import.meta.env.VITE_FIREBASE_DATABASE_URL
+
+const countNode = (node) =>
+  fetch(`${DB_URL}/${node}.json?shallow=true`)
+    .then((r) => r.json())
+    .then((data) => (data ? Object.keys(data).length : 0))
+
+export const getStats = () =>
+  Promise.all([
+    countNode('surprises'),
+    countNode('sets'),
+    countNode('users'),
+  ]).then(([surprises, sets, users]) => ({ surprises, sets, users }))
+
 // --- Search ---
 
 export const fetchAllSurprises = () => get(ref(rtdb, 'surprises')).then(snap2list)

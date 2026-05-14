@@ -1,8 +1,7 @@
 import { Avatar, Box, Paper, Typography, IconButton } from '@mui/material'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import StarBorderIcon from '@mui/icons-material/StarBorder'
 import { useT } from '../../store/LanguageContext'
-import EggRating from './EggRating'
+import EggRating, { EggOutline } from './EggRating'
 import EmptyState from '../common/EmptyState'
 
 const FeedbackList = ({ feedbacks, limit, myUsername, onEdit }) => {
@@ -10,7 +9,7 @@ const FeedbackList = ({ feedbacks, limit, myUsername, onEdit }) => {
   const items = limit ? feedbacks.slice(0, limit) : feedbacks
 
   if (!items.length) return (
-    <EmptyState icon={StarBorderIcon} message={t.feedback.noFeedback} hint={t.feedback.noFeedbackHint} />
+    <EmptyState icon={EggOutline} message={t.feedback.noFeedback} hint={t.feedback.noFeedbackHint} />
   )
 
   return (

@@ -6,6 +6,24 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ShareIcon from '@mui/icons-material/Share'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import ChatBubbleOutlinedIcon from '@mui/icons-material/ChatBubbleOutlined'
+import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import StarIcon from '@mui/icons-material/Star'
+import DifferenceIcon from '@mui/icons-material/Difference'
+import { SvgIcon } from '@mui/material'
+
+const EGG_PATH = 'M 14.4 2 C 11.4 2 7.2 6.5 7.2 13 c 0 5.3 3.24 9 7.2 9 s 7.2 -3.7 7.2 -9 c 0 -6.5 -4.2 -11 -7.2 -11 z'
+const EggOutlineIcon = (props) => (
+  <SvgIcon {...props} viewBox="0 0 24 24">
+    <path d={EGG_PATH} fill="none" stroke="currentColor" strokeWidth="2" />
+  </SvgIcon>
+)
+const EggFilledIcon = (props) => (
+  <SvgIcon {...props} viewBox="0 0 24 24">
+    <path d={EGG_PATH} />
+  </SvgIcon>
+)
 import Topbar from '../../components/layout/Topbar'
 import PublicFooter from '../../components/layout/PublicFooter'
 import { getUserProfile, getPublicMissing, getPublicDoubles, getFeedbackFor, getChatId } from '../../services/database.service'
@@ -183,11 +201,11 @@ const PublicProfilePage = () => {
         </Box>
 
         {isLoggedIn && !isSelf && (
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            <Button size="small" variant="outlined" onClick={() => navigate(`/chat/${getChatId(myUsername, profileUsername)}`, { state: { with: profileUsername } })}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Button size="small" variant="outlined" fullWidth startIcon={<ChatBubbleOutlinedIcon />} onClick={() => navigate(`/chat/${getChatId(myUsername, profileUsername)}`, { state: { with: profileUsername } })}>
               {t.chat.startChat}
             </Button>
-            <Button size="small" variant="outlined" onClick={() => setFeedbackOpen(true)}>
+            <Button size="small" variant="outlined" fullWidth startIcon={<EggFilledIcon />} onClick={() => setFeedbackOpen(true)}>
               {t.feedback.title}
             </Button>
           </Box>
@@ -206,10 +224,12 @@ const PublicProfilePage = () => {
       {/* Tabs */}
       <Paper elevation={0} sx={{ borderRadius: 3, p: 0.5, mb: 2, display: 'flex', gap: 0.5 }}>
         {[
-          `${t.missing.title} (${missing.length})`,
-          `${t.doubles.title} (${doubles.length})`,
-          `${t.feedback.reviews} (${feedbacks.length})`,
-        ].map((label, i) => (
+          { label: `${t.missing.title} (${missing.length})`,      IconOff: StarBorderIcon,       IconOn: StarIcon },
+          { label: `${t.doubles.title} (${doubles.length})`,      IconOff: DifferenceOutlinedIcon, IconOn: DifferenceIcon },
+          { label: `${t.feedback.reviews} (${feedbacks.length})`, IconOff: EggOutlineIcon,       IconOn: EggFilledIcon },
+        ].map(({ label, IconOff, IconOn }, i) => {
+          const Icon = tab === i ? IconOn : IconOff
+          return (
           <Box
             key={i}
             onClick={() => setTab(i)}
@@ -223,13 +243,19 @@ const PublicProfilePage = () => {
               cursor: 'pointer',
               transition: 'background-color 0.2s',
               userSelect: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 0.25,
             }}
           >
+            <Icon sx={{ fontSize: 16 }} />
             <Typography variant="caption" sx={{ fontWeight: tab === i ? 700 : 400 }}>
               {label}
             </Typography>
           </Box>
-        ))}
+          )
+        })}
       </Paper>
 
       {tab === 0 && (

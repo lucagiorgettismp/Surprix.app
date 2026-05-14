@@ -7,6 +7,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner'
 import { usePageTracking } from '../hooks/usePageTracking'
 import IosPwaPrompt from '../components/common/IosPwaPrompt'
 
+const LandingPage       = lazy(() => import('../pages/public/LandingPage'))
 const LoginPage         = lazy(() => import('../pages/auth/LoginPage'))
 const SignUpPage        = lazy(() => import('../pages/auth/SignUpPage'))
 const OnboardingPage    = lazy(() => import('../pages/auth/OnboardingPage'))
@@ -37,6 +38,16 @@ const PrivateRoute = ({ children }) => {
   return children
 }
 
+const HomeRoute = () => {
+  const { user } = useAuth()
+  const { username, loading } = useCollection()
+
+  if (user === undefined || loading || username === undefined) return <LoadingSpinner fullScreen />
+  if (user && username) return <Navigate to="/missing" replace />
+  if (user && !username) return <Navigate to="/onboarding" replace />
+  return <LandingPage />
+}
+
 const PageTracker = () => { usePageTracking(); return null }
 
 const AppRouter = () => (
@@ -45,35 +56,28 @@ const AppRouter = () => (
     <IosPwaPrompt />
     <Suspense fallback={<LoadingSpinner fullScreen />}>
       <Routes>
+        <Route path="/" element={<HomeRoute />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/u/:username" element={<PublicProfilePage />} />
         {FakeScreensRoot && <Route path="/fake-screens/*" element={<FakeScreensRoot />} />}
         <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <AppLayout />
-            </PrivateRoute>
-          }
-        >
-          <Route index element={<Navigate to="/missing" replace />} />
-          <Route path="catalog" element={<ProducersPage />} />
-          <Route path="catalog/:producerId" element={<YearsPage />} />
-          <Route path="catalog/:producerId/:yearId" element={<SetsPage />} />
-          <Route path="catalog/:producerId/:yearId/:setId" element={<SurprisesPage />} />
-          <Route path="missing" element={<MissingPage />} />
-          <Route path="missing-owners/:surpriseId" element={<MissingOwnersPage />} />
-          <Route path="other-for-you/:ownerUsername" element={<OtherForYouPage />} />
-          <Route path="doubles" element={<DoublesPage />} />
-          <Route path="settings" element={<ProfilePage />} />
-          <Route path="search" element={<SearchPage />} />
-          <Route path="chat" element={<ChatListPage />} />
-          <Route path="chat/:chatId" element={<ChatPage />} />
+        <Route element={<PrivateRoute><AppLayout /></PrivateRoute>}>
+          <Route path="/catalog" element={<ProducersPage />} />
+          <Route path="/catalog/:producerId" element={<YearsPage />} />
+          <Route path="/catalog/:producerId/:yearId" element={<SetsPage />} />
+          <Route path="/catalog/:producerId/:yearId/:setId" element={<SurprisesPage />} />
+          <Route path="/missing" element={<MissingPage />} />
+          <Route path="/missing-owners/:surpriseId" element={<MissingOwnersPage />} />
+          <Route path="/other-for-you/:ownerUsername" element={<OtherForYouPage />} />
+          <Route path="/doubles" element={<DoublesPage />} />
+          <Route path="/settings" element={<ProfilePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/chat" element={<ChatListPage />} />
+          <Route path="/chat/:chatId" element={<ChatPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   </BrowserRouter>

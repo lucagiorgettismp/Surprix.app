@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Box, Typography, Link } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined'
 import { useT } from '../../store/LanguageContext'
 import PolicyDialog from '../common/PolicyDialog'
 import TosDialog from '../common/TosDialog'
-import { FACEBOOK_URL, CONTACT_EMAIL } from '../../constants'
+import { FACEBOOK_URL, CONTACT_EMAIL, COFFEE_URL } from '../../constants'
 
 const PublicFooter = () => {
   const t = useT()
@@ -29,6 +30,10 @@ const PublicFooter = () => {
         <Link component="button" variant="caption" color="text.secondary" underline="hover"
           onClick={() => { window.location.href = `mailto:${CONTACT_EMAIL}?subject=${reportSubject}` }}>
           {t.common.reportIssue}
+        </Link>
+        <Link href={COFFEE_URL} target="_blank" rel="noopener noreferrer" variant="caption" color="text.secondary" underline="hover" sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+          <LocalCafeOutlinedIcon sx={{ fontSize: 14 }} />
+          {t.landing.coffee}
         </Link>
       </Box>
       <Typography variant="caption" color="text.disabled">

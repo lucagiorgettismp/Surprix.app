@@ -1,13 +1,19 @@
 import { useState } from 'react'
-import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Button } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography, IconButton, Avatar, Menu, MenuItem, Button, Divider, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate, useLocation } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { APP_NAME } from '../../constants'
 import { useAuth } from '../../store/AuthContext'
 import { useCollection } from '../../store/CollectionContext'
 import { useT } from '../../store/LanguageContext'
 import { logout } from '../../services/auth.service'
+import useDatabaseQuery from '../../hooks/useDatabaseQuery'
+import { getStats } from '../../services/database.service'
+import StatCounter from '../common/StatCounter'
 
 const Topbar = () => {
   const { user } = useAuth()
@@ -29,6 +35,7 @@ const Topbar = () => {
 
   const theme = useTheme()
   const initial = (username?.[0] || user?.email?.[0] || '').toUpperCase()
+  const { data: stats } = useDatabaseQuery(getStats, [])
 
   return (
     <AppBar position="fixed" color="default" elevation={0} sx={{ bgcolor: 'background.paper', paddingTop: 'env(safe-area-inset-top)' }}>
@@ -50,9 +57,23 @@ const Topbar = () => {
               </Avatar>
             </IconButton>
             <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
-              <MenuItem onClick={() => { handleClose(); navigate(`/u/${username}`) }}>{t.nav.viewProfile}</MenuItem>
-              <MenuItem onClick={() => { handleClose(); navigate('/settings') }}>{t.nav.settings}</MenuItem>
-              <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>{t.profile.logout}</MenuItem>
+              <Box sx={{ px: 1.5, pt: 1, pb: 0.5 }}>
+                <Stack direction="row" spacing={1} sx={{ minWidth: 210 }}>
+                  <StatCounter value={stats?.surprises ?? null} label={t.landing.statsSurprises} primary />
+                  <StatCounter value={stats?.sets ?? null}      label={t.landing.statsSeries}    primary />
+                  <StatCounter value={stats?.users ?? null}     label={t.landing.statsUsers}     primary />
+                </Stack>
+              </Box>
+              <Divider sx={{ my: 0.5 }} />
+              <MenuItem onClick={() => { handleClose(); navigate(`/u/${username}`) }}>
+                <PersonOutlinedIcon fontSize="small" sx={{ mr: 1.5, color: 'text.secondary' }} />{t.nav.viewProfile}
+              </MenuItem>
+              <MenuItem onClick={() => { handleClose(); navigate('/settings') }}>
+                <SettingsOutlinedIcon fontSize="small" sx={{ mr: 1.5, color: 'text.secondary' }} />{t.nav.settings}
+              </MenuItem>
+              <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>
+                <LogoutIcon fontSize="small" sx={{ mr: 1.5 }} />{t.profile.logout}
+              </MenuItem>
             </Menu>
           </>
         ) : (
