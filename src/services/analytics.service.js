@@ -29,6 +29,20 @@ export const trackPage = (pathname) => {
   })
 }
 
+const getAppMode = () => {
+  if (document.referrer.startsWith('android-app://')) return 'twa'
+  if (window.matchMedia('(display-mode: standalone)').matches) return 'pwa'
+  return 'browser'
+}
+
+export const setAppModeProperty = () => {
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('set', 'user_properties', { app_mode: getAppMode() })
+    }
+  } catch {}
+}
+
 export const trackToggleMissing = (action)        => track('toggle_missing', { action })
 export const trackToggleDoubles = (action)         => track('toggle_doubles', { action })
 export const trackAddAllMissing = (count)          => track('add_all_missing', { count })
@@ -39,3 +53,4 @@ export const trackAddSelected   = (count, page)    => track('confirm_add_selecte
 export const trackSearch        = (page)           => track('use_search', { page })
 export const trackFilter        = (page)           => track('use_filter', { page })
 export const trackTradeEmail    = (itemCount)      => track('send_trade_email', { item_count: itemCount })
+export const trackShareChecklist = (setId)         => track('share_checklist', { set_id: setId })

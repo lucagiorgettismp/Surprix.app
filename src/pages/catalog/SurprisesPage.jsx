@@ -9,6 +9,7 @@ import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import RemoveDoneIcon from '@mui/icons-material/RemoveDone'
 import CloseIcon from '@mui/icons-material/Close'
+import DownloadIcon from '@mui/icons-material/Download'
 import PageHeader from '../../components/catalog/PageHeader'
 import RarityBadge from '../../components/common/RarityBadge'
 import ErrorMessage from '../../components/common/ErrorMessage'
@@ -20,7 +21,7 @@ import { getCountryName, getCategoryLabel } from '../../utils/locale'
 import { useCollection } from '../../store/CollectionContext'
 import { useLanguage, useT } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
-import { trackLightbox, trackSelectMode, trackAddSelected } from '../../services/analytics.service'
+import { trackLightbox, trackSelectMode, trackAddSelected, trackShareChecklist } from '../../services/analytics.service'
 import { celebrateSeries } from '../../utils/confetti'
 
 const GRID_SX = {
@@ -52,7 +53,7 @@ const SurprisesPage = () => {
   const setLabel = state?.setLabel || setId
 
   const theme = useTheme()
-  const { missing, doubles, toggleMissing, toggleDoubles, addAllMissing, producerColors } = useCollection()
+  const { username, missing, doubles, toggleMissing, toggleDoubles, addAllMissing, producerColors } = useCollection()
   const tintAmount = theme.palette.mode === 'dark' ? '8%' : '6%'
   const tintedBg = producerColors[producerId]
     ? `color-mix(in srgb, ${producerColors[producerId]} ${tintAmount}, ${theme.palette.background.paper})`
@@ -64,6 +65,43 @@ const SurprisesPage = () => {
   const [lightboxUrl, setLightboxUrl] = useState(null)
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState(new Set())
+  const [sharing, setSharing] = useState(false)
+
+  // Sempre download (non navigator.share): su Windows lo share nativo funziona
+  // male/e' assente, e su Android condividere la stessa immagine in piu' punti
+  // riavrebbe rigenerato il PNG lato server ad ogni tap. Scaricando una volta,
+  // l'utente ha il file in locale (galleria/Download) e lo condivide da li'
+  // quante volte vuole senza toccare di nuovo il server.
+  const handleDownloadChecklist = async () => {
+    trackShareChecklist(setId)
+    setSharing(true)
+    // Sempre il dominio di produzione: la Cloud Function che genera l'immagine
+    // vive solo li', non ha un equivalente locale su cui puntare in dev.
+    // ?lang= per le scritte incorporate nel PNG (la funzione non ha altro modo
+    // di sapere la lingua scelta dall'utente lato client).
+    const imageUrl = `https://surprix.app/u/${username}/checklist/${setId}.png?lang=${lang}`
+    try {
+      const res = await fetch(imageUrl)
+      if (!res.ok) throw new Error('fetch-failed')
+      const blob = await res.blob()
+      const today = new Date()
+      const dateStamp = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`
+      const safe = (s) => String(s).replace(/[^a-zA-Z0-9_-]/g, '')
+      const fileName = `surprix_${safe(username)}_${safe(setId)}_${dateStamp}.png`
+      const blobUrl = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = blobUrl
+      link.download = fileName
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
+    } catch {
+      window.open(imageUrl, '_blank')
+    } finally {
+      setSharing(false)
+    }
+  }
 
   const toggleSelect = (id) => setSelected((prev) => {
     const next = new Set(prev); next.has(id) ? next.delete(id) : next.add(id); return next
@@ -167,7 +205,7 @@ const SurprisesPage = () => {
       )}
 
       {setImageUrl && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1.5 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, mb: 1.5 }}>
           <Box
             component="img"
             src={setImageUrl}
@@ -176,6 +214,17 @@ const SurprisesPage = () => {
             onContextMenu={(e) => e.preventDefault()}
             sx={{ maxWidth: '100%', maxHeight: 220, borderRadius: 2, display: 'block' }}
           />
+          {username && (
+            <Button
+              size="small"
+              variant="outlined"
+              startIcon={<DownloadIcon />}
+              disabled={sharing}
+              onClick={handleDownloadChecklist}
+            >
+              {t.common.downloadList}
+            </Button>
+          )}
         </Box>
       )}
 
