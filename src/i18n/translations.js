@@ -352,10 +352,10 @@ const translations = {
       contact: (name) => `Contact ${name}`,
       viewProfile: 'View profile',
       chatMessage: (ownerUsername, myUsername, items) =>
-        `Hi, I'm ${myUsername}, nice to meet you!\n\nI saw you have available:\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' — ')}`).join('\n')}\n\nAre you interested in a trade?`,
+        `Hi, I'm ${myUsername}, nice to meet you!\n\nI saw you have available:\n${items.map((s) => `- ${[s.code, s.description_en || s.description].filter(Boolean).join(' — ')}`).join('\n')}\n\nAre you interested in a trade?`,
       emailSubject: (myUsername) => `Surprix - ${myUsername}`,
       emailBody: (ownerUsername, myUsername, items) =>
-        `Hi ${ownerUsername},\n\nI'm ${myUsername} on Surprix. I saw you have the following pieces available:\n\n${items.map((s) => `- ${[s.code, s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nI'd be interested in a trade!\n\n${myUsername}`,
+        `Hi ${ownerUsername},\n\nI'm ${myUsername} on Surprix. I saw you have the following pieces available:\n\n${items.map((s) => `- ${[s.code, s.description_en || s.description].filter(Boolean).join(' - ')}`).join('\n')}\n\nI'd be interested in a trade!\n\n${myUsername}`,
     },
     profile: {
       lightMode: 'Light mode',

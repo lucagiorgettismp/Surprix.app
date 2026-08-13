@@ -7,11 +7,13 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 import { fetchAllSurprises, getSet } from '../../services/database.service'
 import { gsToHttps } from '../../utils/storage'
-import { useT } from '../../store/LanguageContext'
+import { getItemDescription } from '../../utils/locale'
+import { useT, useLanguage } from '../../store/LanguageContext'
 import { useCollection } from '../../store/CollectionContext'
 
 const SearchPage = () => {
   const t = useT()
+  const { lang } = useLanguage()
   const navigate = useNavigate()
   const { producers, producerColors } = useCollection()
   const [query, setQuery] = useState('')
@@ -33,12 +35,12 @@ const SearchPage = () => {
         if (producerFilter.length > 0 && !producerFilter.includes(s.set_producer_id)) return false
         return (
           s.code?.toLowerCase().includes(q) ||
-          s.description?.toLowerCase().includes(q) ||
+          getItemDescription(s, lang)?.toLowerCase().includes(q) ||
           s.set_name?.toLowerCase().includes(q)
         )
       })
       .slice(0, 50)
-  }, [surprises, query, producerFilter])
+  }, [surprises, query, producerFilter, lang])
 
   const handleClick = async (s) => {
     if (!s.set_producer_id || !s.set_year_id) return
@@ -54,12 +56,12 @@ const SearchPage = () => {
 
   const displayName = (s) => {
     const useCode = (s.isSet_effective_code || s.set_effective_code) && s.code
-    return useCode ? s.code : s.description
+    return useCode ? s.code : getItemDescription(s, lang)
   }
 
   const displaySub = (s) => {
     const useCode = (s.isSet_effective_code || s.set_effective_code) && s.code
-    return [useCode ? s.description : null, s.set_name].filter(Boolean).join(' · ')
+    return [useCode ? getItemDescription(s, lang) : null, s.set_name].filter(Boolean).join(' · ')
   }
 
   return (

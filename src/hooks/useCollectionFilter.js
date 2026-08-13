@@ -1,9 +1,12 @@
 import { useMemo, useState } from 'react'
+import { useLanguage } from '../store/LanguageContext'
+import { getItemDescription } from '../utils/locale'
 
 const normalize = (s) => (s || '').toLowerCase()
 const sortKey = (item) => ((item.isSet_effective_code || item.set_effective_code) && item.code ? item.code : `ZZZ_${item.id}`)
 
 export const useCollectionFilter = (items) => {
+  const { lang } = useLanguage()
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState({ category: [], producer: [], year: [] })
 
@@ -31,7 +34,7 @@ export const useCollectionFilter = (items) => {
     const q = normalize(search)
     return items.filter((item) => {
       if (q) {
-        const label = normalize(item.code) + ' ' + normalize(item.description) + ' ' + normalize(item.set_name)
+        const label = normalize(item.code) + ' ' + normalize(getItemDescription(item, lang)) + ' ' + normalize(item.set_name)
         if (!label.includes(q)) return false
       }
       if (selected.category.length && !selected.category.includes(item.set_category)) return false
@@ -40,7 +43,7 @@ export const useCollectionFilter = (items) => {
       if (selected.year.length && !selected.year.includes(yearLabel)) return false
       return true
     }).sort((a, b) => sortKey(a).localeCompare(sortKey(b)))
-  }, [items, search, selected])
+  }, [items, search, selected, lang])
 
   return { filtered, search, setSearch, selected, toggleFilter, clearFilters, activeCount, options }
 }

@@ -13,7 +13,7 @@ import PullToRefresh from '../../components/common/PullToRefresh'
 import { useT, useLanguage } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
 import { celebrateSeries } from '../../utils/confetti'
-import { getCategoryLabel } from '../../utils/locale'
+import { getCategoryLabel, getItemDescription } from '../../utils/locale'
 import { trackSearch, trackFilter } from '../../services/analytics.service'
 
 const CollectionSkeleton = () => (
@@ -108,7 +108,7 @@ const MissingPage = () => {
                 item={item}
                 onRemove={handleRemove}
                 onFindTrade={(i) => navigate(`/missing-owners/${i.id}`, {
-                  state: { surpriseLabel: i.code || i.description },
+                  state: { surpriseLabel: i.code || getItemDescription(i, lang) },
                 })}
                 accentColor={producerColors[item.set_producer_id]}
               />

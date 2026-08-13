@@ -1,9 +1,6 @@
 # Claude Code local settings
 .claude/settings.local.json
 
-# Migration data (contains user emails)
-scripts/facebook-migration.csv
-
 # Dependencies
 node_modules/
 

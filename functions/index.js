@@ -843,7 +843,8 @@ const buildPersonalChecklistSvg = async (username, setId, lang = 'it') => {
     const { x, y } = posFor(row, col)
     const img = itemImages[i]
     const codeText = escapeHtml(s.code || '')
-    const nameLines = clWrapText(s.description || '', cellW - 20, CL_NAME_FONT_SIZE, CL_NAME_MAX_LINES)
+    const itemDesc = (lang === 'en' && s.description_en) || s.description || ''
+    const nameLines = clWrapText(itemDesc, cellW - 20, CL_NAME_FONT_SIZE, CL_NAME_MAX_LINES)
     const codeChipY = y + photoH + gap1
     const descChipY = codeChipY + CL_CODE_CHIP_H + gap2
     // Alta in base al numero di righe effettive, non stirata al budget massimo.

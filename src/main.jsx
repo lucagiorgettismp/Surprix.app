@@ -1,6 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+setAppModeProperty()
+
 document.addEventListener('mousedown', (e) => {
   if (!e.target.closest('input, textarea, select, [contenteditable], [data-selectable]')) {
     e.preventDefault()
@@ -26,6 +28,7 @@ import { SnackbarProvider } from './store/SnackbarContext'
 import OfflineOverlay from './components/common/OfflineOverlay'
 import CookieBanner from './components/common/CookieBanner'
 import AppRouter from './router/AppRouter'
+import { setAppModeProperty } from './services/analytics.service'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

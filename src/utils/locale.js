@@ -82,6 +82,15 @@ export const getCountryCodes = (lang = 'it') => {
     .sort((a, b) => a.label.localeCompare(b.label, lang))
 }
 
+// description_en e' opzionale e popolato a mano (script di import) solo per
+// le serie con nomi che cambiano da mercato a mercato (es. Topolino/Mickey
+// Mouse). Se manca, l'utente EN vede comunque l'italiano invece di niente.
+export const getItemDescription = (item, lang = 'it') => {
+  if (!item) return ''
+  if (lang === 'en' && item.description_en) return item.description_en
+  return item.description || ''
+}
+
 export const getCountryName = (code, lang = 'it') => {
   if (!code) return ''
   const upper = code.toUpperCase()

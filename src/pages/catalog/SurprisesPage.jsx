@@ -17,7 +17,7 @@ import EmptyState from '../../components/common/EmptyState'
 import useDatabaseQuery from '../../hooks/useDatabaseQuery'
 import { getSurprises, getSet } from '../../services/database.service'
 import { gsToHttps, onImgError } from '../../utils/storage'
-import { getCountryName, getCategoryLabel } from '../../utils/locale'
+import { getCountryName, getCategoryLabel, getItemDescription } from '../../utils/locale'
 import { useCollection } from '../../store/CollectionContext'
 import { useLanguage, useT } from '../../store/LanguageContext'
 import { useSnackbar } from '../../store/SnackbarContext'
@@ -271,9 +271,9 @@ const SurprisesPage = () => {
                       {s.code}
                     </Typography>
                   )}
-                  {s.description && (
+                  {getItemDescription(s, lang) && (
                     <Typography variant="caption" color="text.secondary" display="block" sx={{ overflowWrap: 'break-word', hyphens: 'auto' }}>
-                      {s.description}
+                      {getItemDescription(s, lang)}
                     </Typography>
                   )}
                   <Box sx={{ mt: 0.5 }}>

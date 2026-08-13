@@ -337,7 +337,8 @@ const buildChecklistSvg = async (setId, { setData, surprises, producerId, produc
     const { x, y } = posFor(row, col)
     const img = itemImages[i]
     const codeText = escapeXml(s.code || '')
-    const nameLines = wrapText(s.description || '', cellW - 20, NAME_FONT_SIZE, NAME_MAX_LINES)
+    const itemDesc = (LANG === 'en' && s.description_en) || s.description || ''
+    const nameLines = wrapText(itemDesc, cellW - 20, NAME_FONT_SIZE, NAME_MAX_LINES)
     const codeChipY = y + photoH + gap1
     const descChipY = codeChipY + CODE_CHIP_H + gap2
     // Alta in base al numero di righe effettive, non stirata al budget massimo.

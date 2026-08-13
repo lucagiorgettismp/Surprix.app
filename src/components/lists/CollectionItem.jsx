@@ -6,15 +6,15 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import { gsToHttps, onImgError } from '../../utils/storage'
 import { useLanguage } from '../../store/LanguageContext'
-import { getCategoryLabel, getCategoryShortLabel } from '../../utils/locale'
+import { getCategoryLabel, getCategoryShortLabel, getItemDescription } from '../../utils/locale'
 import RarityBadge from '../common/RarityBadge'
 
 const SWIPE_THRESHOLD = 72
 
-const surpriseLabel = (item) =>
+const surpriseLabel = (item, lang) =>
   (item.isSet_effective_code || item.set_effective_code) && item.code
-    ? `${item.code} · ${item.description}`
-    : item.description || item.id
+    ? `${item.code} · ${getItemDescription(item, lang)}`
+    : getItemDescription(item, lang) || item.id
 
 const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLink = false }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -30,7 +30,7 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLi
   const tintedBg = accentColor
     ? `color-mix(in srgb, ${accentColor} ${tintAmount}, ${theme.palette.background.paper})`
     : theme.palette.background.paper
-  const title = surpriseLabel(item)
+  const title = surpriseLabel(item, lang)
   const year = item.set_year_name || item.set_year_year
 
   const handleNavigateToSet = (e) => {
@@ -125,7 +125,7 @@ const CollectionItem = ({ item, onRemove, onFindTrade, accentColor, disableSetLi
             <Box
               component="img"
               src={gsToHttps(item.img_path)}
-              alt={item.description}
+              alt={getItemDescription(item, lang)}
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
               onClick={() => setLightboxOpen(true)}
