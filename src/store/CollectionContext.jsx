@@ -168,6 +168,7 @@ export const CollectionProvider = ({ children }) => {
     if (uname) {
       setCached(user.uid, uname)
       setUsername(uname)
+      getUserCountry(uname).then(setUserCountry).catch(() => {})
     }
   }
 
@@ -255,7 +256,7 @@ if (setId && !newMissing.some((m) => m.set_id === setId)) {
     } catch (err) {
       console.error('Error toggling double:', err)
     }
-  }, [username])
+  }, [username, userCountry])
 
   return (
     <CollectionContext.Provider

@@ -20,7 +20,7 @@ import PublicFooter from '../../components/layout/PublicFooter'
 
 const ProfilePage = () => {
   const { user } = useAuth()
-  const { username } = useCollection()
+  const { username, refreshProfile } = useCollection()
   const { mode, toggleTheme } = useThemeMode()
   const { lang, setLang } = useLanguage()
   const t = useT()
@@ -63,6 +63,7 @@ const ProfilePage = () => {
   const handleSaveCountry = async () => {
     setCountryLoading(true)
     await updateUserCountry(username, country)
+    await refreshProfile()
     setSavedCountry(country)
     setCountryLoading(false)
     setCountryOpen(false)

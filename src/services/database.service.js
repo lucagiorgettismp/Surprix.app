@@ -1,5 +1,6 @@
 import { ref, get, set, update, remove, query, orderByChild, equalTo, onValue, off, push, limitToLast } from 'firebase/database'
 import { rtdb } from './firebase'
+import { resolveCountryCode } from '../utils/locale'
 
 const snap2list = (snapshot) => {
   const items = []
@@ -112,10 +113,15 @@ export const getUserProfile = async (username) => {
 export const getOwnersForSurprise = async (surpriseId) => {
   const snap = await get(ref(rtdb, `surprise_doubles/${surpriseId}`))
   if (!snap.exists()) return []
-  return Object.entries(snap.val()).map(([username, val]) => ({
-    username,
-    country: typeof val === 'string' ? val : '',
-  }))
+  // Country in surprise_doubles is denormalized at addDouble time and may be missing or stale:
+  // the user profile is the source of truth.
+  return Promise.all(
+    Object.entries(snap.val()).map(async ([username, val]) => {
+      const profileCountry = await getUserCountry(username)
+      const raw = profileCountry || (typeof val === 'string' ? val : '')
+      return { username, country: resolveCountryCode(raw) || raw }
+    })
+  )
 }
 
 export const getOtherSurprisesForYou = async (ownerUsername, myMissingIds) => {
