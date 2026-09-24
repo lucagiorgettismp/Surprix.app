@@ -431,6 +431,10 @@ const main = async () => {
       loadSystemFonts: false,
       defaultFontFamily: 'Inter',
     },
+    // Render a 2x la larghezza logica dell'SVG (1080 -> 2160px): altrimenti il
+    // PNG esce alla risoluzione nativa del canvas e risulta sgranato quando lo
+    // si zooma (es. aprendo l'immagine a schermo intero sui social).
+    fitTo: { mode: 'width', value: CANVAS_W * 2 },
   })
   const png = resvg.render().asPng()
 

@@ -42,3 +42,6 @@ Thumbs.db
 
 # Generated marketing screenshots
 fake-screens-export/
+
+# Generated checklist images (scripts/generate-checklist.mjs)
+checklist-*.png

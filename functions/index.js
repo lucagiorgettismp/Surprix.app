@@ -963,7 +963,10 @@ exports.profilemeta = onRequest(
       try {
         const { Resvg } = require('@resvg/resvg-js')
         const svg = await buildPersonalChecklistSvg(username, setId, lang)
-        const resvg = new Resvg(svg, { font: FONT_OPTIONS })
+        // Render a 2x la larghezza logica (1080 -> 2160px): altrimenti il PNG
+        // esce alla risoluzione nativa del canvas e risulta sgranato in zoom
+        // (stesso fix di scripts/generate-checklist.mjs).
+        const resvg = new Resvg(svg, { font: FONT_OPTIONS, fitTo: { mode: 'width', value: CL_CANVAS_W * 2 } })
         const png = resvg.render().asPng()
         res.set('Content-Type', 'image/png')
         // no-store: e' una mancolista/doppiolista personale, cambia ogni volta
